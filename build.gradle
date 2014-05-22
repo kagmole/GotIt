@@ -1,0 +1,32 @@
+apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'war'
+
+jar {
+    baseName = 'got-it'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+    maven {url 'http://repo.spring.io/release'}
+	maven {url 'http://repository.jboss.org/nexus/content/groups/public/'}
+}
+
+dependencies {
+	compile 'jstl:jstl:1.2'
+	compile 'log4j:log4j:1.2.17'
+	compile 'mysql:mysql-connector-java:5.1.30'
+	compile 'org.jboss.as:jboss-as-jpa-hibernate4:7.2.0.Final'
+	compile 'org.jboss.spec.javax.servlet:jboss-servlet-api_3.0_spec:1.0.2.Final'
+	compile 'org.springframework:spring-context:4.0.4.RELEASE'
+	compile 'org.springframework:spring-jdbc:4.0.4.RELEASE'
+	compile 'org.springframework:spring-orm:4.0.4.RELEASE'
+	compile 'org.springframework:spring-webmvc:4.0.4.RELEASE'
+	compile 'org.springframework:spring-web:4.0.4.RELEASE'
+	
+	testCompile 'junit:junit:4.11'
+    testCompile 'org.springframework:spring-test:4.0.4.RELEASE'
+}
