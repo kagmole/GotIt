@@ -1,6 +1,11 @@
 package ch.hearc.gotit.controllers;
 
+import ch.hearc.gotit.entities.UserEntity;
+import ch.hearc.gotit.services.UserService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +21,9 @@ public class UserController {
 	private static final String SIGN_IN_URI = START_URI + "sign_in";
 	private static final String SIGN_UP_URI = START_URI + "sign_up";
 	private static final String VIEW_URI = START_URI + "view";
+	
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
 	public String getList() {
@@ -33,7 +41,9 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/sign-up", method = RequestMethod.GET)
-	public String getSignUp() {
+	public String getSignUp(Model model) {
+		model.addAttribute("userEntity", new UserEntity());
+		
 		return SIGN_UP_URI;
 	}
 	

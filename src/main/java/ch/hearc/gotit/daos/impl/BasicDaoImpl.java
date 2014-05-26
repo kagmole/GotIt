@@ -7,13 +7,12 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
-@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 public abstract class BasicDaoImpl<E, K extends Serializable> implements BasicDao<E, K> {
 
+	@Autowired
 	private SessionFactory sessionFactory;
 	
     protected Class<E> entityClass;
@@ -21,11 +20,6 @@ public abstract class BasicDaoImpl<E, K extends Serializable> implements BasicDa
 	public BasicDaoImpl(Class<E> entityClass) {
 		this.entityClass = entityClass;
     }
-    
-	@Autowired
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
 	
     protected Session getCurrentSession() {
     	return sessionFactory.getCurrentSession();
@@ -65,5 +59,12 @@ public abstract class BasicDaoImpl<E, K extends Serializable> implements BasicDa
 	@Override
 	public List<E> findAll() {
 		return getCurrentSession().createCriteria(entityClass).list();
+	}
+	
+	@Override
+	public int count() {
+		return ((Number) getCurrentSession().createCriteria(entityClass)
+				.setProjection(Projections.rowCount())
+				.uniqueResult()).intValue();
 	}
 }

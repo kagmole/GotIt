@@ -1,8 +1,8 @@
 package ch.hearc.gotit.initializers;
 
-import ch.hearc.gotit.configurations.DispatcherConfiguration;
-import ch.hearc.gotit.configurations.PersistenceConfiguration;
-import ch.hearc.gotit.configurations.ServiceConfiguration;
+import ch.hearc.gotit.configurers.DispatcherConfigurer;
+import ch.hearc.gotit.configurers.PersistenceConfigurer;
+import ch.hearc.gotit.configurers.ServiceConfigurer;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -19,14 +19,14 @@ public class GotItInitializer implements WebApplicationInitializer {
 	public void onStartup(ServletContext container) throws ServletException {
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
 		
-		rootContext.register(PersistenceConfiguration.class);
-		rootContext.register(ServiceConfiguration.class);
+		rootContext.register(PersistenceConfigurer.class);
+		rootContext.register(ServiceConfigurer.class);
 		
 		container.addListener(new ContextLoaderListener(rootContext));
 		
 		AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
 		
-		dispatcherContext.register(DispatcherConfiguration.class);
+		dispatcherContext.register(DispatcherConfigurer.class);
 		
 		ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(dispatcherContext));
 		

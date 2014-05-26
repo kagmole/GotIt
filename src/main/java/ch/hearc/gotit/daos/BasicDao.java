@@ -11,4 +11,6 @@ public interface BasicDao<E, K> {
 	public E findOne(K key);
 	public List<E> findRange(int offset, int limit);
 	public List<E> findAll();
+	
+	public int count();
 }

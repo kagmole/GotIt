@@ -1,5 +1,5 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" session="false" %>
-<%@ taglib tagdir="/WEB-INF/tags/layouts" prefix="l" %>
+<%@ taglib prefix="l" tagdir="/WEB-INF/tags/layouts" %>
 <l:standard>
 	<jsp:attribute name="title">Home</jsp:attribute>
 	<jsp:body>

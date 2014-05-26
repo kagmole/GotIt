@@ -1,6 +1,7 @@
 package ch.hearc.gotit.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.validator.constraints.Email;
 
 /**
  * TODO ENTITY JAVADOC
@@ -48,10 +51,12 @@ public class UserEntity implements Serializable {
     @Column(name = "lastname")
     private String lastname;
     
+    @Email
     @Size(max = 45)
     @Column(name = "main_email")
     private String mainEmail;
     
+    @Email
     @Size(max = 45)
     @Column(name = "secondary_email")
     private String secondaryEmail;
