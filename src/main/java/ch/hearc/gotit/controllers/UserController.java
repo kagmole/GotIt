@@ -3,12 +3,16 @@ package ch.hearc.gotit.controllers;
 import ch.hearc.gotit.entities.UserEntity;
 import ch.hearc.gotit.services.UserService;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(value = "/users")
@@ -36,7 +40,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/sign-in", method = RequestMethod.GET)
-	public String getSignIn() {
+	public String getSignIn(@RequestParam(value = "error", required = false) String error) {
+		if (error != null) {
+			return VIEW_URI;
+		}
+		
 		return SIGN_IN_URI;
 	}
 	
@@ -45,6 +53,17 @@ public class UserController {
 		model.addAttribute("userEntity", new UserEntity());
 		
 		return SIGN_UP_URI;
+	}
+	
+	@RequestMapping(value = "/sign-up", method = RequestMethod.POST)
+	public String postSignUp(@Valid UserEntity userEntity, BindingResult result) {
+		if (result.hasErrors()) {
+			return SIGN_UP_URI;
+		}
+		
+		userService.create(userEntity);
+		
+		return LIST_URI;
 	}
 	
 	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)

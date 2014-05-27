@@ -2,6 +2,7 @@ package ch.hearc.gotit.initializers;
 
 import ch.hearc.gotit.configurers.DispatcherConfigurer;
 import ch.hearc.gotit.configurers.PersistenceConfigurer;
+import ch.hearc.gotit.configurers.SecurityConfigurer;
 import ch.hearc.gotit.configurers.ServiceConfigurer;
 
 import javax.servlet.ServletContext;
@@ -20,6 +21,7 @@ public class GotItInitializer implements WebApplicationInitializer {
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
 		
 		rootContext.register(PersistenceConfigurer.class);
+		rootContext.register(SecurityConfigurer.class);
 		rootContext.register(ServiceConfigurer.class);
 		
 		container.addListener(new ContextLoaderListener(rootContext));
