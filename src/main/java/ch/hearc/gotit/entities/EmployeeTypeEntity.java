@@ -13,8 +13,6 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * TODO ENTITY JAVADOC
@@ -23,7 +21,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "employees_types")
-@XmlRootElement
 public class EmployeeTypeEntity implements Serializable {
 	
     private static final long serialVersionUID = 1L;
@@ -31,10 +28,10 @@ public class EmployeeTypeEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_employee_type")
-    private Integer id;
+    @Column(name = "pk_employee_type")
+    private Integer employeeTypePk;
     
-    @Size(max = 45)
+    @Size(max = 50)
     @Column(name = "name")
     private String name;
     
@@ -44,7 +41,7 @@ public class EmployeeTypeEntity implements Serializable {
     private String description;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeType")
-    private List<EmployeeSchoolEntity> employeesSchoolsList;
+    private List<EmployeeSchoolTypeEntity> employeesSchoolsList;
 
     /**
      * TODO CONSTRUCTORS JAVADOC
@@ -52,16 +49,16 @@ public class EmployeeTypeEntity implements Serializable {
     public EmployeeTypeEntity() {
     }
 
-    public EmployeeTypeEntity(Integer id) {
-        this.id = id;
+    public EmployeeTypeEntity(Integer employeeTypePk) {
+        this.employeeTypePk = employeeTypePk;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getEmployeeTypePk() {
+        return employeeTypePk;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setEmployeeTypePk(Integer employeeTypePk) {
+        this.employeeTypePk = employeeTypePk;
     }
 
     public String getName() {
@@ -80,12 +77,11 @@ public class EmployeeTypeEntity implements Serializable {
         this.description = description;
     }
 
-    @XmlTransient
-    public List<EmployeeSchoolEntity> getEmployeesSchoolsList() {
+    public List<EmployeeSchoolTypeEntity> getEmployeesSchoolsList() {
         return employeesSchoolsList;
     }
 
-    public void setEmployeesSchoolsList(List<EmployeeSchoolEntity> employeesSchoolsList) {
+    public void setEmployeesSchoolsList(List<EmployeeSchoolTypeEntity> employeesSchoolsList) {
         this.employeesSchoolsList = employeesSchoolsList;
     }
 
@@ -93,7 +89,7 @@ public class EmployeeTypeEntity implements Serializable {
     public int hashCode() {
         int hash = 0;
         
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (employeeTypePk != null ? employeeTypePk.hashCode() : 0);
         
         return hash;
     }
@@ -106,7 +102,7 @@ public class EmployeeTypeEntity implements Serializable {
         
         EmployeeTypeEntity other = (EmployeeTypeEntity) object;
         
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.employeeTypePk == null && other.employeeTypePk != null) || (this.employeeTypePk != null && !this.employeeTypePk.equals(other.employeeTypePk))) {
             return false;
         }
         
@@ -115,6 +111,6 @@ public class EmployeeTypeEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "EmployeeTypeEntity[id=" + id + "]";
+        return "EmployeeTypeEntity[id=" + employeeTypePk + "]";
     }
 }

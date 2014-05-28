@@ -19,31 +19,33 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication().dataSource(dataSource)
-			.usersByUsernameQuery("SELECT username, password FROM users WHERE username = ?");
+			.usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username = ?")
+			.authoritiesByUsernameQuery("SELECT username, role FROM users, authorities"
+					+ " WHERE users.username = ? AND users.fk_authority = authorities.pk_authority");
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// XXX Keep or clean
 		http.authorizeRequests()
-			//.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-			.anyRequest().anonymous()
+				.antMatchers("/admin**").access("hasRole('admin')")
+				.antMatchers("/users/sign-in").anonymous()
 			.and()
 				.formLogin()
-				.loginPage("/webapp/standards/users/sign-in")
-				.loginProcessingUrl("/webapp/standards/users/sign-in")
-				.defaultSuccessUrl("/webapp/standards/users/view")
-				.failureUrl("/webapp/standards/users/sign-in?error")
+				.loginPage("/users/sign-in")
+				.loginProcessingUrl("/users/sign-in")
+				.defaultSuccessUrl("/")
+				.failureUrl("/users/sign-in?error")
 				.usernameParameter("username")
 				.passwordParameter("password")
 				.permitAll()
 			.and()
 				.logout()
-				//.logoutSuccessUrl("/login?logout")
+				.logoutSuccessUrl("/users/sign-in?logout")
 				.permitAll()
-			//.and()
-				//.exceptionHandling()
-				//.accessDeniedPage("/403")
+			.and()
+				.exceptionHandling()
+				.accessDeniedPage("/403")
 			.and()
 				.csrf().disable(); // TODO enable and modify pages in consequence
 	}

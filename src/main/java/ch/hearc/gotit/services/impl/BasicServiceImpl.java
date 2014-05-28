@@ -31,8 +31,8 @@ public abstract class BasicServiceImpl<E, K> implements BasicService<E, K> {
 
 	@Override
 	@Transactional(readOnly = true)
-	public E findOne(K key) {
-		return getDao().findOne(key);
+	public E find(K key) {
+		return getDao().find(key);
 	}
 
 	@Override

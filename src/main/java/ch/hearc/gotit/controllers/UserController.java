@@ -41,10 +41,6 @@ public class UserController {
 	
 	@RequestMapping(value = "/sign-in", method = RequestMethod.GET)
 	public String getSignIn(@RequestParam(value = "error", required = false) String error) {
-		if (error != null) {
-			return VIEW_URI;
-		}
-		
 		return SIGN_IN_URI;
 	}
 	

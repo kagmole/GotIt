@@ -8,7 +8,7 @@ public interface BasicDao<E, K> {
 	public void update(E entity);
 	public void destroy(E entity);
 	
-	public E findOne(K key);
+	public E find(K key);
 	public List<E> findRange(int offset, int limit);
 	public List<E> findAll();
 	

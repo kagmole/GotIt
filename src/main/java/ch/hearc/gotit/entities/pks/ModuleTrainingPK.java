@@ -12,70 +12,70 @@ import javax.validation.constraints.NotNull;
  * @author Dany Jupille
  */
 @Embeddable
-public class ModuleTrainingPK implements Serializable {
+public class ModuleTrainingPk implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Basic(optional = false)
     @NotNull
-    @Column(name = "id_training")
-    private int idTraining;
+    @Column(name = "pk_training")
+    private int trainingPk;
 	
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_module")
-    private int idModule;
+    @Column(name = "pk_module")
+    private int modulePk;
     
     /**
      * TODO CONSTRUCTORS JAVADOC
      */
-    public ModuleTrainingPK() {
+    public ModuleTrainingPk() {
     }
 
-    public ModuleTrainingPK(int idTraining, int idModule) {
-        this.idTraining = idTraining;
-        this.idModule = idModule;
+    public ModuleTrainingPk(int trainingPk, int modulePk) {
+        this.trainingPk = trainingPk;
+        this.modulePk = modulePk;
     }
 
-    public int getIdTraining() {
-        return idTraining;
+    public int getTrainingPk() {
+        return trainingPk;
     }
 
-    public void setIdTraining(int idTraining) {
-        this.idTraining = idTraining;
+    public void setTrainingPk(int trainingPk) {
+        this.trainingPk = trainingPk;
     }
 
-    public int getIdModule() {
-        return idModule;
+    public int getModulePk() {
+        return modulePk;
     }
 
-    public void setIdModule(int idModule) {
-        this.idModule = idModule;
+    public void setModulePk(int modulePk) {
+        this.modulePk = modulePk;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
         
-        hash += (int) idTraining;
-        hash += (int) idModule;
+        hash += (int) trainingPk;
+        hash += (int) modulePk;
         
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof ModuleTrainingPK)) {
+        if (!(object instanceof ModuleTrainingPk)) {
             return false;
         }
         
-        ModuleTrainingPK other = (ModuleTrainingPK) object;
+        ModuleTrainingPk other = (ModuleTrainingPk) object;
         
-        if (this.idTraining != other.idTraining) {
+        if (this.trainingPk != other.trainingPk) {
             return false;
         }
         
-        if (this.idModule != other.idModule) {
+        if (this.modulePk != other.modulePk) {
             return false;
         }
         
@@ -84,6 +84,6 @@ public class ModuleTrainingPK implements Serializable {
 
     @Override
     public String toString() {
-        return "ModuleTrainingPK[idTraining=" + idTraining + ", idModule=" + idModule + "]";
+        return "ModuleTrainingPK[idTraining=" + trainingPk + ", idModule=" + modulePk + "]";
     }
 }

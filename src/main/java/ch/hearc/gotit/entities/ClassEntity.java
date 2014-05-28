@@ -12,7 +12,6 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * TODO ENTITY JAVADOC
@@ -21,7 +20,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "classes")
-@XmlRootElement
 public class ClassEntity implements Serializable {
 	
     private static final long serialVersionUID = 1L;
@@ -29,10 +27,10 @@ public class ClassEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_class")
-    private Integer id;
+    @Column(name = "pk_class")
+    private Integer classPk;
     
-    @Size(max = 45)
+    @Size(max = 50)
     @Column(name = "name")
     private String name;
     
@@ -41,7 +39,7 @@ public class ClassEntity implements Serializable {
     @Column(name = "description")
     private String description;
     
-    @JoinColumn(name = "id_course", referencedColumnName = "id_course")
+    @JoinColumn(name = "fk_course", referencedColumnName = "pk_course")
     @ManyToOne(optional = false)
     private CourseEntity course;
 
@@ -51,16 +49,16 @@ public class ClassEntity implements Serializable {
     public ClassEntity() {
     }
 
-    public ClassEntity(Integer id) {
-        this.id = id;
+    public ClassEntity(Integer classPk) {
+        this.classPk = classPk;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getClassPk() {
+        return classPk;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setClassPk(Integer classPk) {
+        this.classPk = classPk;
     }
 
     public String getName() {
@@ -91,7 +89,7 @@ public class ClassEntity implements Serializable {
     public int hashCode() {
         int hash = 0;
         
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (classPk != null ? classPk.hashCode() : 0);
         
         return hash;
     }
@@ -104,7 +102,7 @@ public class ClassEntity implements Serializable {
         
         ClassEntity other = (ClassEntity) object;
         
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.classPk == null && other.classPk != null) || (this.classPk != null && !this.classPk.equals(other.classPk))) {
             return false;
         }
         
@@ -113,6 +111,6 @@ public class ClassEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "ClassEntity[id=" + id + "]";
+        return "ClassEntity[id=" + classPk + "]";
     }
 }

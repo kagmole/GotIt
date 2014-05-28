@@ -1,6 +1,6 @@
 package ch.hearc.gotit.entities;
 
-import ch.hearc.gotit.entities.pks.AssessmentResultPK;
+import ch.hearc.gotit.entities.pks.AssessmentStudentPk;
 
 import java.io.Serializable;
 
@@ -12,7 +12,6 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * TODO ENTITY JAVADOC
@@ -21,18 +20,17 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "assessments_results")
-@XmlRootElement
-public class AssessmentResultEntity implements Serializable {
+public class AssessmentStudentEntity implements Serializable {
 	
     private static final long serialVersionUID = 1L;
     
     @EmbeddedId
-    protected AssessmentResultPK assessmentResultPK;
+    protected AssessmentStudentPk assessmentResultPK;
     
     @Column(name = "marks")
     private Integer marks;
     
-    @Size(max = 45)
+    @Size(max = 50)
     @Column(name = "grade")
     private String grade;
     
@@ -41,33 +39,33 @@ public class AssessmentResultEntity implements Serializable {
     @Column(name = "comments")
     private String comments;
     
-    @JoinColumn(name = "id_assessment", referencedColumnName = "id_assessment", insertable = false, updatable = false)
+    @JoinColumn(name = "pk_assessment", referencedColumnName = "pk_assessment", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private AssessmentEntity assessment;
     
-    @JoinColumn(name = "id_student", referencedColumnName = "id_student", insertable = false, updatable = false)
+    @JoinColumn(name = "pk_student", referencedColumnName = "pk_student", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private StudentEntity student;
 
     /**
      * TODO CONSTRUCTORS JAVADOC
      */
-    public AssessmentResultEntity() {
+    public AssessmentStudentEntity() {
     }
 
-    public AssessmentResultEntity(AssessmentResultPK assessmentResultPK) {
+    public AssessmentStudentEntity(AssessmentStudentPk assessmentResultPK) {
         this.assessmentResultPK = assessmentResultPK;
     }
 
-    public AssessmentResultEntity(int idStudent, int idAssessment) {
-        this.assessmentResultPK = new AssessmentResultPK(idStudent, idAssessment);
+    public AssessmentStudentEntity(int idStudent, int idAssessment) {
+        this.assessmentResultPK = new AssessmentStudentPk(idStudent, idAssessment);
     }
 
-    public AssessmentResultPK getAssessmentResultPK() {
+    public AssessmentStudentPk getAssessmentResultPK() {
         return assessmentResultPK;
     }
 
-    public void setAssessmentResultPK(AssessmentResultPK assessmentResultPK) {
+    public void setAssessmentResultPK(AssessmentStudentPk assessmentResultPK) {
         this.assessmentResultPK = assessmentResultPK;
     }
 
@@ -122,11 +120,11 @@ public class AssessmentResultEntity implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof AssessmentResultEntity)) {
+        if (!(object instanceof AssessmentStudentEntity)) {
             return false;
         }
         
-        AssessmentResultEntity other = (AssessmentResultEntity) object;
+        AssessmentStudentEntity other = (AssessmentStudentEntity) object;
         
         if ((this.assessmentResultPK == null && other.assessmentResultPK != null) || (this.assessmentResultPK != null && !this.assessmentResultPK.equals(other.assessmentResultPK))) {
             return false;
@@ -137,6 +135,6 @@ public class AssessmentResultEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "AssessmentResultEntity[assessmentResultPK=" + assessmentResultPK + "]";
+        return "AssessmentResultEntity[pk=" + assessmentResultPK + "]";
     }
 }

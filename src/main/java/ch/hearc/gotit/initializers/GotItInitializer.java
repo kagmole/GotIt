@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.filter.DelegatingFilterProxy;
 
 public class GotItInitializer implements WebApplicationInitializer {
 
@@ -22,6 +23,9 @@ public class GotItInitializer implements WebApplicationInitializer {
 		rootContext.register(ServiceConfigurer.class);
 
 		container.addListener(new ContextLoaderListener(rootContext));
+		
+		container.addFilter("springSecurityFilterChain", new DelegatingFilterProxy("springSecurityFilterChain"))
+				.addMappingForUrlPatterns(null, false, "/*");
 	}
 }
 

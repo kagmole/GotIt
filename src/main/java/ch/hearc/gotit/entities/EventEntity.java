@@ -15,8 +15,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * TODO ENTITY JAVADOC
@@ -25,7 +23,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "events")
-@XmlRootElement
 public class EventEntity implements Serializable {
 	
     private static final long serialVersionUID = 1L;
@@ -33,10 +30,10 @@ public class EventEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_event")
-    private Integer id;
+    @Column(name = "pk_event")
+    private Integer eventPk;
     
-    @Size(max = 45)
+    @Size(max = 50)
     @Column(name = "name")
     private String name;
     
@@ -67,16 +64,16 @@ public class EventEntity implements Serializable {
     public EventEntity() {
     }
 
-    public EventEntity(Integer id) {
-        this.id = id;
+    public EventEntity(Integer eventPk) {
+        this.eventPk = eventPk;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getEventPk() {
+        return eventPk;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setEventPk(Integer eventPk) {
+        this.eventPk = eventPk;
     }
 
     public String getName() {
@@ -111,7 +108,6 @@ public class EventEntity implements Serializable {
         this.importance = importance;
     }
 
-    @XmlTransient
     public List<TrainingEntity> getTrainingsList() {
         return trainingsList;
     }
@@ -120,7 +116,6 @@ public class EventEntity implements Serializable {
         this.trainingsList = trainingsList;
     }
 
-    @XmlTransient
     public List<SchoolEntity> getSchoolsList() {
         return schoolsList;
     }
@@ -129,7 +124,6 @@ public class EventEntity implements Serializable {
         this.schoolsList = schoolsList;
     }
 
-    @XmlTransient
     public List<CourseEntity> getCoursesList() {
         return coursesList;
     }
@@ -142,7 +136,7 @@ public class EventEntity implements Serializable {
     public int hashCode() {
         int hash = 0;
         
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (eventPk != null ? eventPk.hashCode() : 0);
         
         return hash;
     }
@@ -155,7 +149,7 @@ public class EventEntity implements Serializable {
         
         EventEntity other = (EventEntity) object;
         
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.eventPk == null && other.eventPk != null) || (this.eventPk != null && !this.eventPk.equals(other.eventPk))) {
             return false;
         }
         
@@ -164,6 +158,6 @@ public class EventEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "EventEntity[id=" + id + "]";
+        return "EventEntity[id=" + eventPk + "]";
     }
 }

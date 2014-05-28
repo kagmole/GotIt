@@ -15,8 +15,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * TODO ENTITY JAVADOC
@@ -25,7 +23,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "students")
-@XmlRootElement
 public class StudentEntity implements Serializable {
 	
     private static final long serialVersionUID = 1L;
@@ -33,21 +30,21 @@ public class StudentEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_student")
-    private Integer id;
+    @Column(name = "pk_student")
+    private Integer studentPk;
     
     @JoinTable(name = "students_schools", joinColumns = {
-        @JoinColumn(name = "id_student", referencedColumnName = "id_student")}, inverseJoinColumns = {
-        @JoinColumn(name = "id_school", referencedColumnName = "id_school")})
+        @JoinColumn(name = "pk_student", referencedColumnName = "pk_student")}, inverseJoinColumns = {
+        @JoinColumn(name = "pk_school", referencedColumnName = "pk_school")})
     @ManyToMany
     private List<SchoolEntity> schoolsList;
     
-    @JoinColumn(name = "id_user", referencedColumnName = "id_user")
+    @JoinColumn(name = "fk_user", referencedColumnName = "pk_user")
     @OneToOne(optional = false)
     private UserEntity user;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-    private List<AssessmentResultEntity> assessmentsResultsList;
+    private List<AssessmentStudentEntity> assessmentsStudentsList;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
     private List<StudentTrainingEntity> studentsTrainingsList;
@@ -62,19 +59,18 @@ public class StudentEntity implements Serializable {
     public StudentEntity() {
     }
 
-    public StudentEntity(Integer id) {
-        this.id = id;
+    public StudentEntity(Integer studentPk) {
+        this.studentPk = studentPk;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getStudentPk() {
+        return studentPk;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setStudentPk(Integer studentPk) {
+        this.studentPk = studentPk;
     }
 
-    @XmlTransient
     public List<SchoolEntity> getSchoolsList() {
         return schoolsList;
     }
@@ -91,16 +87,14 @@ public class StudentEntity implements Serializable {
         this.user = user;
     }
 
-    @XmlTransient
-    public List<AssessmentResultEntity> getAssessmentsResultsList() {
-        return assessmentsResultsList;
+    public List<AssessmentStudentEntity> getAssessmentsStudentsList() {
+        return assessmentsStudentsList;
     }
 
-    public void setAssessmentsResultsList(List<AssessmentResultEntity> assessmentsResultsList) {
-        this.assessmentsResultsList = assessmentsResultsList;
+    public void setAssessmentsStudentsList(List<AssessmentStudentEntity> assessmentsStudentsList) {
+        this.assessmentsStudentsList = assessmentsStudentsList;
     }
 
-    @XmlTransient
     public List<StudentTrainingEntity> getStudentsTrainingsList() {
         return studentsTrainingsList;
     }
@@ -109,7 +103,6 @@ public class StudentEntity implements Serializable {
         this.studentsTrainingsList = studentsTrainingsList;
     }
 
-    @XmlTransient
     public List<StudentCourseEntity> getStudentsCoursesList() {
         return studentsCoursesList;
     }
@@ -122,7 +115,7 @@ public class StudentEntity implements Serializable {
     public int hashCode() {
         int hash = 0;
         
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (studentPk != null ? studentPk.hashCode() : 0);
         
         return hash;
     }
@@ -135,7 +128,7 @@ public class StudentEntity implements Serializable {
         
         StudentEntity other = (StudentEntity) object;
         
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.studentPk == null && other.studentPk != null) || (this.studentPk != null && !this.studentPk.equals(other.studentPk))) {
             return false;
         }
         
@@ -144,6 +137,6 @@ public class StudentEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "StudentEntity[id=" + id + "]";
+        return "StudentEntity[id=" + studentPk + "]";
     }
 }

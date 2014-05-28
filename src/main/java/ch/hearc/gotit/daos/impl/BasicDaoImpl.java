@@ -42,7 +42,7 @@ public abstract class BasicDaoImpl<E, K extends Serializable> implements BasicDa
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public E findOne(K key) {
+	public E find(K key) {
 		return (E) getCurrentSession().get(entityClass, key);
 	}
 	

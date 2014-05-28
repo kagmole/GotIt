@@ -13,8 +13,6 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * TODO ENTITY JAVADOC
@@ -23,7 +21,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "assessments_types")
-@XmlRootElement
 public class AssessmentTypeEntity implements Serializable {
 	
     private static final long serialVersionUID = 1L;
@@ -31,10 +28,10 @@ public class AssessmentTypeEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_assessment_type")
-    private Integer id;
+    @Column(name = "pk_assessment_type")
+    private Integer assessmentTypePk;
     
-    @Size(max = 45)
+    @Size(max = 50)
     @Column(name = "name")
     private String name;
     
@@ -46,7 +43,7 @@ public class AssessmentTypeEntity implements Serializable {
     @Column(name = "importance")
     private Integer importance;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "assessmentType")
     private List<AssessmentEntity> assessmentsList;
 
     /**
@@ -55,16 +52,16 @@ public class AssessmentTypeEntity implements Serializable {
     public AssessmentTypeEntity() {
     }
 
-    public AssessmentTypeEntity(Integer id) {
-        this.id = id;
+    public AssessmentTypeEntity(Integer assessmentTypePk) {
+        this.assessmentTypePk = assessmentTypePk;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getAssessmentTypePk() {
+        return assessmentTypePk;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setAssessmentTypePk(Integer assessmentTypePk) {
+        this.assessmentTypePk = assessmentTypePk;
     }
 
     public String getName() {
@@ -91,7 +88,6 @@ public class AssessmentTypeEntity implements Serializable {
         this.importance = importance;
     }
 
-    @XmlTransient
     public List<AssessmentEntity> getAssessmentsList() {
         return assessmentsList;
     }
@@ -104,7 +100,7 @@ public class AssessmentTypeEntity implements Serializable {
     public int hashCode() {
         int hash = 0;
         
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (assessmentTypePk != null ? assessmentTypePk.hashCode() : 0);
         
         return hash;
     }
@@ -117,7 +113,7 @@ public class AssessmentTypeEntity implements Serializable {
         
         AssessmentTypeEntity other = (AssessmentTypeEntity) object;
         
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.assessmentTypePk == null && other.assessmentTypePk != null) || (this.assessmentTypePk != null && !this.assessmentTypePk.equals(other.assessmentTypePk))) {
             return false;
         }
         
@@ -126,6 +122,6 @@ public class AssessmentTypeEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "AssessmentTypeEntity[id=" + id + "]";
+        return "AssessmentTypeEntity[id=" + assessmentTypePk + "]";
     }
 }
