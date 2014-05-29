@@ -32,7 +32,7 @@ public abstract class BasicDaoImpl<E, K extends Serializable> implements BasicDa
 
 	@Override
 	public void update(E entity) {
-		getCurrentSession().saveOrUpdate(entity);
+		getCurrentSession().update(entity);
 	}
 
 	@Override

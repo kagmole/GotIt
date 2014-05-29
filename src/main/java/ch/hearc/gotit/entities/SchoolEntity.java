@@ -2,6 +2,7 @@ package ch.hearc.gotit.entities;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * TODO ENTITY JAVADOC
@@ -34,7 +37,8 @@ public class SchoolEntity implements Serializable {
     @Column(name = "pk_school")
     private Integer schoolPk;
     
-    @Size(max = 50)
+    @NotBlank(message = "Name cannot be empty")
+    @Size(max = 50, message = "Name is too long (maximum 50 character)")
     @Column(name = "name")
     private String name;
     

@@ -2,11 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags/layouts" %>
 <l:standard>
-	<jsp:attribute name="title">Sign in</jsp:attribute>
+	<jsp:attribute name="title">Edit school</jsp:attribute>
 	<jsp:body>
 		<form method="POST">
-			<label for="username">Username</label><input type="text" name="username" /><br />
-			<label for="password">Password</label><input type="password" name="password" /><br />
+			Delete ?
+			<input type="submit" value="Delete school" />
 		</form>
 	</jsp:body>
 </l:standard>
