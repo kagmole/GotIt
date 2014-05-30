@@ -40,7 +40,7 @@ public class EmployeeEntity implements Serializable {
     private List<CourseEntity> coursesList;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
-    private List<EmployeeSchoolTypeEntity> employeesSchoolsList;
+    private List<EmployeeSchoolTypeEntity> employeesSchoolsTypesList;
     
     @JoinColumn(name = "fk_user", referencedColumnName = "pk_user")
     @OneToOne(optional = false)
@@ -72,12 +72,12 @@ public class EmployeeEntity implements Serializable {
         this.coursesList = coursesList;
     }
 
-    public List<EmployeeSchoolTypeEntity> getEmployeesSchoolsList() {
-        return employeesSchoolsList;
+    public List<EmployeeSchoolTypeEntity> getEmployeesSchoolsTypesList() {
+        return employeesSchoolsTypesList;
     }
 
-    public void setEmployeesSchoolsList(List<EmployeeSchoolTypeEntity> employeesSchoolsList) {
-        this.employeesSchoolsList = employeesSchoolsList;
+    public void setEmployeesSchoolsTypesList(List<EmployeeSchoolTypeEntity> employeesSchoolsTypesList) {
+        this.employeesSchoolsTypesList = employeesSchoolsTypesList;
     }
 
     public UserEntity getUser() {

@@ -2,6 +2,8 @@ package ch.hearc.gotit.services.impl;
 
 import ch.hearc.gotit.daos.BasicDao;
 import ch.hearc.gotit.daos.UserDao;
+import ch.hearc.gotit.entities.EmployeeEntity;
+import ch.hearc.gotit.entities.StudentEntity;
 import ch.hearc.gotit.entities.UserEntity;
 import ch.hearc.gotit.services.AuthorityService;
 import ch.hearc.gotit.services.UserService;
@@ -27,9 +29,23 @@ public class UserServiceImpl extends BasicServiceImpl<UserEntity, Integer> imple
 	@Override
 	@Transactional(readOnly = false)
 	public void create(UserEntity userEntity) {
+		EmployeeEntity employeeEntity = new EmployeeEntity();
+		employeeEntity.setUser(userEntity);
+		
+		StudentEntity studentEntity = new StudentEntity();
+		studentEntity.setUser(userEntity);
+		
 		userEntity.setEnabled(true);
 		userEntity.setAuthority(authorityService.findByRole("user"));
+		userEntity.setEmployee(employeeEntity);
+		userEntity.setStudent(studentEntity);
 		
 		userDao.create(userEntity);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public UserEntity findByUsername(String username) {
+		return userDao.findByUsername(username);
 	}
 }

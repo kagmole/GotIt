@@ -8,6 +8,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 /**
@@ -22,16 +23,19 @@ public class EmployeeSchoolTypeEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @EmbeddedId
-    protected EmployeeSchoolTypePk employeeSchoolTypePk;
+    protected EmployeeSchoolTypePk employeeSchoolTypePk = new EmployeeSchoolTypePk();
     
+    @MapsId("employeePk")
     @JoinColumn(name = "pk_employee", referencedColumnName = "pk_employee", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private EmployeeEntity employee;
     
+    @MapsId("schoolPk")
     @JoinColumn(name = "pk_school", referencedColumnName = "pk_school", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private SchoolEntity school;
     
+    @MapsId("employeeTypePk")
     @JoinColumn(name = "pk_employee_type", referencedColumnName = "pk_employee_type", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private EmployeeTypeEntity employeeType;

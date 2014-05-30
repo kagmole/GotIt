@@ -11,4 +11,12 @@ public class EmployeeTypeDaoImpl extends BasicDaoImpl<EmployeeTypeEntity, Intege
 	public EmployeeTypeDaoImpl() {
 		super(EmployeeTypeEntity.class);
 	}
+
+	@Override
+	public EmployeeTypeEntity findByName(String name) {
+		return (EmployeeTypeEntity) getCurrentSession()
+				.getNamedQuery("EmployeeTypeQuery.findByName")
+				.setString("name", name)
+				.uniqueResult();
+	}
 }

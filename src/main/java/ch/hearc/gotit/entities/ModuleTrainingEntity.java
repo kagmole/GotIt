@@ -9,6 +9,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 /**
@@ -28,10 +29,12 @@ public class ModuleTrainingEntity implements Serializable {
     @Column(name = "weight")
     private Float weight;
     
+    @MapsId("modulePk")
     @JoinColumn(name = "pk_module", referencedColumnName = "pk_module", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private ModuleEntity module;
     
+    @MapsId("trainingPk")
     @JoinColumn(name = "pk_training", referencedColumnName = "pk_training", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private TrainingEntity training;

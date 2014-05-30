@@ -60,7 +60,7 @@ public class SchoolEntity implements Serializable {
     private List<TrainingEntity> trainingsList;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "school")
-    private List<EmployeeSchoolTypeEntity> employeesSchoolsList;
+    private List<EmployeeSchoolTypeEntity> employeesSchoolsTypesList;
 
     /**
      * TODO CONSTRUCTORS JAVADOC
@@ -120,12 +120,12 @@ public class SchoolEntity implements Serializable {
         this.trainingsList = trainingsList;
     }
 
-    public List<EmployeeSchoolTypeEntity> getEmployeesSchoolsList() {
-        return employeesSchoolsList;
+    public List<EmployeeSchoolTypeEntity> getEmployeesSchoolsTypesList() {
+        return employeesSchoolsTypesList;
     }
 
-    public void setEmployeesSchoolsList(List<EmployeeSchoolTypeEntity> employeesSchoolsList) {
-        this.employeesSchoolsList = employeesSchoolsList;
+    public void setEmployeesSchoolsTypesList(List<EmployeeSchoolTypeEntity> employeesSchoolsTypesList) {
+        this.employeesSchoolsTypesList = employeesSchoolsTypesList;
     }
 
     @Override

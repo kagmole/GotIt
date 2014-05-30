@@ -11,7 +11,7 @@
 			<c:otherwise>
 				<c:forEach var="schoolEntity" items="${schoolsEntitiesList}">
 					<c:out value="${schoolEntity.name}" />
-					<a href="/schools/view/${schoolEntity.schoolPk}">[MORE]</a>
+					<a href="/schools/${schoolEntity.schoolPk}">[MORE]</a>
 					<a href="/schools/delete/${schoolEntity.schoolPk}">[DELETE]</a>
 					<br />
 				</c:forEach>

@@ -7,12 +7,13 @@ import ch.hearc.gotit.configurers.ServiceConfigurer;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
+import org.springframework.core.annotation.Order;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.filter.DelegatingFilterProxy;
 
-public class GotItInitializer implements WebApplicationInitializer {
+@Order(2)
+public class SpringMvcInitializer implements WebApplicationInitializer {
 
 	@Override
 	public void onStartup(ServletContext container) throws ServletException {
@@ -23,9 +24,6 @@ public class GotItInitializer implements WebApplicationInitializer {
 		rootContext.register(ServiceConfigurer.class);
 
 		container.addListener(new ContextLoaderListener(rootContext));
-		
-		container.addFilter("springSecurityFilterChain", new DelegatingFilterProxy("springSecurityFilterChain"))
-				.addMappingForUrlPatterns(null, false, "/*");
 	}
 }
 
@@ -39,7 +37,7 @@ public class GotItInitializer implements WebApplicationInitializer {
 //import ch.hearc.gotit.configurers.PersistenceConfigurer;
 //import ch.hearc.gotit.configurers.ServiceConfigurer;
 //
-//public class GotItInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+//public class SpringMvcInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 //
 //	@Override
 //	protected Class<?>[] getRootConfigClasses() {

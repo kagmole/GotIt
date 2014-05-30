@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -28,6 +30,11 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author Dany Jupille
  */
 @Entity
+@NamedQueries({
+	@NamedQuery(
+			name = "UserQuery.findByUsername",
+			query = "SELECT u FROM UserEntity u WHERE u.username = :username")
+})
 @FieldEqualsConstraint.List({
 	@FieldEqualsConstraint(first = "password", second = "confirmPassword", message = "Passwords don't match"),
 	@FieldEqualsConstraint(first = "mainEmail", second = "confirmMainEmail", message = "Main emails don't match"),
@@ -266,7 +273,7 @@ public class UserEntity implements Serializable {
         return employee;
     }
 
-    public void setEmployees(EmployeeEntity employee) {
+    public void setEmployee(EmployeeEntity employee) {
         this.employee = employee;
     }
 

@@ -30,13 +30,35 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
-	public String getList() {
+	public String getList(Model model) {
+		model.addAttribute("usersEntitiesList", userService.findAll());
+		
 		return LIST_URI;
 	}
 	
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-	public String getEditById(@PathVariable int id) {
+	public String getEditById(@PathVariable int id, Model model) {
+		UserEntity userEntity = userService.find(id);
+		
+		if (userEntity == null) {
+			return "redirect:/users";
+		}
+		
+		model.addAttribute("userEntity", userEntity);
+		
 		return EDIT_URI;
+	}
+	
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+	public String postEditById(@PathVariable int id, @Valid UserEntity userEntity, BindingResult result) {
+		if (result.hasErrors()) {
+			return EDIT_URI;
+		}
+		
+		userEntity.setUserPk(id);
+		userService.update(userEntity);
+		
+		return "redirect:/users/" + userEntity.getUserPk();
 	}
 	
 	@RequestMapping(value = "/sign-in", method = RequestMethod.GET)
@@ -59,10 +81,10 @@ public class UserController {
 		
 		userService.create(userEntity);
 		
-		return LIST_URI;
+		return "redirect:/users/" + userEntity.getUserPk();
 	}
 	
-	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String getViewById(@PathVariable int id) {
 		return VIEW_URI;
 	}

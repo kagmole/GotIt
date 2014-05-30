@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping(value = "/desktop")
+//TODO remove: destkop will be at "/schools/{id}/desktop" -> SchoolController (or forwarding... ?)
 public class DesktopController {
 	
 	private static final String START_URI = "desktops/bases/";

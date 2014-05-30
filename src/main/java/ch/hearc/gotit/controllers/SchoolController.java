@@ -1,7 +1,10 @@
 package ch.hearc.gotit.controllers;
 
+import java.security.Principal;
+
 import ch.hearc.gotit.entities.SchoolEntity;
 import ch.hearc.gotit.services.SchoolService;
+import ch.hearc.gotit.services.UserService;
 
 import javax.validation.Valid;
 
@@ -28,6 +31,9 @@ public class SchoolController {
 	@Autowired
 	private SchoolService schoolService;
 	
+	@Autowired
+	private UserService userService;
+	
 	@RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
 	public String getList(Model model) {
 		model.addAttribute("schoolsEntitiesList", schoolService.findAll());
@@ -43,22 +49,26 @@ public class SchoolController {
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String postAdd(@Valid SchoolEntity schoolEntity, BindingResult result) {
+	public String postAdd(@Valid SchoolEntity schoolEntity, BindingResult result, Principal principal) {
 		if (result.hasErrors()) {
 			return ADD_URI;
 		}
 		
-		schoolService.create(schoolEntity);
+		schoolService.createByUser(schoolEntity, userService.findByUsername(principal.getName()));
 		
-		return "redirect:/schools/view/" + schoolEntity.getSchoolPk();
+		return "redirect:/schools/" + schoolEntity.getSchoolPk();
 	}
 	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public String getDeleteById(@PathVariable int id, Model model) {
+	public String getDeleteById(@PathVariable int id, Model model, Principal principal) {
 		SchoolEntity schoolEntity = schoolService.find(id);
 		
 		if (schoolEntity == null) {
-			return "redirect:/schools";
+			return "redirect:/errors/404";
+		}
+		
+		if (!schoolService.isDestroyAuthorized(schoolEntity, userService.findByUsername(principal.getName()))) {
+			return "redirect:/errors/403";
 		}
 		
 		model.addAttribute("schoolEntity", schoolEntity);
@@ -67,20 +77,32 @@ public class SchoolController {
 	}
 	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-	public String postDeleteById(@PathVariable int id) {
-		// XXX security is "meh" (correct id?)
-		// XXX "yerk" composition: should be able to destroy by id
-		schoolService.destroy(schoolService.find(id));
+	public String postDeleteById(@PathVariable int id, Principal principal) {
+		SchoolEntity schoolEntity = schoolService.find(id);
+		
+		if (schoolEntity == null) {
+			return "redirect:/errors/404";
+		}
+		
+		if (!schoolService.isDestroyAuthorized(schoolEntity, userService.findByUsername(principal.getName()))) {
+			return "redirect:/errors/403";
+		}
+		
+		schoolService.destroy(schoolEntity);
 		
 		return "redirect:/schools";
 	}
 	
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-	public String getEditById(@PathVariable int id, Model model) {
+	public String getEditById(@PathVariable int id, Model model, Principal principal) {
 		SchoolEntity schoolEntity = schoolService.find(id);
 		
 		if (schoolEntity == null) {
-			return "redirect:/schools";
+			return "redirect:/errors/404";
+		}
+		
+		if (!schoolService.isUpdateAuthorized(schoolEntity, userService.findByUsername(principal.getName()))) {
+			return "redirect:/errors/403";
 		}
 		
 		model.addAttribute("schoolEntity", schoolEntity);
@@ -89,23 +111,29 @@ public class SchoolController {
 	}
 	
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-	public String postEditById(@PathVariable int id, @Valid SchoolEntity schoolEntity, BindingResult result) {
+	public String postEditById(@PathVariable int id, @Valid SchoolEntity schoolEntity2, BindingResult result, Principal principal) {		
+		// XXX this is crap: should implement BasicDao.exists criteria
+		SchoolEntity schoolEntity = schoolService.find(id);
+		
 		if (schoolEntity == null) {
-			return "redirect:/schools/edit/" + id;
+			return "redirect:/errors/404";
+		}
+		
+		if (!schoolService.isUpdateAuthorized(schoolEntity, userService.findByUsername(principal.getName()))) {
+			return "redirect:/errors/403";
 		}
 		
 		if (result.hasErrors()) {
 			return EDIT_URI;
 		}
 		
-		// XXX security is "meh" (correct id?)
-		schoolEntity.setSchoolPk(id);
-		schoolService.update(schoolEntity);
+		schoolEntity2.setSchoolPk(id);
+		schoolService.update(schoolEntity2);
 		
-		return "redirect:/schools/view/" + schoolEntity.getSchoolPk();
+		return "redirect:/schools/" + id;
 	}
 	
-	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String getViewById(@PathVariable int id, Model model) {
 		SchoolEntity schoolEntity = schoolService.find(id);
 		

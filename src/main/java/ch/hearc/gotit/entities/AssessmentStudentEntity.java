@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -39,10 +40,12 @@ public class AssessmentStudentEntity implements Serializable {
     @Column(name = "comments")
     private String comments;
     
+    @MapsId("assessmentPk")
     @JoinColumn(name = "pk_assessment", referencedColumnName = "pk_assessment", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private AssessmentEntity assessment;
     
+    @MapsId("studentPk")
     @JoinColumn(name = "pk_student", referencedColumnName = "pk_student", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private StudentEntity student;
@@ -135,6 +138,7 @@ public class AssessmentStudentEntity implements Serializable {
 
     @Override
     public String toString() {
+    	// TODO enhance for all toString of entities
         return "AssessmentResultEntity[pk=" + assessmentResultPK + "]";
     }
 }

@@ -9,9 +9,9 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * TODO ENTITY JAVADOC
@@ -20,7 +20,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "students_courses")
-@XmlRootElement
 public class StudentCourseEntity implements Serializable {
 	
     private static final long serialVersionUID = 1L;
@@ -35,10 +34,12 @@ public class StudentCourseEntity implements Serializable {
     @Column(name = "course_complete")
     private Boolean courseComplete;
     
+    @MapsId("coursePk")
     @JoinColumn(name = "pk_course", referencedColumnName = "pk_course", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private CourseEntity course;
     
+    @MapsId("studentPk")
     @JoinColumn(name = "pk_student", referencedColumnName = "pk_student", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private StudentEntity student;

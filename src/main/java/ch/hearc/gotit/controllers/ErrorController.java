@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/errors")
 public class ErrorController {
 	
-	private static final String START_URI = "desktops/bases/";
+	private static final String START_URI = "standards/errors/";
 	
 	private static final String ERROR_403_URI = START_URI + "403";
 	private static final String ERROR_404_URI = START_URI + "404";

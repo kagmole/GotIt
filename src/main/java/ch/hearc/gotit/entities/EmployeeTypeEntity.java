@@ -2,6 +2,7 @@ package ch.hearc.gotit.entities;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -20,6 +23,11 @@ import javax.validation.constraints.Size;
  * @author Dany Jupille
  */
 @Entity
+@NamedQueries({
+	@NamedQuery(
+			name = "EmployeeTypeQuery.findByName",
+			query = "SELECT et FROM EmployeeTypeEntity et WHERE et.name = :name")
+})
 @Table(name = "employees_types")
 public class EmployeeTypeEntity implements Serializable {
 	
@@ -41,7 +49,7 @@ public class EmployeeTypeEntity implements Serializable {
     private String description;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeType")
-    private List<EmployeeSchoolTypeEntity> employeesSchoolsList;
+    private List<EmployeeSchoolTypeEntity> employeesSchoolsTypesList;
 
     /**
      * TODO CONSTRUCTORS JAVADOC
@@ -77,12 +85,12 @@ public class EmployeeTypeEntity implements Serializable {
         this.description = description;
     }
 
-    public List<EmployeeSchoolTypeEntity> getEmployeesSchoolsList() {
-        return employeesSchoolsList;
+    public List<EmployeeSchoolTypeEntity> getEmployeesSchoolsTypesList() {
+        return employeesSchoolsTypesList;
     }
 
-    public void setEmployeesSchoolsList(List<EmployeeSchoolTypeEntity> employeesSchoolsList) {
-        this.employeesSchoolsList = employeesSchoolsList;
+    public void setEmployeesSchoolsTypesList(List<EmployeeSchoolTypeEntity> employeesSchoolsTypesList) {
+        this.employeesSchoolsTypesList = employeesSchoolsTypesList;
     }
 
     @Override

@@ -10,10 +10,10 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * TODO ENTITY JAVADOC
@@ -22,7 +22,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "students_trainings")
-@XmlRootElement
 public class StudentTrainingEntity implements Serializable {
 	
     private static final long serialVersionUID = 1L;
@@ -41,10 +40,12 @@ public class StudentTrainingEntity implements Serializable {
     @Column(name = "training_complete")
     private Boolean trainingComplete;
     
+    @MapsId("trainingPk")
     @JoinColumn(name = "pk_training", referencedColumnName = "pk_training", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private TrainingEntity training;
     
+    @MapsId("studentPk")
     @JoinColumn(name = "pk_student", referencedColumnName = "pk_student", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private StudentEntity student;
