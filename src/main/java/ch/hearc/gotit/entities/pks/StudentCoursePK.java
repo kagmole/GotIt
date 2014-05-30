@@ -12,71 +12,71 @@ import javax.validation.constraints.NotNull;
  * @author Dany Jupille
  */
 @Embeddable
-public class StudentCoursePK implements Serializable {
+public class StudentCoursePk implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Basic(optional = false)
     @NotNull
-    @Column(name = "id_student")
-    private int idStudent;
+    @Column(name = "pk_student")
+    private int studentPk;
 	
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_course")
-    private int idCourse;
+    @Column(name = "pk_course")
+    private int coursePk;
     
     /**
      * TODO CONSTRUCTORS JAVADOC
      */
 
-    public StudentCoursePK() {
+    public StudentCoursePk() {
     }
 
-    public StudentCoursePK(int idStudent, int idCourse) {
-        this.idStudent = idStudent;
-        this.idCourse = idCourse;
+    public StudentCoursePk(int studentPk, int coursePk) {
+        this.studentPk = studentPk;
+        this.coursePk = coursePk;
     }
 
-    public int getIdStudent() {
-        return idStudent;
+    public int getStudentPk() {
+        return studentPk;
     }
 
-    public void setIdStudent(int idStudent) {
-        this.idStudent = idStudent;
+    public void setStudentPk(int studentPk) {
+        this.studentPk = studentPk;
     }
 
-    public int getIdCourse() {
-        return idCourse;
+    public int getCoursePk() {
+        return coursePk;
     }
 
-    public void setIdCourse(int idCourse) {
-        this.idCourse = idCourse;
+    public void setCoursePk(int coursePk) {
+        this.coursePk = coursePk;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
         
-        hash += (int) idStudent;
-        hash += (int) idCourse;
+        hash += (int) studentPk;
+        hash += (int) coursePk;
         
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof StudentCoursePK)) {
+        if (!(object instanceof StudentCoursePk)) {
             return false;
         }
         
-        StudentCoursePK other = (StudentCoursePK) object;
+        StudentCoursePk other = (StudentCoursePk) object;
         
-        if (this.idStudent != other.idStudent) {
+        if (this.studentPk != other.studentPk) {
             return false;
         }
         
-        if (this.idCourse != other.idCourse) {
+        if (this.coursePk != other.coursePk) {
             return false;
         }
         
@@ -85,7 +85,7 @@ public class StudentCoursePK implements Serializable {
 
     @Override
     public String toString() {
-        return "StudentCoursePK[idStudent=" + idStudent + ", idCourse=" + idCourse + "]";
+        return "StudentCoursePK[idStudent=" + studentPk + ", idCourse=" + coursePk + "]";
     }
     
 }

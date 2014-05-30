@@ -17,8 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * TODO ENTITY JAVADOC
@@ -27,7 +25,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "trainings")
-@XmlRootElement
 public class TrainingEntity implements Serializable {
 	
     private static final long serialVersionUID = 1L;
@@ -35,10 +32,10 @@ public class TrainingEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_training")
-    private Integer id;
+    @Column(name = "pk_training")
+    private Integer trainingPk;
     
-    @Size(max = 45)
+    @Size(max = 50)
     @Column(name = "name")
     private String name;
     
@@ -48,12 +45,12 @@ public class TrainingEntity implements Serializable {
     private String description;
     
     @JoinTable(name = "events_trainings", joinColumns = {
-        @JoinColumn(name = "id_training", referencedColumnName = "id_training")}, inverseJoinColumns = {
-        @JoinColumn(name = "id_event", referencedColumnName = "id_event")})
+        @JoinColumn(name = "pk_training", referencedColumnName = "pk_training")}, inverseJoinColumns = {
+        @JoinColumn(name = "pk_event", referencedColumnName = "pk_event")})
     @ManyToMany
     private List<EventEntity> eventsList;
     
-    @JoinColumn(name = "id_school", referencedColumnName = "id_school")
+    @JoinColumn(name = "fk_school", referencedColumnName = "pk_school")
     @ManyToOne(optional = false)
     private SchoolEntity school;
     
@@ -69,16 +66,16 @@ public class TrainingEntity implements Serializable {
     public TrainingEntity() {
     }
 
-    public TrainingEntity(Integer id) {
-        this.id = id;
+    public TrainingEntity(Integer trainingPk) {
+        this.trainingPk = trainingPk;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getTrainingPk() {
+        return trainingPk;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setTrainingPk(Integer trainingPk) {
+        this.trainingPk = trainingPk;
     }
 
     public String getName() {
@@ -97,7 +94,6 @@ public class TrainingEntity implements Serializable {
         this.description = description;
     }
 
-    @XmlTransient
     public List<EventEntity> getEventsList() {
         return eventsList;
     }
@@ -114,7 +110,6 @@ public class TrainingEntity implements Serializable {
         this.school = school;
     }
 
-    @XmlTransient
     public List<ModuleTrainingEntity> getModulesTrainingsList() {
         return modulesTrainingsList;
     }
@@ -123,7 +118,6 @@ public class TrainingEntity implements Serializable {
         this.modulesTrainingsList = modulesTrainingsList;
     }
 
-    @XmlTransient
     public List<StudentTrainingEntity> getStudentsTrainingsList() {
         return studentsTrainingsList;
     }
@@ -136,7 +130,7 @@ public class TrainingEntity implements Serializable {
     public int hashCode() {
         int hash = 0;
         
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (trainingPk != null ? trainingPk.hashCode() : 0);
         
         return hash;
     }
@@ -149,7 +143,7 @@ public class TrainingEntity implements Serializable {
         
         TrainingEntity other = (TrainingEntity) object;
         
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.trainingPk == null && other.trainingPk != null) || (this.trainingPk != null && !this.trainingPk.equals(other.trainingPk))) {
             return false;
         }
         
@@ -158,7 +152,7 @@ public class TrainingEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "TrainingEntity[id=" + id + "]";
+        return "TrainingEntity[id=" + trainingPk + "]";
     }
     
 }

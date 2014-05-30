@@ -1,6 +1,6 @@
 package ch.hearc.gotit.entities;
 
-import ch.hearc.gotit.entities.pks.StudentTrainingPK;
+import ch.hearc.gotit.entities.pks.StudentTrainingPk;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,10 +10,10 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * TODO ENTITY JAVADOC
@@ -22,13 +22,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "students_trainings")
-@XmlRootElement
 public class StudentTrainingEntity implements Serializable {
 	
     private static final long serialVersionUID = 1L;
     
     @EmbeddedId
-    protected StudentTrainingPK studentTrainingPK;
+    protected StudentTrainingPk studentTrainingPk;
     
     @Column(name = "starting_datetime")
     @Temporal(TemporalType.TIMESTAMP)
@@ -41,11 +40,13 @@ public class StudentTrainingEntity implements Serializable {
     @Column(name = "training_complete")
     private Boolean trainingComplete;
     
-    @JoinColumn(name = "id_training", referencedColumnName = "id_training", insertable = false, updatable = false)
+    @MapsId("trainingPk")
+    @JoinColumn(name = "pk_training", referencedColumnName = "pk_training", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private TrainingEntity training;
     
-    @JoinColumn(name = "id_student", referencedColumnName = "id_student", insertable = false, updatable = false)
+    @MapsId("studentPk")
+    @JoinColumn(name = "pk_student", referencedColumnName = "pk_student", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private StudentEntity student;
 
@@ -55,20 +56,20 @@ public class StudentTrainingEntity implements Serializable {
     public StudentTrainingEntity() {
     }
 
-    public StudentTrainingEntity(StudentTrainingPK studentTrainingPK) {
-        this.studentTrainingPK = studentTrainingPK;
+    public StudentTrainingEntity(StudentTrainingPk studentTrainingPK) {
+        this.studentTrainingPk = studentTrainingPK;
     }
 
-    public StudentTrainingEntity(int idStudent, int idTraining) {
-        this.studentTrainingPK = new StudentTrainingPK(idStudent, idTraining);
+    public StudentTrainingEntity(int studentPk, int trainingPk) {
+        this.studentTrainingPk = new StudentTrainingPk(studentPk, trainingPk);
     }
 
-    public StudentTrainingPK getStudentTrainingPK() {
-        return studentTrainingPK;
+    public StudentTrainingPk getStudentTrainingPk() {
+        return studentTrainingPk;
     }
 
-    public void setStudentTrainingPK(StudentTrainingPK studentTrainingPK) {
-        this.studentTrainingPK = studentTrainingPK;
+    public void setStudentTrainingPk(StudentTrainingPk studentTrainingPk) {
+        this.studentTrainingPk = studentTrainingPk;
     }
 
     public Date getStartingDatetime() {
@@ -115,7 +116,7 @@ public class StudentTrainingEntity implements Serializable {
     public int hashCode() {
         int hash = 0;
         
-        hash += (studentTrainingPK != null ? studentTrainingPK.hashCode() : 0);
+        hash += (studentTrainingPk != null ? studentTrainingPk.hashCode() : 0);
         
         return hash;
     }
@@ -128,7 +129,7 @@ public class StudentTrainingEntity implements Serializable {
         
         StudentTrainingEntity other = (StudentTrainingEntity) object;
         
-        if ((this.studentTrainingPK == null && other.studentTrainingPK != null) || (this.studentTrainingPK != null && !this.studentTrainingPK.equals(other.studentTrainingPK))) {
+        if ((this.studentTrainingPk == null && other.studentTrainingPk != null) || (this.studentTrainingPk != null && !this.studentTrainingPk.equals(other.studentTrainingPk))) {
             return false;
         }
         
@@ -137,6 +138,6 @@ public class StudentTrainingEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "StudentTrainingEntity[studentTrainingPK=" + studentTrainingPK + "]";
+        return "StudentTrainingEntity[studentTrainingPK=" + studentTrainingPk + "]";
     }
 }

@@ -11,4 +11,12 @@ public class UserDaoImpl extends BasicDaoImpl<UserEntity, Integer> implements Us
 	public UserDaoImpl() {
 		super(UserEntity.class);
 	}
+
+	@Override
+	public UserEntity findByUsername(String username) {
+		return (UserEntity) getCurrentSession()
+				.getNamedQuery("UserQuery.findByUsername")
+				.setString("username", username)
+				.uniqueResult();
+	}
 }

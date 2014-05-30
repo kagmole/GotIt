@@ -1,5 +1,6 @@
 package ch.hearc.gotit.services;
 
-public interface BasicService {
+import ch.hearc.gotit.daos.BasicDao;
 
+public interface BasicService<E, K> extends BasicDao<E, K> {
 }

@@ -1,6 +1,6 @@
 package ch.hearc.gotit.entities;
 
-import ch.hearc.gotit.entities.pks.ModuleTrainingPK;
+import ch.hearc.gotit.entities.pks.ModuleTrainingPk;
 
 import java.io.Serializable;
 
@@ -9,8 +9,8 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * TODO ENTITY JAVADOC
@@ -19,22 +19,23 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "modules_trainings")
-@XmlRootElement
 public class ModuleTrainingEntity implements Serializable {
 	
     private static final long serialVersionUID = 1L;
     
     @EmbeddedId
-    protected ModuleTrainingPK moduleTrainingPK;
+    protected ModuleTrainingPk moduleTrainingPk;
     
     @Column(name = "weight")
     private Float weight;
     
-    @JoinColumn(name = "id_module", referencedColumnName = "id_module", insertable = false, updatable = false)
+    @MapsId("modulePk")
+    @JoinColumn(name = "pk_module", referencedColumnName = "pk_module", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private ModuleEntity module;
     
-    @JoinColumn(name = "id_training", referencedColumnName = "id_training", insertable = false, updatable = false)
+    @MapsId("trainingPk")
+    @JoinColumn(name = "pk_training", referencedColumnName = "pk_training", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private TrainingEntity training;
     
@@ -44,20 +45,20 @@ public class ModuleTrainingEntity implements Serializable {
     public ModuleTrainingEntity() {
     }
 
-    public ModuleTrainingEntity(ModuleTrainingPK moduleTrainingPK) {
-        this.moduleTrainingPK = moduleTrainingPK;
+    public ModuleTrainingEntity(ModuleTrainingPk moduleTrainingPk) {
+        this.moduleTrainingPk = moduleTrainingPk;
     }
 
-    public ModuleTrainingEntity(int idTraining, int idModule) {
-        this.moduleTrainingPK = new ModuleTrainingPK(idTraining, idModule);
+    public ModuleTrainingEntity(int trainingPk, int modulePk) {
+        this.moduleTrainingPk = new ModuleTrainingPk(trainingPk, modulePk);
     }
 
-    public ModuleTrainingPK getModuleTrainingPK() {
-        return moduleTrainingPK;
+    public ModuleTrainingPk getModuleTrainingPk() {
+        return moduleTrainingPk;
     }
 
-    public void setModuleTrainingPK(ModuleTrainingPK moduleTrainingPK) {
-        this.moduleTrainingPK = moduleTrainingPK;
+    public void setModuleTrainingPk(ModuleTrainingPk moduleTrainingPk) {
+        this.moduleTrainingPk = moduleTrainingPk;
     }
 
     public Float getWeight() {
@@ -88,7 +89,7 @@ public class ModuleTrainingEntity implements Serializable {
     public int hashCode() {
         int hash = 0;
         
-        hash += (moduleTrainingPK != null ? moduleTrainingPK.hashCode() : 0);
+        hash += (moduleTrainingPk != null ? moduleTrainingPk.hashCode() : 0);
         
         return hash;
     }
@@ -101,7 +102,7 @@ public class ModuleTrainingEntity implements Serializable {
         
         ModuleTrainingEntity other = (ModuleTrainingEntity) object;
         
-        if ((this.moduleTrainingPK == null && other.moduleTrainingPK != null) || (this.moduleTrainingPK != null && !this.moduleTrainingPK.equals(other.moduleTrainingPK))) {
+        if ((this.moduleTrainingPk == null && other.moduleTrainingPk != null) || (this.moduleTrainingPk != null && !this.moduleTrainingPk.equals(other.moduleTrainingPk))) {
             return false;
         }
         
@@ -110,7 +111,7 @@ public class ModuleTrainingEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "ModuleTrainingEntity[moduleTrainingPK=" + moduleTrainingPK + "]";
+        return "ModuleTrainingEntity[moduleTrainingPK=" + moduleTrainingPk + "]";
     }
     
 }

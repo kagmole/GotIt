@@ -1,6 +1,6 @@
 package ch.hearc.gotit.entities;
 
-import ch.hearc.gotit.entities.pks.StudentCoursePK;
+import ch.hearc.gotit.entities.pks.StudentCoursePk;
 
 import java.io.Serializable;
 
@@ -9,9 +9,9 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * TODO ENTITY JAVADOC
@@ -20,27 +20,27 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "students_courses")
-@XmlRootElement
 public class StudentCourseEntity implements Serializable {
 	
     private static final long serialVersionUID = 1L;
     
     @EmbeddedId
-    protected StudentCoursePK studentCoursePK;
+    protected StudentCoursePk studentCoursePk;
     
-    @Size(max = 45)
+    @Size(max = 50)
     @Column(name = "grade")
     private String grade;
     
-    @Size(max = 45)
     @Column(name = "course_complete")
-    private String courseComplete;
+    private Boolean courseComplete;
     
-    @JoinColumn(name = "id_course", referencedColumnName = "id_course", insertable = false, updatable = false)
+    @MapsId("coursePk")
+    @JoinColumn(name = "pk_course", referencedColumnName = "pk_course", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private CourseEntity course;
     
-    @JoinColumn(name = "id_student", referencedColumnName = "id_student", insertable = false, updatable = false)
+    @MapsId("studentPk")
+    @JoinColumn(name = "pk_student", referencedColumnName = "pk_student", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private StudentEntity student;
 
@@ -50,20 +50,20 @@ public class StudentCourseEntity implements Serializable {
     public StudentCourseEntity() {
     }
 
-    public StudentCourseEntity(StudentCoursePK studentCoursePK) {
-        this.studentCoursePK = studentCoursePK;
+    public StudentCourseEntity(StudentCoursePk studentCoursePK) {
+        this.studentCoursePk = studentCoursePK;
     }
 
     public StudentCourseEntity(int idStudent, int idCourse) {
-        this.studentCoursePK = new StudentCoursePK(idStudent, idCourse);
+        this.studentCoursePk = new StudentCoursePk(idStudent, idCourse);
     }
 
-    public StudentCoursePK getStudentCoursePK() {
-        return studentCoursePK;
+    public StudentCoursePk getStudentCoursePk() {
+        return studentCoursePk;
     }
 
-    public void setStudentCoursePK(StudentCoursePK studentCoursePK) {
-        this.studentCoursePK = studentCoursePK;
+    public void setStudentCoursePk(StudentCoursePk studentCoursePk) {
+        this.studentCoursePk = studentCoursePk;
     }
 
     public String getGrade() {
@@ -74,11 +74,11 @@ public class StudentCourseEntity implements Serializable {
         this.grade = grade;
     }
 
-    public String getCourseComplete() {
+    public Boolean getCourseComplete() {
         return courseComplete;
     }
 
-    public void setCourseComplete(String courseComplete) {
+    public void setCourseComplete(Boolean courseComplete) {
         this.courseComplete = courseComplete;
     }
 
@@ -102,7 +102,7 @@ public class StudentCourseEntity implements Serializable {
     public int hashCode() {
         int hash = 0;
         
-        hash += (studentCoursePK != null ? studentCoursePK.hashCode() : 0);
+        hash += (studentCoursePk != null ? studentCoursePk.hashCode() : 0);
         
         return hash;
     }
@@ -115,7 +115,7 @@ public class StudentCourseEntity implements Serializable {
         
         StudentCourseEntity other = (StudentCourseEntity) object;
         
-        if ((this.studentCoursePK == null && other.studentCoursePK != null) || (this.studentCoursePK != null && !this.studentCoursePK.equals(other.studentCoursePK))) {
+        if ((this.studentCoursePk == null && other.studentCoursePk != null) || (this.studentCoursePk != null && !this.studentCoursePk.equals(other.studentCoursePk))) {
             return false;
         }
         
@@ -124,6 +124,6 @@ public class StudentCourseEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "StudentCourseEntity[studentCoursePK=" + studentCoursePK + "]";
+        return "StudentCourseEntity[studentCoursePK=" + studentCoursePk + "]";
     }
 }

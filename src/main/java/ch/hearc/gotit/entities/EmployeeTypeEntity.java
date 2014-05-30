@@ -2,6 +2,7 @@ package ch.hearc.gotit.entities;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,11 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * TODO ENTITY JAVADOC
@@ -22,8 +23,12 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Dany Jupille
  */
 @Entity
+@NamedQueries({
+	@NamedQuery(
+			name = "EmployeeTypeQuery.findByName",
+			query = "SELECT et FROM EmployeeTypeEntity et WHERE et.name = :name")
+})
 @Table(name = "employees_types")
-@XmlRootElement
 public class EmployeeTypeEntity implements Serializable {
 	
     private static final long serialVersionUID = 1L;
@@ -31,10 +36,10 @@ public class EmployeeTypeEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_employee_type")
-    private Integer id;
+    @Column(name = "pk_employee_type")
+    private Integer employeeTypePk;
     
-    @Size(max = 45)
+    @Size(max = 50)
     @Column(name = "name")
     private String name;
     
@@ -44,7 +49,7 @@ public class EmployeeTypeEntity implements Serializable {
     private String description;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeType")
-    private List<EmployeeSchoolEntity> employeesSchoolsList;
+    private List<EmployeeSchoolTypeEntity> employeesSchoolsTypesList;
 
     /**
      * TODO CONSTRUCTORS JAVADOC
@@ -52,16 +57,16 @@ public class EmployeeTypeEntity implements Serializable {
     public EmployeeTypeEntity() {
     }
 
-    public EmployeeTypeEntity(Integer id) {
-        this.id = id;
+    public EmployeeTypeEntity(Integer employeeTypePk) {
+        this.employeeTypePk = employeeTypePk;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getEmployeeTypePk() {
+        return employeeTypePk;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setEmployeeTypePk(Integer employeeTypePk) {
+        this.employeeTypePk = employeeTypePk;
     }
 
     public String getName() {
@@ -80,20 +85,19 @@ public class EmployeeTypeEntity implements Serializable {
         this.description = description;
     }
 
-    @XmlTransient
-    public List<EmployeeSchoolEntity> getEmployeesSchoolsList() {
-        return employeesSchoolsList;
+    public List<EmployeeSchoolTypeEntity> getEmployeesSchoolsTypesList() {
+        return employeesSchoolsTypesList;
     }
 
-    public void setEmployeesSchoolsList(List<EmployeeSchoolEntity> employeesSchoolsList) {
-        this.employeesSchoolsList = employeesSchoolsList;
+    public void setEmployeesSchoolsTypesList(List<EmployeeSchoolTypeEntity> employeesSchoolsTypesList) {
+        this.employeesSchoolsTypesList = employeesSchoolsTypesList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
         
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (employeeTypePk != null ? employeeTypePk.hashCode() : 0);
         
         return hash;
     }
@@ -106,7 +110,7 @@ public class EmployeeTypeEntity implements Serializable {
         
         EmployeeTypeEntity other = (EmployeeTypeEntity) object;
         
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.employeeTypePk == null && other.employeeTypePk != null) || (this.employeeTypePk != null && !this.employeeTypePk.equals(other.employeeTypePk))) {
             return false;
         }
         
@@ -115,6 +119,6 @@ public class EmployeeTypeEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "EmployeeTypeEntity[id=" + id + "]";
+        return "EmployeeTypeEntity[id=" + employeeTypePk + "]";
     }
 }

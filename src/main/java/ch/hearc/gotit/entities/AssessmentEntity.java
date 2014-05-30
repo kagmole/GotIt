@@ -19,8 +19,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * TODO ENTITY JAVADOC
@@ -29,7 +27,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "assessments")
-@XmlRootElement
 public class AssessmentEntity implements Serializable {
 	
     private static final long serialVersionUID = 1L;
@@ -37,10 +34,10 @@ public class AssessmentEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_assessment")
-    private Integer id;
+    @Column(name = "pk_assessment")
+    private Integer assessmentPk;
     
-    @Size(max = 45)
+    @Size(max = 50)
     @Column(name = "name")
     private String name;
     
@@ -62,12 +59,12 @@ public class AssessmentEntity implements Serializable {
     @ManyToMany(mappedBy = "assessmentsList")
     private List<CourseEntity> coursesList;
     
-    @JoinColumn(name = "id_assessment_type", referencedColumnName = "id_assessment_type")
+    @JoinColumn(name = "pk_assessment_type", referencedColumnName = "pk_assessment_type")
     @ManyToOne(optional = false)
     private AssessmentTypeEntity assessmentType;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "assessment")
-    private List<AssessmentResultEntity> assessmentsResultsList;
+    private List<AssessmentStudentEntity> assessmentsStudentsList;
 
     /**
      * TODO CONSTRUCTORS JAVADOC
@@ -75,16 +72,16 @@ public class AssessmentEntity implements Serializable {
     public AssessmentEntity() {
     }
 
-    public AssessmentEntity(Integer id) {
-        this.id = id;
+    public AssessmentEntity(Integer assessmentPk) {
+        this.assessmentPk = assessmentPk;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getAssessmentPk() {
+        return assessmentPk;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setAssessmentPk(Integer assessmentPk) {
+        this.assessmentPk = assessmentPk;
     }
 
     public String getName() {
@@ -127,7 +124,6 @@ public class AssessmentEntity implements Serializable {
         this.weight = weight;
     }
 
-    @XmlTransient
     public List<CourseEntity> getCoursesList() {
         return coursesList;
     }
@@ -144,20 +140,19 @@ public class AssessmentEntity implements Serializable {
         this.assessmentType = assessmentType;
     }
 
-    @XmlTransient
-    public List<AssessmentResultEntity> getAssessmentsResultsList() {
-        return assessmentsResultsList;
+    public List<AssessmentStudentEntity> getAssessmentsStudentsList() {
+        return assessmentsStudentsList;
     }
 
-    public void setAssessmentsResultsList(List<AssessmentResultEntity> assessmentsResultsList) {
-        this.assessmentsResultsList = assessmentsResultsList;
+    public void setAssessmentsStudentsList(List<AssessmentStudentEntity> assessmentsStudentsList) {
+        this.assessmentsStudentsList = assessmentsStudentsList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
         
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (assessmentPk != null ? assessmentPk.hashCode() : 0);
         
         return hash;
     }
@@ -170,7 +165,7 @@ public class AssessmentEntity implements Serializable {
         
         AssessmentEntity other = (AssessmentEntity) object;
         
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.assessmentPk == null && other.assessmentPk != null) || (this.assessmentPk != null && !this.assessmentPk.equals(other.assessmentPk))) {
             return false;
         }
         
@@ -179,6 +174,6 @@ public class AssessmentEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "AssessmentEntity[id=" + id + "]";
+        return "AssessmentEntity[pk=" + assessmentPk + "]";
     }
 }

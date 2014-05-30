@@ -16,8 +16,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * TODO ENTITY JAVADOC
@@ -26,7 +24,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "modules")
-@XmlRootElement
 public class ModuleEntity implements Serializable {
 	
     private static final long serialVersionUID = 1L;
@@ -34,10 +31,10 @@ public class ModuleEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_module")
-    private Integer id;
+    @Column(name = "pk_module")
+    private Integer modulePk;
     
-    @Size(max = 45)
+    @Size(max = 50)
     @Column(name = "name")
     private String name;
     
@@ -47,15 +44,15 @@ public class ModuleEntity implements Serializable {
     private String description;
     
     @JoinTable(name = "modules_dependencies", joinColumns = {
-        @JoinColumn(name = "id_module", referencedColumnName = "id_module")}, inverseJoinColumns = {
-        @JoinColumn(name = "id_dependency", referencedColumnName = "id_module")})
+        @JoinColumn(name = "pk_module", referencedColumnName = "pk_module")}, inverseJoinColumns = {
+        @JoinColumn(name = "pk_dependency", referencedColumnName = "pk_module")})
     @ManyToMany
     private List<ModuleEntity> dependencyModulesList;
     
     @ManyToMany(mappedBy = "dependencyModulesList")
     private List<ModuleEntity> dependentModulesList;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "module")
     private List<CourseEntity> coursesList;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "module")
@@ -67,16 +64,16 @@ public class ModuleEntity implements Serializable {
     public ModuleEntity() {
     }
 
-    public ModuleEntity(Integer id) {
-        this.id = id;
+    public ModuleEntity(Integer modulePk) {
+        this.modulePk = modulePk;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getModulePk() {
+        return modulePk;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setModulePk(Integer modulePk) {
+        this.modulePk = modulePk;
     }
 
     public String getName() {
@@ -95,7 +92,6 @@ public class ModuleEntity implements Serializable {
         this.description = description;
     }
 
-    @XmlTransient
     public List<ModuleEntity> getDependencyModulesList() {
         return dependencyModulesList;
     }
@@ -104,7 +100,6 @@ public class ModuleEntity implements Serializable {
         this.dependencyModulesList = dependencyModulesList;
     }
 
-    @XmlTransient
     public List<ModuleEntity> getDependentModulesList() {
         return dependentModulesList;
     }
@@ -113,7 +108,6 @@ public class ModuleEntity implements Serializable {
         this.dependentModulesList = dependentModulesList;
     }
 
-    @XmlTransient
     public List<CourseEntity> getCoursesList() {
         return coursesList;
     }
@@ -122,7 +116,6 @@ public class ModuleEntity implements Serializable {
         this.coursesList = coursesList;
     }
 
-    @XmlTransient
     public List<ModuleTrainingEntity> getModulesTrainingsList() {
         return modulesTrainingsList;
     }
@@ -135,7 +128,7 @@ public class ModuleEntity implements Serializable {
     public int hashCode() {
         int hash = 0;
         
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (modulePk != null ? modulePk.hashCode() : 0);
         
         return hash;
     }
@@ -148,7 +141,7 @@ public class ModuleEntity implements Serializable {
         
         ModuleEntity other = (ModuleEntity) object;
         
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.modulePk == null && other.modulePk != null) || (this.modulePk != null && !this.modulePk.equals(other.modulePk))) {
             return false;
         }
         
@@ -157,7 +150,7 @@ public class ModuleEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "ModuleEntity[id=" + id + "]";
+        return "ModuleEntity[id=" + modulePk + "]";
     }
     
 }
