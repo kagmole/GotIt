@@ -1,8 +1,10 @@
 package ch.hearc.gotit.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -57,14 +59,14 @@ public class AssessmentEntity implements Serializable {
     private Float weight;
     
     @ManyToMany(mappedBy = "assessmentsList")
-    private List<CourseEntity> coursesList;
+    private List<CourseEntity> coursesList = new ArrayList<>();
     
     @JoinColumn(name = "pk_assessment_type", referencedColumnName = "pk_assessment_type")
     @ManyToOne(optional = false)
     private AssessmentTypeEntity assessmentType;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "assessment")
-    private List<AssessmentStudentEntity> assessmentsStudentsList;
+    private List<AssessmentStudentEntity> assessmentsStudentsList = new ArrayList<>();
 
     /**
      * TODO CONSTRUCTORS JAVADOC

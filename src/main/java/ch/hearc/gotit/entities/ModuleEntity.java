@@ -1,7 +1,9 @@
 package ch.hearc.gotit.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -47,16 +49,16 @@ public class ModuleEntity implements Serializable {
         @JoinColumn(name = "pk_module", referencedColumnName = "pk_module")}, inverseJoinColumns = {
         @JoinColumn(name = "pk_dependency", referencedColumnName = "pk_module")})
     @ManyToMany
-    private List<ModuleEntity> dependencyModulesList;
+    private List<ModuleEntity> dependencyModulesList = new ArrayList<>();
     
     @ManyToMany(mappedBy = "dependencyModulesList")
-    private List<ModuleEntity> dependentModulesList;
+    private List<ModuleEntity> dependentModulesList = new ArrayList<>();
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "module")
-    private List<CourseEntity> coursesList;
+    private List<CourseEntity> coursesList = new ArrayList<>();
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "module")
-    private List<ModuleTrainingEntity> modulesTrainingsList;
+    private List<ModuleTrainingEntity> modulesTrainingsList = new ArrayList<>();
 
     /**
      * TODO CONSTRUCTORS JAVADOC    

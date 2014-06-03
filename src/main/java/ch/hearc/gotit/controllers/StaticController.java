@@ -13,7 +13,7 @@ public class StaticController {
 	private static final String ABOUT_URI = START_URI + "about";
 	private static final String CONTACT_URI = START_URI + "contact";
 	
-	@RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public String getHome() {		
 		return HOME_URI;
 	}

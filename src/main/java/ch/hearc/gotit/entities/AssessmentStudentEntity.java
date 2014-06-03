@@ -26,7 +26,7 @@ public class AssessmentStudentEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @EmbeddedId
-    protected AssessmentStudentPk assessmentResultPK;
+    protected AssessmentStudentPk assessmentResultPK = new AssessmentStudentPk();
     
     @Column(name = "marks")
     private Integer marks;

@@ -1,6 +1,7 @@
 package ch.hearc.gotit.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -49,7 +50,7 @@ public class EmployeeTypeEntity implements Serializable {
     private String description;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employeeType")
-    private List<EmployeeSchoolTypeEntity> employeesSchoolsTypesList;
+    private List<EmployeeSchoolTypeEntity> employeesSchoolsTypesList = new ArrayList<>();
 
     /**
      * TODO CONSTRUCTORS JAVADOC

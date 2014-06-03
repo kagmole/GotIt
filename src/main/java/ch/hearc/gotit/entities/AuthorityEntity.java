@@ -1,6 +1,7 @@
 package ch.hearc.gotit.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -37,7 +38,7 @@ public class AuthorityEntity implements Serializable {
     private String role;
     
     @OneToMany(mappedBy = "authority")
-    private List<UserEntity> usersList;
+    private List<UserEntity> usersList = new ArrayList<>();
 
     public AuthorityEntity() {
     }

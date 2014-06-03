@@ -1,7 +1,9 @@
 package ch.hearc.gotit.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,20 +39,20 @@ public class StudentEntity implements Serializable {
         @JoinColumn(name = "pk_student", referencedColumnName = "pk_student")}, inverseJoinColumns = {
         @JoinColumn(name = "pk_school", referencedColumnName = "pk_school")})
     @ManyToMany
-    private List<SchoolEntity> schoolsList;
+    private List<SchoolEntity> schoolsList = new ArrayList<>();
     
     @JoinColumn(name = "fk_user", referencedColumnName = "pk_user")
     @OneToOne(optional = false)
     private UserEntity user;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-    private List<AssessmentStudentEntity> assessmentsStudentsList;
+    private List<AssessmentStudentEntity> assessmentsStudentsList = new ArrayList<>();
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-    private List<StudentTrainingEntity> studentsTrainingsList;
+    private List<StudentTrainingEntity> studentsTrainingsList = new ArrayList<>();
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-    private List<StudentCourseEntity> studentsCoursesList;
+    private List<StudentCourseEntity> studentsCoursesList = new ArrayList<>();
 
     /**
      * TODO CONSTRUCTORS JAVADOC

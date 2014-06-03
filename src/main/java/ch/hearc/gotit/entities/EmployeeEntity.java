@@ -1,11 +1,14 @@
 package ch.hearc.gotit.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,10 +40,11 @@ public class EmployeeEntity implements Serializable {
         @JoinColumn(name = "pk_employee", referencedColumnName = "pk_employee")}, inverseJoinColumns = {
         @JoinColumn(name = "pk_course", referencedColumnName = "pk_course")})
     @ManyToMany
-    private List<CourseEntity> coursesList;
+    private List<CourseEntity> coursesList = new ArrayList<>();
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
-    private List<EmployeeSchoolTypeEntity> employeesSchoolsTypesList;
+    // XXX TEMP should use AspectJ to reactivate LAZY initializiation!
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "employee")
+    private List<EmployeeSchoolTypeEntity> employeesSchoolsTypesList = new ArrayList<>();
     
     @JoinColumn(name = "fk_user", referencedColumnName = "pk_user")
     @OneToOne(optional = false)

@@ -34,7 +34,7 @@ public class SchoolController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public String getList(Model model) {
 		model.addAttribute("schoolsEntitiesList", schoolService.findAll());
 		
@@ -54,7 +54,7 @@ public class SchoolController {
 			return ADD_URI;
 		}
 		
-		schoolService.createByUser(schoolEntity, userService.findByUsername(principal.getName()));
+		schoolService.createWithUser(schoolEntity, userService.findByUsername(principal.getName()));
 		
 		return "redirect:/schools/" + schoolEntity.getSchoolPk();
 	}
@@ -111,8 +111,7 @@ public class SchoolController {
 	}
 	
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-	public String postEditById(@PathVariable int id, @Valid SchoolEntity schoolEntity2, BindingResult result, Principal principal) {		
-		// XXX this is crap: should implement BasicDao.exists criteria
+	public String postEditById(@PathVariable int id, @Valid SchoolEntity schoolEntity2, BindingResult result, Principal principal) {
 		SchoolEntity schoolEntity = schoolService.find(id);
 		
 		if (schoolEntity == null) {
@@ -138,7 +137,7 @@ public class SchoolController {
 		SchoolEntity schoolEntity = schoolService.find(id);
 		
 		if (schoolEntity == null) {
-			return "redirect:/schools";
+			return "redirect:/errors/404";
 		}
 		
 		model.addAttribute("schoolEntity", schoolEntity);

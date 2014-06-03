@@ -29,7 +29,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public String getList(Model model) {
 		model.addAttribute("usersEntitiesList", userService.findAll());
 		

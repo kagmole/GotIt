@@ -25,7 +25,7 @@ public class StudentCourseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @EmbeddedId
-    protected StudentCoursePk studentCoursePk;
+    protected StudentCoursePk studentCoursePk = new StudentCoursePk();
     
     @Size(max = 50)
     @Column(name = "grade")

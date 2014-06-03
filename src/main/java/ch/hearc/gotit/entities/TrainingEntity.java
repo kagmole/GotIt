@@ -1,7 +1,9 @@
 package ch.hearc.gotit.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -48,17 +50,17 @@ public class TrainingEntity implements Serializable {
         @JoinColumn(name = "pk_training", referencedColumnName = "pk_training")}, inverseJoinColumns = {
         @JoinColumn(name = "pk_event", referencedColumnName = "pk_event")})
     @ManyToMany
-    private List<EventEntity> eventsList;
+    private List<EventEntity> eventsList = new ArrayList<>();
     
     @JoinColumn(name = "fk_school", referencedColumnName = "pk_school")
     @ManyToOne(optional = false)
     private SchoolEntity school;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "training")
-    private List<ModuleTrainingEntity> modulesTrainingsList;
+    private List<ModuleTrainingEntity> modulesTrainingsList = new ArrayList<>();
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "training")
-    private List<StudentTrainingEntity> studentsTrainingsList;
+    private List<StudentTrainingEntity> studentsTrainingsList = new ArrayList<>();
 
     /**
      * TODO CONSTRUCTORS JAVADOC

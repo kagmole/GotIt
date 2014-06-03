@@ -1,7 +1,9 @@
 package ch.hearc.gotit.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -54,26 +56,26 @@ public class CourseEntity implements Serializable {
         @JoinColumn(name = "pk_course", referencedColumnName = "pk_course")}, inverseJoinColumns = {
         @JoinColumn(name = "pk_assessment", referencedColumnName = "pk_assessment")})
     @ManyToMany
-    private List<AssessmentEntity> assessmentsList;
+    private List<AssessmentEntity> assessmentsList = new ArrayList<>();
     
     @ManyToMany(mappedBy = "coursesList")
-    private List<EmployeeEntity> employeesList;
+    private List<EmployeeEntity> employeesList = new ArrayList<>();
     
     @JoinTable(name = "events_courses", joinColumns = {
         @JoinColumn(name = "pk_course", referencedColumnName = "pk_course")}, inverseJoinColumns = {
         @JoinColumn(name = "pk_event", referencedColumnName = "pk_event")})
     @ManyToMany
-    private List<EventEntity> eventsList;
+    private List<EventEntity> eventsList = new ArrayList<>();
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
-    private List<ClassEntity> classesList;
+    private List<ClassEntity> classesList = new ArrayList<>();
     
     @JoinColumn(name = "fk_module", referencedColumnName = "pk_module")
     @ManyToOne(optional = false)
     private ModuleEntity module;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
-    private List<StudentCourseEntity> studentsCoursesList;
+    private List<StudentCourseEntity> studentsCoursesList = new ArrayList<>();
 
     /**
      * TODO CONSTRUCTORS JAVADOC

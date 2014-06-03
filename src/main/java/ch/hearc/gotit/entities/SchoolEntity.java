@@ -1,6 +1,7 @@
 package ch.hearc.gotit.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -48,19 +49,19 @@ public class SchoolEntity implements Serializable {
     private String description;
     
     @ManyToMany(mappedBy = "schoolsList")
-    private List<StudentEntity> studentsList;
+    private List<StudentEntity> studentsList = new ArrayList<>();
     
     @JoinTable(name = "events_schools", joinColumns = {
         @JoinColumn(name = "pk_school", referencedColumnName = "pk_school")}, inverseJoinColumns = {
         @JoinColumn(name = "pk_event", referencedColumnName = "pk_event")})
     @ManyToMany
-    private List<EventEntity> eventsList;
+    private List<EventEntity> eventsList = new ArrayList<>();
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "school")
-    private List<TrainingEntity> trainingsList;
+    private List<TrainingEntity> trainingsList = new ArrayList<>();
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "school")
-    private List<EmployeeSchoolTypeEntity> employeesSchoolsTypesList;
+    private List<EmployeeSchoolTypeEntity> employeesSchoolsTypesList = new ArrayList<>();
 
     /**
      * TODO CONSTRUCTORS JAVADOC

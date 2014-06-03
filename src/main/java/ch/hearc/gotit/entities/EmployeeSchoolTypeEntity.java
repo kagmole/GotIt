@@ -23,7 +23,7 @@ public class EmployeeSchoolTypeEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @EmbeddedId
-    protected EmployeeSchoolTypePk employeeSchoolTypePk = new EmployeeSchoolTypePk();
+    protected EmployeeSchoolTypePk employeeSchoolTypePk;
     
     @MapsId("employeePk")
     @JoinColumn(name = "pk_employee", referencedColumnName = "pk_employee", insertable = false, updatable = false)

@@ -1,8 +1,10 @@
 package ch.hearc.gotit.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,13 +52,13 @@ public class EventEntity implements Serializable {
     private Integer importance;
     
     @ManyToMany(mappedBy = "eventsList")
-    private List<TrainingEntity> trainingsList;
+    private List<TrainingEntity> trainingsList = new ArrayList<>();
     
     @ManyToMany(mappedBy = "eventsList")
-    private List<SchoolEntity> schoolsList;
+    private List<SchoolEntity> schoolsList = new ArrayList<>();
     
     @ManyToMany(mappedBy = "eventsList")
-    private List<CourseEntity> coursesList;
+    private List<CourseEntity> coursesList = new ArrayList<>();
 
     /**
      * TODO CONSTRUCTORS JAVADOC

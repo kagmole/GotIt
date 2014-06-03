@@ -27,7 +27,7 @@ public class StudentTrainingEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @EmbeddedId
-    protected StudentTrainingPk studentTrainingPk;
+    protected StudentTrainingPk studentTrainingPk = new StudentTrainingPk();
     
     @Column(name = "starting_datetime")
     @Temporal(TemporalType.TIMESTAMP)

@@ -1,12 +1,11 @@
 package ch.hearc.gotit.services.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ch.hearc.gotit.daos.BasicDao;
 import ch.hearc.gotit.daos.SchoolDao;
 import ch.hearc.gotit.entities.EmployeeSchoolTypeEntity;
+import ch.hearc.gotit.entities.EmployeeTypeEntity;
 import ch.hearc.gotit.entities.SchoolEntity;
+import ch.hearc.gotit.entities.TrainingEntity;
 import ch.hearc.gotit.entities.UserEntity;
 import ch.hearc.gotit.services.EmployeeTypeService;
 import ch.hearc.gotit.services.SchoolService;
@@ -18,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service("schoolService")
 public class SchoolServiceImpl extends BasicServiceImpl<SchoolEntity, Integer> implements SchoolService {
-
+	
 	@Autowired
 	private EmployeeTypeService employeeTypeService;
 	
@@ -35,23 +34,49 @@ public class SchoolServiceImpl extends BasicServiceImpl<SchoolEntity, Integer> i
 	
 	@Override
 	@Transactional(readOnly = false)
-	public void createByUser(SchoolEntity schoolEntity, UserEntity userEntity) {
+	public void createWithUser(SchoolEntity schoolEntity, UserEntity userEntity) {
 		EmployeeSchoolTypeEntity employeeSchoolTypeEntity = new EmployeeSchoolTypeEntity();
 		employeeSchoolTypeEntity.setEmployee(userEntity.getEmployee());
 		employeeSchoolTypeEntity.setSchool(schoolEntity);
 		employeeSchoolTypeEntity.setEmployeeType(employeeTypeService.findByName("founder"));
 		
-		List<EmployeeSchoolTypeEntity> employeesSchoolsTypesList = new ArrayList<>();
-		employeesSchoolsTypesList.add(employeeSchoolTypeEntity);
-		
-		schoolEntity.setEmployeesSchoolsTypesList(employeesSchoolsTypesList);
+		schoolEntity.getEmployeesSchoolsTypesList().add(employeeSchoolTypeEntity);;
 		
 		schoolDao.create(schoolEntity);
+	}
+	
+	@Override
+	@Transactional(readOnly = false)
+	public void addEmployeeWithType(SchoolEntity schoolEntity, UserEntity userEntity, EmployeeTypeEntity employeeTypeEntity) {
+		EmployeeSchoolTypeEntity employeeSchoolTypeEntity = new EmployeeSchoolTypeEntity();
+		employeeSchoolTypeEntity.setEmployee(userEntity.getEmployee());
+		employeeSchoolTypeEntity.setSchool(schoolEntity);
+		employeeSchoolTypeEntity.setEmployeeType(employeeTypeEntity);
+		
+		schoolEntity.getEmployeesSchoolsTypesList().add(employeeSchoolTypeEntity);
+		
+		schoolDao.update(schoolEntity);
+	}
+	
+	@Override
+	@Transactional(readOnly = false)
+	public void addStudent(SchoolEntity schoolEntity, UserEntity userEntity) {
+		schoolEntity.getStudentsList().add(userEntity.getStudent());
+		
+		schoolDao.update(schoolEntity);
+	}
+	
+	@Override
+	@Transactional(readOnly = false)
+	public void addTraining(SchoolEntity schoolEntity, TrainingEntity trainingEntity) {
+		schoolEntity.getTrainingsList().add(trainingEntity);
+		
+		schoolDao.update(schoolEntity);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public boolean isUpdateAuthorized(SchoolEntity schoolEntity, UserEntity userEntity) {
+	public boolean isUpdateAuthorized(SchoolEntity schoolEntity, UserEntity userEntity) {		
 		for (EmployeeSchoolTypeEntity employeeSchoolTypeEntity : userEntity.getEmployee().getEmployeesSchoolsTypesList()) {
 			if (employeeSchoolTypeEntity.getSchool().equals(schoolEntity)) {
 				if (employeeSchoolTypeEntity.getEmployeeType().getName().equals("founder")) {
@@ -65,7 +90,7 @@ public class SchoolServiceImpl extends BasicServiceImpl<SchoolEntity, Integer> i
 
 	@Override
 	@Transactional(readOnly = true)
-	public boolean isDestroyAuthorized(SchoolEntity schoolEntity, UserEntity userEntity) {
+	public boolean isDestroyAuthorized(SchoolEntity schoolEntity, UserEntity userEntity) {		
 		for (EmployeeSchoolTypeEntity employeeSchoolTypeEntity : userEntity.getEmployee().getEmployeesSchoolsTypesList()) {
 			if (employeeSchoolTypeEntity.getSchool().equals(schoolEntity)) {
 				if (employeeSchoolTypeEntity.getEmployeeType().getName().equals("founder")) {
