@@ -27,6 +27,7 @@ dependencies {
 	compile 'org.springframework:spring-webmvc:4.0.4.RELEASE'
 	compile 'org.springframework:spring-web:4.0.4.RELEASE'
 	compile 'org.springframework.security:spring-security-config:3.2.4.RELEASE'
+	compile 'org.springframework.security:spring-security-taglibs:3.2.4.RELEASE'
 	compile 'org.springframework.security:spring-security-web:3.2.4.RELEASE'
 	
 	testCompile 'junit:junit:4.11'

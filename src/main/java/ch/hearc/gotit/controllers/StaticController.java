@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping(value = "")
 public class StaticController {
 	
 	private static final String START_URI = "standards/statics/";
@@ -13,7 +14,7 @@ public class StaticController {
 	private static final String ABOUT_URI = START_URI + "about";
 	private static final String CONTACT_URI = START_URI + "contact";
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String getHome() {		
 		return HOME_URI;
 	}
@@ -23,7 +24,7 @@ public class StaticController {
 		return ABOUT_URI;
 	}
 	
-	@RequestMapping(value = "/contact", method = RequestMethod.GET)
+	@RequestMapping(value = "/contacts", method = RequestMethod.GET)
 	public String getContact() {
 		return CONTACT_URI;
 	}

@@ -13,7 +13,7 @@ public class DesktopController {
 	
 	private static final String DEFAULT_URI = START_URI + "default";
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getDefault() {
 		return DEFAULT_URI;
 	}

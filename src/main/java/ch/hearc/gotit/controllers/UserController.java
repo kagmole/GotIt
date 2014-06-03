@@ -29,7 +29,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getList(Model model) {
 		model.addAttribute("usersEntitiesList", userService.findAll());
 		
@@ -62,7 +62,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/sign-in", method = RequestMethod.GET)
-	public String getSignIn(@RequestParam(value = "error", required = false) String error) {
+	public String getSignIn(@RequestParam(value = "error", required = false) String error, Model model) {
+		if (error != null) {
+			model.addAttribute("errorMessage", "Invalid username and/or password!");
+		}
+		
 		return SIGN_IN_URI;
 	}
 	

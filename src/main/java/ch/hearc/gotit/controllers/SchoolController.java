@@ -34,7 +34,7 @@ public class SchoolController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getList(Model model) {
 		model.addAttribute("schoolsEntitiesList", schoolService.findAll());
 		

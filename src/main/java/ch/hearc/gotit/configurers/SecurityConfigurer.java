@@ -46,12 +46,13 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 //				.tokenValiditySeconds(86400)
 			.and()
 				.logout()
-				.logoutSuccessUrl("/users/sign-in?logout")
+				.logoutUrl("/users/sign-out")
+				.logoutSuccessUrl("/?sign-out") // XXX would be better "sign-out?success", but URLs conflicts
 				.permitAll()
 			.and()
 				.exceptionHandling()
 				.accessDeniedPage("/403")
 			.and()
-				.csrf().disable(); // TODO enable and modify pages in consequence
+				.csrf().disable(); // TODO enable
 	}
 }

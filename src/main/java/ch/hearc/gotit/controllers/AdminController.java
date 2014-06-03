@@ -12,7 +12,7 @@ public class AdminController {
 	
 	private static final String OVERVIEW_URI = START_URI + "overview";
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getOverview() {
 		return OVERVIEW_URI;
 	}

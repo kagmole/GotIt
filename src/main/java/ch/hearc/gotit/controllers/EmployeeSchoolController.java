@@ -22,7 +22,7 @@ public class EmployeeSchoolController {
 	@Autowired
 	private SchoolService schoolService;
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String getList(Model model) {
 		return LIST_URI;
 	}
