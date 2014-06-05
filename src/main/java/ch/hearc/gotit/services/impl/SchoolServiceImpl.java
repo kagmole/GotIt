@@ -38,7 +38,7 @@ public class SchoolServiceImpl extends BasicServiceImpl<SchoolEntity, Integer> i
 		EmployeeSchoolTypeEntity employeeSchoolTypeEntity = new EmployeeSchoolTypeEntity();
 		employeeSchoolTypeEntity.setEmployee(userEntity.getEmployee());
 		employeeSchoolTypeEntity.setSchool(schoolEntity);
-		employeeSchoolTypeEntity.setEmployeeType(employeeTypeService.findByName("founder"));
+		employeeSchoolTypeEntity.setEmployeeType(employeeTypeService.findOneWithName("founder"));
 		
 		schoolEntity.getEmployeesSchoolsTypesList().add(employeeSchoolTypeEntity);;
 		
@@ -90,7 +90,7 @@ public class SchoolServiceImpl extends BasicServiceImpl<SchoolEntity, Integer> i
 
 	@Override
 	@Transactional(readOnly = true)
-	public boolean isDestroyAuthorized(SchoolEntity schoolEntity, UserEntity userEntity) {		
+	public boolean isDestroyAuthorized(SchoolEntity schoolEntity, UserEntity userEntity) {
 		for (EmployeeSchoolTypeEntity employeeSchoolTypeEntity : userEntity.getEmployee().getEmployeesSchoolsTypesList()) {
 			if (employeeSchoolTypeEntity.getSchool().equals(schoolEntity)) {
 				if (employeeSchoolTypeEntity.getEmployeeType().getName().equals("founder")) {

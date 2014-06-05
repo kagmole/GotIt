@@ -13,7 +13,7 @@ public class AuthorityDaoImpl extends BasicDaoImpl<AuthorityEntity, Integer> imp
 	}
 
 	@Override
-	public AuthorityEntity findByRole(String role) {
+	public AuthorityEntity findOneWithRole(String role) {
 		return (AuthorityEntity) getCurrentSession()
 				.getNamedQuery("AuthorityQuery.findByRole")
 				.setString("role", role)

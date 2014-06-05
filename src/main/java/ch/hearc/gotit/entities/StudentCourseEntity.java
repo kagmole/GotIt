@@ -25,7 +25,7 @@ public class StudentCourseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @EmbeddedId
-    protected StudentCoursePk studentCoursePk = new StudentCoursePk();
+    protected StudentCoursePk studentCoursePk;
     
     @Size(max = 50)
     @Column(name = "grade")
@@ -48,6 +48,7 @@ public class StudentCourseEntity implements Serializable {
      * TODO CONSTRUCTORS JAVADOC
      */
     public StudentCourseEntity() {
+    	this.studentCoursePk = new StudentCoursePk();
     }
 
     public StudentCourseEntity(StudentCoursePk studentCoursePK) {

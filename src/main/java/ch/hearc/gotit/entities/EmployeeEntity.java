@@ -42,7 +42,7 @@ public class EmployeeEntity implements Serializable {
     @ManyToMany
     private List<CourseEntity> coursesList = new ArrayList<>();
     
-    // XXX TEMP should use AspectJ to reactivate LAZY initializiation!
+    // XXX temp: should use join fetch queries to avoid EAGER fetch and return to LAZY one
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "employee")
     private List<EmployeeSchoolTypeEntity> employeesSchoolsTypesList = new ArrayList<>();
     

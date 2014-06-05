@@ -27,7 +27,7 @@ public class StudentTrainingEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @EmbeddedId
-    protected StudentTrainingPk studentTrainingPk = new StudentTrainingPk();
+    protected StudentTrainingPk studentTrainingPk;
     
     @Column(name = "starting_datetime")
     @Temporal(TemporalType.TIMESTAMP)
@@ -54,6 +54,7 @@ public class StudentTrainingEntity implements Serializable {
      * TODO CONSTRUCTORS JAVADOC    
      */
     public StudentTrainingEntity() {
+    	this.studentTrainingPk = new StudentTrainingPk();
     }
 
     public StudentTrainingEntity(StudentTrainingPk studentTrainingPK) {

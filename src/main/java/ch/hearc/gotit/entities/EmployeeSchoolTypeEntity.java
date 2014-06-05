@@ -44,6 +44,7 @@ public class EmployeeSchoolTypeEntity implements Serializable {
      * TODO CONSTRUCTORS JAVADOC    
      */
     public EmployeeSchoolTypeEntity() {
+    	this.employeeSchoolTypePk = new EmployeeSchoolTypePk();
     }
 
     public EmployeeSchoolTypeEntity(EmployeeSchoolTypePk employeeSchoolTypePk) {

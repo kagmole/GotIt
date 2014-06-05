@@ -1,99 +1,54 @@
-<%@ tag description="Standard page layout using Foundation" pageEncoding="UTF-8" %>
-<%@ attribute name="title" fragment="true" %>
+<%-- TAG DECLARATION --%>
+
+<%@ tag description="Base for a simple page using Foundation" pageEncoding="UTF-8" %>
+<%@ attribute name="showHeader" type="java.lang.Boolean" %>
+<%@ attribute name="pageTitle" required="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags" %>
+
+<%-- ATTRIBUTES DEFAULT VALUES --%>
+
+<c:if test="${showHeader == null}">
+	<c:set var="showHeader" value="${true}" />
+</c:if>
+
+<%-- TAG CONTENT --%>
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Got it! - <jsp:invoke fragment="title" /></title>
+		<title>Got it! - ${pageTitle}</title>
 		<link rel="stylesheet" href="<c:url value="/css/foundation.css" />" />
 	</head>
 	<body>
-		<header class="row">
-			<div class="large-12 columns text-center">
-				<img src="<c:url value="/img/gotit_logo.png" />" alt="Got it!" />
-			</div>
-		</header>
-		<div class="row">
-			<div class="large-12 columns">
-				<nav class="top-bar" data-topbar data-options="sticky_on: large">
-					<ul class="title-area">
-						<li class="name"></li>
-						<li class="toggle-topbar menu-icon">
-							<a href="#"><span>menu</span></a>
-						</li>
-					</ul>
-					<section class="top-bar-section">
-						<ul class="left">
-							<li>
-								<a href="/">Home</a>
-							</li>
-							<li>
-								<a href="/schools">List of schools</a>
-							</li>
-							<li>
-								<a href="/contacts">Contacts</a>
-							</li>
-							<li>
-								<a href="/about">About</a>
-							</li>
-						</ul>
-						<ul class="right">
-							<sec:authorize access="isAnonymous()">
-								<li>
-									<a href="/users/sign-up">Sign up</a>
-								</li>
-								<li>
-									<a href="/users/sign-in">Sign in</a>
-								</li>
-							</sec:authorize>
-							<sec:authorize access="isAuthenticated()">
-								<li>
-									<a href="#">${pageContext.request.userPrincipal.name}</a>
-								</li>
-								<li>
-									<a href="/users/sign-out">Sign out</a>
-								</li>
-							</sec:authorize>
-						</ul>
-					</section>
-				</nav>
-			</div>
-		</div>
 		<br />
-		<div class="row">
-			<div class="large-12 columns">
-				<c:if test="${not empty successMessage}">
-					<div data-alert class="alert-box alert">
-						${successMessage}
-						<a href="#" class="close">&times;</a>
+		<c:if test="${showHeader}">
+			<header class="row">
+				<div class="large-12 columns">
+					<div class="row">
+						<div class="large-3 columns">
+							<a href="/">
+								<img src="http://www.placehold.it/300x250/00ff00/000000&text=RETURN" alt="RETURN" />
+							</a>
+						</div>
+						<div class="large-6 columns">
+							<a href="/">
+								<img src="http://www.placehold.it/600x250/00ff00/000000&text=GOT+IT!" alt="GOT IT!" />
+							</a>
+						</div>
+						<div class="large-3 columns">
+							<a href="/">
+								<img src="http://www.placehold.it/300x250/00ff00/000000&text=MENU" alt="MENU" />
+							</a>
+						</div>
 					</div>
-				</c:if>
-				<c:if test="${not empty infoMessage}">
-					<div data-alert class="alert-box alert">
-						${infoMessage}
-						<a href="#" class="close">&times;</a>
-					</div>
-				</c:if>
-				<c:if test="${not empty warningMessage}">
-					<div data-alert class="alert-box alert">
-						${warningMessage}
-						<a href="#" class="close">&times;</a>
-					</div>
-				</c:if>
-				<c:if test="${not empty errorMessage}">
-					<div data-alert class="alert-box alert">
-						${errorMessage}
-						<a href="#" class="close">&times;</a>
-					</div>
-				</c:if>
-				<h1><jsp:invoke fragment="title" /></h1>
-				<hr />
-				<jsp:doBody />
-			</div>
-		</div>
+					<hr />
+				</div>
+			</header>
+		</c:if>
+		<jsp:doBody />
+		<br />
 		<footer class="row">
 			<div class="large-12 columns">
 				<hr />

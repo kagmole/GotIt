@@ -20,7 +20,7 @@ public class EmployeeTypeServiceImpl extends BasicServiceImpl<EmployeeTypeEntity
 	}
 	
 	@Override
-	public EmployeeTypeEntity findByName(String name) {
-		return employeeTypeDao.findByName(name);
+	public EmployeeTypeEntity findOneWithName(String name) {
+		return employeeTypeDao.findOneWithName(name);
 	}
 }

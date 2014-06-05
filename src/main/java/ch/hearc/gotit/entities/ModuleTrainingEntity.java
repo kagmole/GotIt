@@ -24,7 +24,7 @@ public class ModuleTrainingEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @EmbeddedId
-    protected ModuleTrainingPk moduleTrainingPk = new ModuleTrainingPk();
+    protected ModuleTrainingPk moduleTrainingPk;
     
     @Column(name = "weight")
     private Float weight;
@@ -43,6 +43,7 @@ public class ModuleTrainingEntity implements Serializable {
      * TODO CONSTRUCTORS JAVADOC
      */
     public ModuleTrainingEntity() {
+    	this.moduleTrainingPk = new ModuleTrainingPk();
     }
 
     public ModuleTrainingEntity(ModuleTrainingPk moduleTrainingPk) {

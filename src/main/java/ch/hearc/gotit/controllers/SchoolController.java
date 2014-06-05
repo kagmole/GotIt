@@ -54,21 +54,21 @@ public class SchoolController {
 			return ADD_URI;
 		}
 		
-		schoolService.createWithUser(schoolEntity, userService.findByUsername(principal.getName()));
+		schoolService.createWithUser(schoolEntity, userService.findOneWithUsername(principal.getName()));
 		
 		return "redirect:/schools/" + schoolEntity.getSchoolPk();
 	}
 	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String getDeleteById(@PathVariable int id, Model model, Principal principal) {
-		SchoolEntity schoolEntity = schoolService.find(id);
+		SchoolEntity schoolEntity = schoolService.findOne(id);
 		
 		if (schoolEntity == null) {
-			return "redirect:/errors/404";
+			return "forward:/errors/404";
 		}
 		
-		if (!schoolService.isDestroyAuthorized(schoolEntity, userService.findByUsername(principal.getName()))) {
-			return "redirect:/errors/403";
+		if (!schoolService.isDestroyAuthorized(schoolEntity, userService.findOneWithUsername(principal.getName()))) {
+			return "forward:/errors/403";
 		}
 		
 		model.addAttribute("schoolEntity", schoolEntity);
@@ -78,14 +78,14 @@ public class SchoolController {
 	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
 	public String postDeleteById(@PathVariable int id, Principal principal) {
-		SchoolEntity schoolEntity = schoolService.find(id);
+		SchoolEntity schoolEntity = schoolService.findOne(id);
 		
 		if (schoolEntity == null) {
-			return "redirect:/errors/404";
+			return "forward:/errors/404";
 		}
 		
-		if (!schoolService.isDestroyAuthorized(schoolEntity, userService.findByUsername(principal.getName()))) {
-			return "redirect:/errors/403";
+		if (!schoolService.isDestroyAuthorized(schoolEntity, userService.findOneWithUsername(principal.getName()))) {
+			return "forward:/errors/403";
 		}
 		
 		schoolService.destroy(schoolEntity);
@@ -95,14 +95,14 @@ public class SchoolController {
 	
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String getEditById(@PathVariable int id, Model model, Principal principal) {
-		SchoolEntity schoolEntity = schoolService.find(id);
+		SchoolEntity schoolEntity = schoolService.findOne(id);
 		
 		if (schoolEntity == null) {
-			return "redirect:/errors/404";
+			return "forward:/errors/404";
 		}
 		
-		if (!schoolService.isUpdateAuthorized(schoolEntity, userService.findByUsername(principal.getName()))) {
-			return "redirect:/errors/403";
+		if (!schoolService.isUpdateAuthorized(schoolEntity, userService.findOneWithUsername(principal.getName()))) {
+			return "forward:/errors/403";
 		}
 		
 		model.addAttribute("schoolEntity", schoolEntity);
@@ -112,14 +112,14 @@ public class SchoolController {
 	
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
 	public String postEditById(@PathVariable int id, @Valid SchoolEntity schoolEntity2, BindingResult result, Principal principal) {
-		SchoolEntity schoolEntity = schoolService.find(id);
+		SchoolEntity schoolEntity = schoolService.findOne(id);
 		
 		if (schoolEntity == null) {
-			return "redirect:/errors/404";
+			return "forward:/errors/404";
 		}
 		
-		if (!schoolService.isUpdateAuthorized(schoolEntity, userService.findByUsername(principal.getName()))) {
-			return "redirect:/errors/403";
+		if (!schoolService.isUpdateAuthorized(schoolEntity, userService.findOneWithUsername(principal.getName()))) {
+			return "forward:/errors/403";
 		}
 		
 		if (result.hasErrors()) {
@@ -134,10 +134,10 @@ public class SchoolController {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String getViewById(@PathVariable int id, Model model) {
-		SchoolEntity schoolEntity = schoolService.find(id);
+		SchoolEntity schoolEntity = schoolService.findOne(id);
 		
 		if (schoolEntity == null) {
-			return "redirect:/errors/404";
+			return "forward:/errors/404";
 		}
 		
 		model.addAttribute("schoolEntity", schoolEntity);

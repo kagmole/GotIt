@@ -60,7 +60,7 @@ public class UserEntity implements Serializable {
     
     @Size.List({
     	@Size(min = 8, message = "Password is too short (minimum 8 characters)"),
-    	@Size(max = 50, message = "Password is too long (maximum 50 characters)")
+    	// TODO form for @Size(max = 50, message = "Password is too long (maximum 50 characters)")
     })
     @Column(name = "password")
     private String password;

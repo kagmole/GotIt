@@ -19,17 +19,17 @@ public class EmployeeSchoolTypePk implements Serializable {
 	@Basic(optional = false)
     @NotNull
     @Column(name = "pk_employee")
-    private int employeePk;
+    private Integer employeePk;
 	
     @Basic(optional = false)
     @NotNull
     @Column(name = "pk_school")
-    private int schoolPk;
+    private Integer schoolPk;
     
     @Basic(optional = false)
     @NotNull
     @Column(name = "pk_employee_type")
-    private int employeeTypePk;
+    private Integer employeeTypePk;
 
     public EmployeeSchoolTypePk() {
     }
@@ -40,27 +40,27 @@ public class EmployeeSchoolTypePk implements Serializable {
         this.employeeTypePk = employeeTypePk;
     }
 
-    public int getEmployeePk() {
+    public Integer getEmployeePk() {
         return employeePk;
     }
 
-    public void setEmployeePk(int employeePk) {
+    public void setEmployeePk(Integer employeePk) {
         this.employeePk = employeePk;
     }
 
-    public int getSchoolPk() {
+    public Integer getSchoolPk() {
         return schoolPk;
     }
 
-    public void setSchoolPk(int schoolPk) {
+    public void setSchoolPk(Integer schoolPk) {
         this.schoolPk = schoolPk;
     }
 
-    public int getEmployeeTypePk() {
+    public Integer getEmployeeTypePk() {
         return employeeTypePk;
     }
 
-    public void setEmployeeTypePk(int employeeTypePk) {
+    public void setEmployeeTypePk(Integer employeeTypePk) {
         this.employeeTypePk = employeeTypePk;
     }
 

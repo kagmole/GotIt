@@ -26,7 +26,7 @@ public class AssessmentStudentEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @EmbeddedId
-    protected AssessmentStudentPk assessmentResultPK = new AssessmentStudentPk();
+    protected AssessmentStudentPk assessmentResultPK;
     
     @Column(name = "marks")
     private Integer marks;
@@ -54,6 +54,7 @@ public class AssessmentStudentEntity implements Serializable {
      * TODO CONSTRUCTORS JAVADOC
      */
     public AssessmentStudentEntity() {
+    	this.assessmentResultPK = new AssessmentStudentPk();
     }
 
     public AssessmentStudentEntity(AssessmentStudentPk assessmentResultPK) {

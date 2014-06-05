@@ -36,7 +36,7 @@ public class UserServiceImpl extends BasicServiceImpl<UserEntity, Integer> imple
 		studentEntity.setUser(userEntity);
 		
 		userEntity.setEnabled(true);
-		userEntity.setAuthority(authorityService.findByRole("user"));
+		userEntity.setAuthority(authorityService.findOneWithRole("user"));
 		userEntity.setEmployee(employeeEntity);
 		userEntity.setStudent(studentEntity);
 		
@@ -45,7 +45,7 @@ public class UserServiceImpl extends BasicServiceImpl<UserEntity, Integer> imple
 
 	@Override
 	@Transactional(readOnly = true)
-	public UserEntity findByUsername(String username) {
-		return userDao.findByUsername(username);
+	public UserEntity findOneWithUsername(String username) {
+		return userDao.findOneWithUsername(username);
 	}
 }

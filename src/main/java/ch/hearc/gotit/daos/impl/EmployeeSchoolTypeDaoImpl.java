@@ -1,5 +1,7 @@
 package ch.hearc.gotit.daos.impl;
 
+import java.util.List;
+
 import ch.hearc.gotit.daos.EmployeeSchoolTypeDao;
 import ch.hearc.gotit.entities.EmployeeSchoolTypeEntity;
 import ch.hearc.gotit.entities.pks.EmployeeSchoolTypePk;

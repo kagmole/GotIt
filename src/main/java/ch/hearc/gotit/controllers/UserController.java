@@ -6,6 +6,7 @@ import ch.hearc.gotit.services.UserService;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +28,9 @@ public class UserController {
 	private static final String VIEW_URI = START_URI + "view";
 	
 	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
 	private UserService userService;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -38,7 +42,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String getEditById(@PathVariable int id, Model model) {
-		UserEntity userEntity = userService.find(id);
+		UserEntity userEntity = userService.findOne(id);
 		
 		if (userEntity == null) {
 			return "redirect:/users";
@@ -64,7 +68,7 @@ public class UserController {
 	@RequestMapping(value = "/sign-in", method = RequestMethod.GET)
 	public String getSignIn(@RequestParam(value = "error", required = false) String error, Model model) {
 		if (error != null) {
-			model.addAttribute("errorMessage", "Invalid username and/or password!");
+			model.addAttribute("errorMessage", "Wrong username or password");
 		}
 		
 		return SIGN_IN_URI;
@@ -83,6 +87,8 @@ public class UserController {
 			return SIGN_UP_URI;
 		}
 		
+		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+		userEntity.setConfirmPassword(userEntity.getPassword());
 		userService.create(userEntity);
 		
 		return "redirect:/users/" + userEntity.getUserPk();

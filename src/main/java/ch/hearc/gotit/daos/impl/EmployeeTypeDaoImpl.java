@@ -13,7 +13,7 @@ public class EmployeeTypeDaoImpl extends BasicDaoImpl<EmployeeTypeEntity, Intege
 	}
 
 	@Override
-	public EmployeeTypeEntity findByName(String name) {
+	public EmployeeTypeEntity findOneWithName(String name) {
 		return (EmployeeTypeEntity) getCurrentSession()
 				.getNamedQuery("EmployeeTypeQuery.findByName")
 				.setString("name", name)

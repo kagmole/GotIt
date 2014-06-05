@@ -22,7 +22,7 @@ public class AuthorityServiceImpl extends BasicServiceImpl<AuthorityEntity, Inte
 
 	@Override
 	@Transactional(readOnly = true)
-	public AuthorityEntity findByRole(String role) {
-		return authorityDao.findByRole(role);
+	public AuthorityEntity findOneWithRole(String role) {
+		return authorityDao.findOneWithRole(role);
 	}
 }
