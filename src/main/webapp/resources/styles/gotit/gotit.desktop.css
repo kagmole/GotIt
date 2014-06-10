@@ -1,0 +1,347 @@
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+#page-container {
+	position: fixed;
+	
+	top: 0px;
+	left: 0px;
+
+	width: 100%;
+	height: 100%;
+	
+	margin: 0px;
+	padding: 0px;
+}
+
+.gotit-no-user-select {
+	user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+}
+
+.gotit-desktop-container {	
+	position: absolute;
+	
+	top: 0px;
+	bottom: 40px;
+	left: 0px;
+	
+	width: 100%;
+	
+	margin: 0px;
+	padding: 0px;
+	
+	z-index: 0;
+}
+
+.gotit-frame-component {
+	background-color: #6666FF;
+
+	position: absolute;
+	
+	margin: 0px;
+	padding: 0px;
+}
+
+.gotit-frame-top-left {
+	position: absolute;
+	
+	margin: 0px;
+	padding: 0px;
+	
+	top: 0px;
+	left: 0px;
+	
+	width: 5px;
+	height: 5px;
+	
+	background-image: url(../../img/gotit/frame_top_left.png);
+	background-repeat: no-repeat;
+	
+	cursor: nw-resize;
+}
+
+.gotit-frame-top {
+	position: absolute;
+	
+	margin: 0px;
+	padding: 0px;
+	
+	top: 0px;
+	left: 5px;
+	right: 5px;
+	
+	height: 5px;
+	
+	background-image: url(../../img/gotit/frame_top.png);
+	background-repeat: repeat-x;
+	
+	cursor: n-resize;
+}
+
+.gotit-frame-top-right {
+	position: absolute;
+	
+	margin: 0px;
+	padding: 0px;
+	
+	top: 0px;
+	right: 0px;
+	
+	width: 5px;
+	height: 5px;
+	
+	background-image: url(../../img/gotit/frame_top_right.png);
+	background-repeat: no-repeat;
+	
+	cursor: ne-resize;
+}
+
+.gotit-frame-middle-left {
+	position: absolute;
+	
+	margin: 0px;
+	padding: 0px;
+	
+	top: 5px;
+	left: 0px;
+	bottom: 5px;
+	
+	width: 5px;
+	
+	background-image: url(../../img/gotit/frame_middle_left.png);
+	background-repeat: repeat-y;
+	
+	cursor: w-resize;
+}
+
+.gotit-frame-middle {
+	position: absolute;
+	
+	margin: 0px;
+	padding: 0px;
+	
+	top: 5px;
+	left: 5px;
+	right: 5px;
+	bottom: 5px;
+	
+	background-color: #DDDDDD;
+}
+
+.gotit-frame-middle-right {
+	position: absolute;
+	
+	margin: 0px;
+	padding: 0px;
+	
+	top: 5px;
+	right: 0px;
+	bottom: 5px;
+	
+	width: 5px;
+	
+	background-image: url(../../img/gotit/frame_middle_right.png);
+	background-repeat: repeat-y;
+	
+	cursor: e-resize;
+}
+
+.gotit-frame-bottom-left {
+	position: absolute;
+	
+	margin: 0px;
+	padding: 0px;
+	
+	left: 0px;
+	bottom: 0px;
+	
+	width: 5px;
+	height: 5px;
+	
+	background-image: url(../../img/gotit/frame_bottom_left.png);
+	background-repeat: no-repeat;
+	
+	cursor: sw-resize;
+}
+
+.gotit-frame-bottom {
+	position: absolute;
+	
+	margin: 0px;
+	padding: 0px;
+	
+	left: 5px;
+	right: 5px;
+	bottom: 0px;
+	
+	height: 5px;
+	
+	background-image: url(../../img/gotit/frame_bottom.png);
+	background-repeat: repeat-x;
+	
+	cursor: s-resize;
+}
+
+.gotit-frame-bottom-right {
+	position: absolute;
+	
+	margin: 0px;
+	padding: 0px;
+	
+	right: 0px;
+	bottom: 0px;
+	
+	width: 5px;
+	height: 5px;
+	
+	background-image: url(../../img/gotit/frame_bottom_right.png);
+	background-repeat: no-repeat;
+	
+	cursor: se-resize;
+}
+
+.gotit-frame-title {
+	background-color: #6666FF;
+	
+	position: absolute;
+	
+	top: 5px;
+	left: 5px;
+	right: 5px;
+	
+	height: 30px;
+	
+	margin: 0px;
+	padding: 0px;
+}
+
+.gotit-frame-content {
+	background-color: #66FF66;
+	
+	position: absolute;
+	
+	top: 30px;
+	bottom: 5px;
+	left: 5px;
+	right: 5px;
+	
+	margin: 0px;
+	padding: 0px;
+	
+	overflow: auto;
+}
+
+.gotit-shortcut-container {
+	background-color: #FFFFCC;
+
+	position: absolute;
+	
+	top: 0px;
+	left: 0px;
+	right: 400px;
+	
+	height: 100%;
+	
+	margin: 0px;
+	padding: 0px;
+}
+
+.gotit-shortcut-component {
+	background-color: #696969;
+	
+	float: left;
+	
+	width: 150px;
+	height: 150px;
+	
+	margin: 10px;
+	padding: 0px;
+}
+
+.gotit-gadget-container {
+	background-color: #FFCCFF;
+
+	position: absolute;
+	
+	top: 0px;
+	right: 0px;
+	
+	width: 400px;
+	height: 300px;
+	
+	margin: 0px;
+	padding: 0px;
+}
+
+.gotit-gadget-component {
+
+}
+
+.gotit-notification-container {
+	background-color: #CCFFFF;
+
+	position: absolute;
+	
+	top: 300px;
+	bottom: 0px;
+	right: 0px;
+	
+	width: 400px;
+	
+	margin: 0px;
+	padding: 0px;
+}
+
+.gotit-notification-component {
+
+}
+
+.gotit-taskbar-container {
+	position:absolute;
+	
+	bottom: 0px;
+	left: 0px;
+
+	width: 100%;
+	height: 40px;
+	
+	margin: 0px;
+	padding: 0px;
+	
+	z-index: 100;
+}
+
+.menu-container {
+	background-color: #FFCCCC;
+
+	position: absolute;
+	
+	top: 0px;
+	left: 0px;
+	
+	width: 200px;
+	height: 100%;
+	
+	margin: 0px;
+	padding: 0px;
+}
+
+.miniature-container {
+	background-color: #CCFFCC;
+
+	position: absolute;
+	
+	top: 0px;
+	left: 200px;
+	right: 0px;
+	
+	height: 100%;
+	
+	margin: 0px;
+	padding: 0px;
+}
