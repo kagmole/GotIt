@@ -1,7 +1,11 @@
 package ch.hearc.gotit.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -38,6 +43,9 @@ public class ClassEntity implements Serializable {
     @Size(max = 65535)
     @Column(name = "description")
     private String description;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "classEntity")
+    private List<SlideEntity> slidesList = new ArrayList<>();
     
     @JoinColumn(name = "fk_course", referencedColumnName = "pk_course")
     @ManyToOne(optional = false)
@@ -75,6 +83,14 @@ public class ClassEntity implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public List<SlideEntity> getSlidesList() {
+    	return slidesList;
+    }
+    
+    public void setSlidesList(List<SlideEntity> slidesList) {
+    	this.slidesList = slidesList;
     }
 
     public CourseEntity getCourse() {
