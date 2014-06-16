@@ -323,10 +323,10 @@ var gotItFrameModule = (function () {
 		}
 		
 		xhr.onprogress = function(e) {
-		    frame.contentBlock.innerHTML = 'Loading... (' + e.loaded + ' / ' + e.total + ')';
+		    frame.contentBlock.innerHTML = 'Loading... (' + Math.floor(e.loaded / e.total) + '%)';
 		};
 		
-		xhr.onreadystatechange = function() {
+		xhr.onreadystatechange = function() {	
 			if (xhr.readyState == 4) {
 				frame.contentBlock.innerHTML = xhr.responseText;
 			}

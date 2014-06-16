@@ -1,0 +1,242 @@
+/*============================================================================*\
+|                                                                              |
+|                             GENERIC CSS TARGETS                              |
+|                                                                              |
+\*============================================================================*/
+
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                                   RAW TAGS                                   |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
+
+html, body {
+	margin: 0;
+	padding: 0;
+	
+	height: 100%;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                               COLOR TEMPLATES                                |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
+
+.gotit-color-template-red {
+	
+}
+
+.gotit-color-template-green {
+	
+}
+
+.gotit-color-template-blue {
+	
+}
+
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                            RESPONSIVE GRID SYSTEM                            |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
+
+.gotit-row {
+	margin: 0 auto;
+	padding: 0;
+	
+	width: 100%;
+	max-width: 60em;
+}
+
+.gotit-row::before,
+.gotit-row::after {
+	display: table;
+	
+	content: "";
+}
+
+.gotit-row::after {
+	clear: both;
+}
+
+.gotit-row .gotit-row {
+	margin: 0;
+	padding: 0;
+	
+	width: auto;
+	max-width: none;
+}
+
+.gotit-row .gotit-row::before,
+.gotit-row .gotit-row::after {
+	display: table;
+	
+	content: "";
+}
+
+.gotit-row .gotit-row::after {
+	clear: both;
+}
+
+.gotit-column {	
+	float: left;
+}
+
+.gotit-column-width-1-of-12 {
+	width: 8.33333%;
+}
+
+.gotit-column-width-2-of-12 {
+	width: 16.66666%;
+}
+
+.gotit-column-width-3-of-12 {
+	width: 25%;
+}
+
+.gotit-column-width-4-of-12 {
+	width: 33.33333%;
+}
+
+.gotit-column-width-5-of-12 {
+	width: 41.66666%;
+}
+
+.gotit-column-width-6-of-12 {
+	width: 50%;
+}
+
+.gotit-column-width-7-of-12 {
+	width: 58.33333%;
+}
+
+.gotit-column-width-8-of-12 {
+	width: 66.66666%;
+}
+
+.gotit-column-width-9-of-12 {
+	width: 75%;
+}
+
+.gotit-column-width-10-of-12 {
+	width: 83.33333%;
+}
+
+.gotit-column-width-11-of-12 {
+	width: 91.66666%;
+}
+
+.gotit-column-width-12-of-12 {
+	width: 100%;
+}
+
+@media only screen and (max-width: 30em) {
+	.gotit-column-width-1-of-12,
+	.gotit-column-width-2-of-12,
+	.gotit-column-width-3-of-12,
+	.gotit-column-width-4-of-12,
+	.gotit-column-width-5-of-12,
+	.gotit-column-width-6-of-12,
+	.gotit-column-width-7-of-12,
+	.gotit-column-width-8-of-12,
+	.gotit-column-width-9-of-12,
+	.gotit-column-width-10-of-12,
+	.gotit-column-width-11-of-12 {
+		width: 100%;
+	}
+}
+
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                                BORDER LAYOUT                                 |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
+
+.gotit-border-layout {
+	display: table;
+	
+	width: 100%;
+	height: 100%;
+}
+
+.gotit-border-layout-north {
+	display: table-header-group;
+}
+
+.gotit-border-layout-center {
+	display: table-cell;
+	
+	overflow: auto;
+}
+
+.gotit-border-layout-west {
+	float: left;
+	
+	height: 100%;
+	
+	overflow: auto;
+}
+
+.gotit-border-layout-east {
+	float: right;
+	
+	height: 100%;
+	
+	overflow: auto;
+}
+
+.gotit-border-layout-south {
+	display: table-footer-group;
+}
+
+/*============================================================================*\
+|                                                                              |
+|                             SPECIFIC CSS TARGETS                             |
+|                                                                              |
+\*============================================================================*/
+
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                                STANDARD PAGES                                |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
+
+.gotit-standard-logo-container {
+	text-align: center;
+}
+
+.gotit-standard-copyright-container {
+	text-align: center;
+}
+
+.gotit-standard-navigation-container {
+	vertical-align: middle;
+	text-align: center;
+}
+
+.gotit-standard-navigation-component {
+	display: inline-block;
+	
+	width: 100%;
+	max-width: 200px;
+	height: 100%;
+	max-height: 250px;
+}
+
+.gotit-standard-navigation-component img {
+	display: block;
+	
+	height: 100%;
+	max-height: 200px;
+}
+
+.gotit-standard-navigation-component p {
+	height: 100%;
+	max-height: 50px;
+}

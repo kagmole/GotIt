@@ -7,7 +7,9 @@ import ch.hearc.gotit.entities.SlideEntity;
 import ch.hearc.gotit.services.ClassService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service("classService")
 public class ClassServiceImpl extends BasicServiceImpl<ClassEntity, Integer> implements ClassService {
 
 	@Autowired
