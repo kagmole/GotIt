@@ -1,10 +1,10 @@
 /**
- * Got it! - Desktop module
+ * GotIt.Desktop module
  * 
  * @author Dany Jupille
  * @version 1.0
  */
-var gotItDesktopModule = (function () {
+window.GotIt.Desktop = (function () {
 	
 /*----------------------------------------------------------------------------*\
 |                                                                              |
@@ -16,29 +16,16 @@ var gotItDesktopModule = (function () {
 	
 		this.parentElement = document.getElementById(parentId);
 		
-		this.gadgetBlock = createBlockWithClass('gotit-gadget-container');
-		this.notificationBlock = createBlockWithClass('gotit-notification-container');
-		this.shortcutBlock = createBlockWithClass('gotit-shortcut-container');
+		this.gadgetDiv = GotIt.createDivWithClass('gotit-gadget-container');
+		this.notificationDiv = GotIt.createDivWithClass('gotit-notification-container');
+		this.shortcutDiv = GotIt.createDivWithClass('gotit-shortcut-container');
 		
-		this.desktopBlock = createBlockWithClass('gotit-desktop-container');
+		this.desktopDiv = GotIt.createDivWithClass('gotit-desktop-container');
 		
-		this.desktopBlock.appendChild(this.gadgetBlock);
-		this.desktopBlock.appendChild(this.notificationBlock);
-		this.desktopBlock.appendChild(this.shortcutBlock);
+		this.desktopDiv.appendChild(this.gadgetDiv);
+		this.desktopDiv.appendChild(this.notificationDiv);
+		this.desktopDiv.appendChild(this.shortcutDiv);
 	};
-	
-/*----------------------------------------------------------------------------*\
-|                                                                              |
-|                                  STATIC CODE                                 |
-|                                                                              |
-\*----------------------------------------------------------------------------*/
-	
-	function createBlockWithClass(className) {
-		var block = document.createElement('div');
-		block.className = className;
-		
-		return block;
-	}
 	
 /*----------------------------------------------------------------------------*\
 |                                                                              |
@@ -55,11 +42,11 @@ var gotItDesktopModule = (function () {
 	}
 	
 	Desktop.prototype.insertCode = function() {
-		this.parentElement.appendChild(this.desktopBlock);
+		this.parentElement.appendChild(this.desktopDiv);
 	}
 	
 	Desktop.prototype.removeCode = function() {
-		this.parentElement.removeChild(this.desktopBlock);
+		this.parentElement.removeChild(this.desktopDiv);
 	}
 	
 /*----------------------------------------------------------------------------*\

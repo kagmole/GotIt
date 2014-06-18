@@ -1,10 +1,10 @@
 /**
- * Got it! - Shortcut module
+ * GotIt.Shortcut module
  * 
  * @author Dany Jupille
  * @version 1.0
  */
-var gotItShortcutModule = (function () {
+window.GotIt.Shortcut = (function () {
 	
 /*----------------------------------------------------------------------------*\
 |                                                                              |

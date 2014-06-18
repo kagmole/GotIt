@@ -1,10 +1,10 @@
 /**
- * Got it! - Frame module
+ * GotIt.Frame module
  * 
  * @author Dany Jupille
  * @version 1.0
  */
-var gotItFrameModule = (function () {
+window.GotIt.Frame = (function () {
 	
 /*----------------------------------------------------------------------------*\
 |                                                                              |
@@ -47,43 +47,43 @@ var gotItFrameModule = (function () {
 		this.offsetX = 0;
 		this.offsetY = 0;
 		
-		this.titleBlock = createBlockWithClass('gotit-frame-title');
+		this.titleBlock = GotIt.createDivWithClass('gotit-frame-title');
 		this.titleBlock.textContent = this.title;
 		
-		this.contentBlock = createBlockWithClass('gotit-frame-content');
+		this.contentBlock = GotIt.createDivWithClass('gotit-frame-content');
 		
-		this.frameBlock = createBlockWithClass('gotit-frame-component');
-		this.frameBlock.style.left = this.x + 'px';
-		this.frameBlock.style.top = this.y + 'px';
-		this.frameBlock.style.width = this.width + 'px';
-		this.frameBlock.style.height = this.height + 'px';
+		this.frameDiv = GotIt.createDivWithClass('gotit-frame-component');
+		this.frameDiv.style.left = this.x + 'px';
+		this.frameDiv.style.top = this.y + 'px';
+		this.frameDiv.style.width = this.width + 'px';
+		this.frameDiv.style.height = this.height + 'px';
 		
-		this.frameTopLeftDiv = createBlockWithClass('gotit-frame-top-left');
-		this.frameTopDiv = createBlockWithClass('gotit-frame-top');
-		this.frameTopRightDiv = createBlockWithClass('gotit-frame-top-right');
+		this.frameTopLeftDiv = GotIt.createDivWithClass('gotit-frame-top-left');
+		this.frameTopDiv = GotIt.createDivWithClass('gotit-frame-top');
+		this.frameTopRightDiv = GotIt.createDivWithClass('gotit-frame-top-right');
 		
-		this.frameMiddleLeftDiv = createBlockWithClass('gotit-frame-middle-left');
-		this.frameMiddleDiv = createBlockWithClass('gotit-frame-middle');
-		this.frameMiddleRightDiv = createBlockWithClass('gotit-frame-middle-right');
+		this.frameMiddleLeftDiv = GotIt.createDivWithClass('gotit-frame-middle-left');
+		this.frameMiddleDiv = GotIt.createDivWithClass('gotit-frame-middle');
+		this.frameMiddleRightDiv = GotIt.createDivWithClass('gotit-frame-middle-right');
 		
-		this.frameBottomLeftDiv = createBlockWithClass('gotit-frame-bottom-left');
-		this.frameBottomDiv = createBlockWithClass('gotit-frame-bottom');
-		this.frameBottomRightDiv = createBlockWithClass('gotit-frame-bottom-right');
+		this.frameBottomLeftDiv = GotIt.createDivWithClass('gotit-frame-bottom-left');
+		this.frameBottomDiv = GotIt.createDivWithClass('gotit-frame-bottom');
+		this.frameBottomRightDiv = GotIt.createDivWithClass('gotit-frame-bottom-right');
 		
-		this.frameBlock.appendChild(this.frameTopLeftDiv);
-		this.frameBlock.appendChild(this.frameTopDiv);
-		this.frameBlock.appendChild(this.frameTopRightDiv);
+		this.frameDiv.appendChild(this.frameTopLeftDiv);
+		this.frameDiv.appendChild(this.frameTopDiv);
+		this.frameDiv.appendChild(this.frameTopRightDiv);
 		
-		this.frameBlock.appendChild(this.frameMiddleLeftDiv);
-		this.frameBlock.appendChild(this.frameMiddleDiv);
-		this.frameBlock.appendChild(this.frameMiddleRightDiv);
+		this.frameDiv.appendChild(this.frameMiddleLeftDiv);
+		this.frameDiv.appendChild(this.frameMiddleDiv);
+		this.frameDiv.appendChild(this.frameMiddleRightDiv);
 		
-		this.frameBlock.appendChild(this.frameBottomLeftDiv);
-		this.frameBlock.appendChild(this.frameBottomDiv);
-		this.frameBlock.appendChild(this.frameBottomRightDiv);
+		this.frameDiv.appendChild(this.frameBottomLeftDiv);
+		this.frameDiv.appendChild(this.frameBottomDiv);
+		this.frameDiv.appendChild(this.frameBottomRightDiv);
 		
-		this.frameBlock.appendChild(this.titleBlock);
-		this.frameBlock.appendChild(this.contentBlock);
+		this.frameDiv.appendChild(this.titleBlock);
+		this.frameDiv.appendChild(this.contentBlock);
 		
 		this.titleBlockMouseDownListener = titleBlockMouseDownListener.bind(this);
 		this.titleBlockDblClickListener = titleBlockDblClickListener.bind(this);
@@ -104,29 +104,6 @@ var gotItFrameModule = (function () {
 |                                  STATIC CODE                                 |
 |                                                                              |
 \*----------------------------------------------------------------------------*/
-	
-	function createBlockWithClass(className) {
-		var block = document.createElement('div');
-		block.className = className;
-		
-		return block;
-	}
-	
-	function addEvent(eventTarget, eventType, eventFunction) {
-		if (eventTarget.addEventListener) {
-			eventTarget.addEventListener(eventType, eventFunction, false);
-		} else {
-			eventTarget.attachEvent('on' + eventType, eventFunction);
-		}
-	}
-	
-	function removeEvent(eventTarget, eventType, eventFunction) {
-		if (eventTarget.removeEventListener) {
-			eventTarget.removeEventListener(eventType, eventFunction, false);
-		} else {
-			eventTarget.detachEvent('on' + eventType, eventFunction);
-		}
-	}
 	
 	function setBorderVisible(visible) {
 		var value = visible ? null : 'none';
@@ -156,17 +133,17 @@ var gotItFrameModule = (function () {
 		setBorderVisible.bind(this)(!this.maximized);
 	
 		if (this.maximized) {
-			this.frameBlock.style.left = '0px';
-			this.frameBlock.style.top = '0px';
+			this.frameDiv.style.left = '0px';
+			this.frameDiv.style.top = '0px';
 		
-			this.frameBlock.style.width = '100%';
-			this.frameBlock.style.height = '100%';
+			this.frameDiv.style.width = '100%';
+			this.frameDiv.style.height = '100%';
 		} else {
-			this.frameBlock.style.left = this.x + 'px';
-			this.frameBlock.style.top = this.y + 'px';
+			this.frameDiv.style.left = this.x + 'px';
+			this.frameDiv.style.top = this.y + 'px';
 		
-			this.frameBlock.style.width = this.width + 'px';
-			this.frameBlock.style.height = this.height + 'px';
+			this.frameDiv.style.width = this.width + 'px';
+			this.frameDiv.style.height = this.height + 'px';
 		}
 	}
 	
@@ -234,72 +211,80 @@ var gotItFrameModule = (function () {
 		switch (this.currentGrabType) {
 			case GrabType.MOVE:
 				this.x = e.clientX - this.offsetX;
-				this.frameBlock.style.left = this.x + 'px';
+				this.frameDiv.style.left = this.x + 'px';
 				
 				this.y = e.clientY - this.offsetY;
-				this.frameBlock.style.top = this.y + 'px';
+				this.frameDiv.style.top = this.y + 'px';
 				break;
+				
 			case GrabType.RESIZE_TOP_LEFT:
 				this.width -= (e.clientX - this.offsetX) - this.x;
-				this.frameBlock.style.width = this.width + 'px';
+				this.frameDiv.style.width = this.width + 'px';
 				
 				this.height -= (e.clientY - this.offsetY) - this.y;
-				this.frameBlock.style.height = this.height + 'px';
+				this.frameDiv.style.height = this.height + 'px';
 			
 				this.x = e.clientX - this.offsetX;
-				this.frameBlock.style.left = this.x + 'px';
+				this.frameDiv.style.left = this.x + 'px';
 				
 				this.y = e.clientY - this.offsetY;
-				this.frameBlock.style.top = this.y + 'px';
+				this.frameDiv.style.top = this.y + 'px';
 				break;
+				
 			case GrabType.RESIZE_TOP:
 				this.height -= (e.clientY - this.offsetY) - this.y;
-				this.frameBlock.style.height = this.height + 'px';
+				this.frameDiv.style.height = this.height + 'px';
 				
 				this.y = e.clientY - this.offsetY;
-				this.frameBlock.style.top = this.y + 'px';
+				this.frameDiv.style.top = this.y + 'px';
 				break;
+				
 			case GrabType.RESIZE_TOP_RIGHT:
 				this.width = (e.clientX - this.offsetX) - this.x;
-				this.frameBlock.style.width = this.width + 'px';
+				this.frameDiv.style.width = this.width + 'px';
 				
 				this.height -= (e.clientY - this.offsetY) - this.y;
-				this.frameBlock.style.height = this.height + 'px';
+				this.frameDiv.style.height = this.height + 'px';
 				
 				this.y = e.clientY - this.offsetY;
-				this.frameBlock.style.top = this.y + 'px';
+				this.frameDiv.style.top = this.y + 'px';
 				break;
+				
 			case GrabType.RESIZE_LEFT:
 				this.width -= (e.clientX - this.offsetX) - this.x;
-				this.frameBlock.style.width = this.width + 'px';
+				this.frameDiv.style.width = this.width + 'px';
 			
 				this.x = e.clientX - this.offsetX;
-				this.frameBlock.style.left = this.x + 'px';
+				this.frameDiv.style.left = this.x + 'px';
 				break;
+				
 			case GrabType.RESIZE_RIGHT:
 				this.width = (e.clientX - this.offsetX) - this.x;
-				this.frameBlock.style.width = this.width + 'px';
+				this.frameDiv.style.width = this.width + 'px';
 				break;
+				
 			case GrabType.RESIZE_BOTTOM_LEFT:
 				this.width -= (e.clientX - this.offsetX) - this.x;
-				this.frameBlock.style.width = this.width + 'px';
+				this.frameDiv.style.width = this.width + 'px';
 				
 				this.height = (e.clientY - this.offsetY) - this.y;
-				this.frameBlock.style.height = this.height + 'px';
+				this.frameDiv.style.height = this.height + 'px';
 			
 				this.x = e.clientX - this.offsetX;
-				this.frameBlock.style.left = this.x + 'px';
+				this.frameDiv.style.left = this.x + 'px';
 				break;
+				
 			case GrabType.RESIZE_BOTTOM:
 				this.height = (e.clientY - this.offsetY) - this.y;
-				this.frameBlock.style.height = this.height + 'px';
+				this.frameDiv.style.height = this.height + 'px';
 				break;
+				
 			case GrabType.RESIZE_BOTTOM_RIGHT:
 				this.width = (e.clientX - this.offsetX) - this.x;
-				this.frameBlock.style.width = this.width + 'px';
+				this.frameDiv.style.width = this.width + 'px';
 				
 				this.height = (e.clientY - this.offsetY) - this.y;
-				this.frameBlock.style.height = this.height + 'px';
+				this.frameDiv.style.height = this.height + 'px';
 				break;
 		}
 	}
@@ -349,7 +334,7 @@ var gotItFrameModule = (function () {
 		addEvent(desktop.desktopBlock, 'mouseup', this.desktopBlockMouseUpListener);
 		addEvent(desktop.desktopBlock, 'mousemove', this.desktopBlockMouseMoveListener);
 		
-		desktop.desktopBlock.appendChild(this.frameBlock);
+		desktop.desktopBlock.appendChild(this.frameDiv);
 	}
 	
 	Frame.prototype.onRemoveComponent = function(desktop) {
@@ -366,7 +351,7 @@ var gotItFrameModule = (function () {
 		removeEvent(desktop.desktopBlock, 'mouseup', this.desktopBlockMouseUpListener);
 		removeEvent(desktop.desktopBlock, 'mousemove', this.desktopBlockMouseMoveListener);
 		
-		desktop.desktopBlock.removeChild(this.frameBlock);
+		desktop.desktopBlock.removeChild(this.frameDiv);
 	}
 	
 /*----------------------------------------------------------------------------*\

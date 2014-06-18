@@ -6,32 +6,49 @@
 
 <%-- JSP CONTENT --%>
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Got it! - ${pageTitle}</title>
-		<link rel="stylesheet" href="<c:url value="/css/gotit.css" />" />
-	</head>
-	<body>
-		<div class="gotit-border-layout">
-			<header class="gotit-border-layout-north">
-				<div class="gotit-standard-logo-container">
-					<img src="img/gotit/standard/gotit_logo.png" alt="Got it!" />
+<c:choose>
+	<c:when test="${!requestedWithAjax}">
+		<!DOCTYPE html>
+		<html lang="en">
+			<head>
+				<meta charset="utf-8" />
+				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+				<title>Got it! - ${pageTitle}</title>
+				<link rel="stylesheet" href="<c:url value="/css/gotit.css" />" />
+			</head>
+			<body>
+				<div class="gotit-border-layout">
+					<div class="gotit-border-layout-north">
+						<header id="gotit-standard-header">
+							<img src="img/gotit/standard/gotit_logo.png" alt="Got it!" />
+						</header>
+					</div>
+					<div class="gotit-border-layout-middle gotit-vertical-align-middle">
+						<div class="gotit-border-layout-center">
+							<section id="gotit-standard-body">
+								<jsp:doBody />
+							</section>
+						</div>
+					</div>
+					<div class="gotit-border-layout-south">
+						<footer id="gotit-standard-footer">
+							Copyright &copy; Dany Jupille, HE-Arc Engineering
+						</footer>
+					</div>
 				</div>
-			</header>
-			<section class="gotit-border-layout-center">
-				<div class="gotit-standard-body-container">
+				<script src="<c:url value="/js/gotit/gotit.js" />"></script>
+			</body>
+		</html>
+	</c:when>
+	<c:otherwise>
+		<?xml version="1.0" encoding="UTF-8"?>
+		<ajax-response>
+			<page-title>Got it! - ${pageTitle}</page-title>
+			<page-html>
+				<%= "<![CDATA[" %>
 					<jsp:doBody />
-				</div>
-			</section>
-			<footer class="gotit-border-layout-south">
-				<div class="gotit-standard-copyright-container">
-					Copyright &copy; Dany Jupille, HE-Arc Engineering
-				</div>
-			</footer>
-		</div>
-		<script src="<c:url value="/js/gotit/gotit.standard.js" />"></script>
-	</body>
-</html>
+				<%= "]]>" %>
+			</page-html>
+		</ajax-response>
+	</c:otherwise>
+</c:choose>

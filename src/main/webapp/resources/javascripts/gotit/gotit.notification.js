@@ -1,14 +1,47 @@
-var NotificationModule = (function () {
+/**
+ * GotIt.Notification module
+ * 
+ * @author Dany Jupille
+ * @version 1.0
+ */
+window.GotIt.Notification = (function () {
 	
-	/* PRIVATE CODE HERE */
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                                  CONSTRUCTOR                                 |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
 	
-	return {
-		create: function(/* args */) {
-			return null;
-		},
-		
-		destroy: function(/* args */) {
-			return null;
-		}
+	var Notification = function() {
+	
+		this.nothing = null;
 	};
+	
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                                  STATIC CODE                                 |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
+	
+	function getNothingPrivate() {
+		return null;
+	}
+	
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                            PROTOTYPE ADDITION(S)                             |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
+	
+	Notification.prototype.getNothingPublic = function() {
+		return null;
+	};
+	
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                            RETURN MODULE STATEMENT                           |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
+	
+	return Notification;
 })();

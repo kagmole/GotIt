@@ -1,18 +1,94 @@
-(function() {
-
-	window.GotIt = {
-		Desktop: (typeof gotItDesktopModule !== 'undefined' ? gotItDesktopModule : null),
-		Frame: (typeof gotItFrameModule !== 'undefined' ? gotItFrameModule : null),
-		Gadget: (typeof GadgetModule !== 'undefined' ? GadgetModule : null),
-		Notification: (typeof NotificationModule !== 'undefined' ? NotificationModule : null),
-		Shortcut: (typeof gotItShortcutModule !== 'undefined' ? gotItShortcutModule : null),
-		Standard: (typeof StandardModule !== 'undefined' ? StandardModule : null)
+/**
+ * GotIt namespace module
+ * 
+ * @author Dany Jupille
+ * @version 1.0
+ */
+window.GotIt = (function () {
+	
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                              NAMESPACE CREATION                              |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
+	
+	var GotIt = {};
+	
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                                  STATIC CODE                                 |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
+	
+	var domParser = new DOMParser();
+	
+	GotIt.createDivWithClass = function(className) {
+		var divElement = document.createElement('div');
+		
+		divElement.className = className;
+		
+		return divElement;
+	};
+	
+	GotIt.addEvent = function(eventTarget, eventType, eventFunction) {
+		if (eventTarget.addEventListener) {
+			eventTarget.addEventListener(eventType, eventFunction, false);
+		} else {
+			eventTarget.attachEvent('on' + eventType, eventFunction);
+		}
+	};
+	
+	GotIt.removeEvent = function(eventTarget, eventType, eventFunction) {
+		if (eventTarget.removeEventListener) {
+			eventTarget.removeEventListener(eventType, eventFunction, false);
+		} else {
+			eventTarget.detachEvent('on' + eventType, eventFunction);
+		}
+	};
+	
+	GotIt.doAjaxGet = function(aElement, targetElementId) {
+		var xhr = new XMLHttpRequest();
+		
+		xhr.timeout = 10000;
+		xhr.open('GET', aElement.getAttribute('href'));
+		
+		xhr.setRequestHeader('GotIt-Ajax', 'true');
+		
+		var targetElement = document.getElementById(targetElementId);
+		
+		xhr.ontimeout = function() {
+			targetElement.innerHTML = 'That shit takes much longer than exptected!';
+		}
+		
+		xhr.onprogress = function(e) {
+			targetElement.innerHTML = 'Loading... (' + Math.floor(e.loaded / e.total) + '%)';
+		}
+		
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4) {
+				var xmlDocument = domParser.parseFromString(xhr.responseText.trim(), "text/xml");
+				var rootChildNodes = xmlDocument.documentElement.childNodes;
+				
+				document.title = rootChildNodes[1].textContent;
+				targetElement.innerHTML = rootChildNodes[3].textContent;
+				
+				// TODO implements
+				//history.pushState({}, 'yo', aElement.getAttribute('href'));
+			}
+		}
+		
+		xhr.send(null);
 	}
 	
-	var myDesktop = new GotIt.Desktop('page-container');
+	GotIt.doAjaxPost = function(aElement, targetElementId) {
+		
+	}
 	
-	myDesktop.addComponent(new GotIt.Shortcut('Prout frame', 'prout', '/desktop/test'));
-	myDesktop.addComponent(new GotIt.Shortcut('Tutu frame', 'prout', '/desktop/test'));
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                            RETURN MODULE STATEMENT                           |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
 	
-	myDesktop.insertCode();
+	return GotIt;
 })();

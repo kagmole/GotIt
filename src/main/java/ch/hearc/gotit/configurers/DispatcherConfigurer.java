@@ -11,6 +11,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import ch.hearc.gotit.interceptors.AjaxInterceptor;
+
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "ch.hearc.gotit.controllers")
@@ -24,7 +26,7 @@ public class DispatcherConfigurer extends WebMvcConfigurerAdapter {
 	// TODO check id validity of most views with interceptors
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		super.addInterceptors(registry);
+		registry.addInterceptor(new AjaxInterceptor());
 	}
 	
 	@Override

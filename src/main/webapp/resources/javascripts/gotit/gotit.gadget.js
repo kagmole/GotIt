@@ -1,14 +1,47 @@
-var GadgetModule = (function () {
+/**
+ * GotIt.Gadget module
+ * 
+ * @author Dany Jupille
+ * @version 1.0
+ */
+window.GotIt.Gadget = (function () {
 	
-	/* PRIVATE CODE HERE */
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                                  CONSTRUCTOR                                 |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
 	
-	return {
-		create: function(/* args */) {
-			return null;
-		},
-		
-		destroy: function(/* args */) {
-			return null;
-		}
+	var Gadget = function() {
+	
+		this.nothing = null;
 	};
+	
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                                  STATIC CODE                                 |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
+	
+	function getNothingPrivate() {
+		return null;
+	}
+	
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                            PROTOTYPE ADDITION(S)                             |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
+	
+	Gadget.prototype.getNothingPublic = function() {
+		return null;
+	};
+	
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                            RETURN MODULE STATEMENT                           |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
+	
+	return Gadget;
 })();
