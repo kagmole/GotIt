@@ -24,9 +24,18 @@ img {
 
 /*----------------------------------------------------------------------------*\
 |                                                                              |
-|                               SINGLETON STYLES                               |
+|                                UTILITY STYLES                                |
 |                                                                              |
 \*----------------------------------------------------------------------------*/
+
+.gotit-absolute-mask {
+	position: absolute;
+	
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
 
 .gotit-text-align-center {
 	text-align: center;
@@ -180,6 +189,7 @@ img {
 }
 
 .gotit-border-layout-north {
+	position: relative;
 	display: table-header-group;
 	
 	overflow-x: auto;
@@ -191,6 +201,7 @@ img {
 }
 
 .gotit-border-layout-west {
+	position: relative;
 	float: left;
 	
 	height: 100%;
@@ -200,6 +211,7 @@ img {
 }
 
 .gotit-border-layout-east {
+	position: relative;
 	float: right;
 	
 	height: 100%;
@@ -208,11 +220,13 @@ img {
 	overflow-y: auto;
 }
 
-.gotit-border-layout-center {	
+.gotit-border-layout-center {
+	position: relative;
 	overflow: auto;
 }
 
 .gotit-border-layout-south {
+	position: relative;
 	display: table-footer-group;
 	
 	overflow-x: auto;

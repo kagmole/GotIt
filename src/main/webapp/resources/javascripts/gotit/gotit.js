@@ -46,6 +46,16 @@ window.GotIt = (function () {
 		}
 	};
 	
+	// TODO keep or clean
+	/*GotIt.doAjaxGet = function(action, targetElement) {
+		var xhr = new XMLHttpRequest();
+		
+		xhr.timeout = 10000;
+		xhr.open('GET', action);
+		
+		xhr.setRequestHeader('GotIt-Aajx', 'true');
+	}*/
+	
 	GotIt.doAjaxGet = function(aElement, targetElementId) {
 		var xhr = new XMLHttpRequest();
 		

@@ -37,6 +37,7 @@
 					</div>
 				</div>
 				<script src="<c:url value="/js/gotit/gotit.js" />"></script>
+				<script src="<c:url value="/js/gotit/gotit.standard.js" />"></script>
 			</body>
 		</html>
 	</c:when>
