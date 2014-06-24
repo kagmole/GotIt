@@ -13,9 +13,19 @@
 		desktop.addComponent(new GotIt.Desktop.Notification('My notifications', 'img/gotit/links/link_my_notifications.jpg'));
 	});
 	
+	var link4 = new GotIt.Desktop.Link('Trainings app.', 'img/gotit/links/link_trainings_app.jpg', function() {
+		var frame = new GotIt.Desktop.Frame('Trainings app.', 'img/gotit/links/link_trainings_app.jpg');
+		var application = new GotIt.Desktop.Application.MyTrainings();
+		
+		frame.frameContentDiv.appendChild(application.applicationDiv);
+		
+		desktop.addComponent(frame);
+	});
+	
 	desktop.addComponent(link);
 	desktop.addComponent(link2);
 	desktop.addComponent(link3);
+	desktop.addComponent(link4);
 	
 	desktop.insertCode(document.getElementById('gotit-page-container'));
 })();

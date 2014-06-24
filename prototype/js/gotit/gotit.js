@@ -104,6 +104,25 @@ window.GotIt = (function() {
 		xhr.send(null);
 	};
 	
+	// XXX Is this prototype addition a good idea?
+	// TODO Should recreate our own canvas element
+	HTMLCanvasElement.prototype.getRelativeMousePosition = function(e) {
+		var totalOffsetX = 0;
+		var totalOffsetY = 0;
+		
+		var currentElement = this;
+		
+		do {
+			totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
+			totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
+		} while (currentElement = currentElement.offsetParent);
+		
+		return {
+			x: e.pageX - totalOffsetX,
+			y: e.pageY - totalOffsetY
+		};
+	}
+	
 /*----------------------------------------------------------------------------*\
 |                                                                              |
 |                            RETURN MODULE STATEMENT                           |

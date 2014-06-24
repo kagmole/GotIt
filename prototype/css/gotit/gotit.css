@@ -160,6 +160,17 @@ html, body {
 |                                                                              |
 \*----------------------------------------------------------------------------*/
 
+.gotit-border-layout,
+.gotit-border-layout-north,
+.gotit-border-layout-middle,
+.gotit-border-layout-west,
+.gotit-border-layout-east,
+.gotit-border-layout-center,
+.gotit-border-layout-south {
+	margin: 0;
+	padding: 0;
+}
+
 .gotit-border-layout {
 	display: table;
 	
@@ -501,13 +512,13 @@ html, body {
 .gotit-frame-content {
 	position: absolute;
 	
+	margin: 0;
+	padding: 0;
+	
 	top: 30px;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	
-	margin: 0px;
-	padding: 5px;
 	
 	overflow: auto;
 	
@@ -621,4 +632,15 @@ html, body {
 	height: 50px;
 	
 	background-color: red;
+}
+
+/* APPLICATION COMPONENT
+   --------------------- */
+
+.gotit-application-component {
+	margin: 0;
+	padding: 0;
+	
+	height: 100%;
+	width: 100%;
 }

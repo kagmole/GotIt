@@ -1,5 +1,5 @@
 /**
- * GotIt.Desktop.Application module
+ * GotIt.Application module
  * 
  * @author Dany Jupille
  * @version 1.0
