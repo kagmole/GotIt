@@ -1,0 +1,624 @@
+/*============================================================================*\
+|                                                                              |
+|                              GENERIC CSS TARGETS                             |
+|                                                                              |
+\*============================================================================*/
+
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                        RAW TAGS AND IDENTIFIERS STYLES                       |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
+
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+#gotit-page-container {
+	position: fixed;
+	
+	margin: 0;
+	padding: 0;
+	
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                                UTILITY STYLES                                |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
+
+.gotit-absolute-mask {
+	position: absolute;
+	
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                            RESPONSIVE GRID SYSTEM                            |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
+
+.gotit-row {
+	margin: 0 auto;
+	padding: 0;
+	
+	width: 100%;
+	max-width: 60em;
+}
+
+.gotit-row::before,
+.gotit-row::after {
+	display: table;
+	
+	content: '';
+}
+
+.gotit-row::after {
+	clear: both;
+}
+
+.gotit-row .gotit-row {
+	margin: 0;
+	padding: 0;
+	
+	width: auto;
+	max-width: none;
+}
+
+.gotit-row .gotit-row::before,
+.gotit-row .gotit-row::after {
+	display: table;
+	
+	content: '';
+}
+
+.gotit-row .gotit-row::after {
+	clear: both;
+}
+
+.gotit-column {	
+	float: left;
+}
+
+.gotit-column-width-1-of-12 {
+	width: 8.33333%;
+}
+
+.gotit-column-width-2-of-12 {
+	width: 16.66666%;
+}
+
+.gotit-column-width-3-of-12 {
+	width: 25%;
+}
+
+.gotit-column-width-4-of-12 {
+	width: 33.33333%;
+}
+
+.gotit-column-width-5-of-12 {
+	width: 41.66666%;
+}
+
+.gotit-column-width-6-of-12 {
+	width: 50%;
+}
+
+.gotit-column-width-7-of-12 {
+	width: 58.33333%;
+}
+
+.gotit-column-width-8-of-12 {
+	width: 66.66666%;
+}
+
+.gotit-column-width-9-of-12 {
+	width: 75%;
+}
+
+.gotit-column-width-10-of-12 {
+	width: 83.33333%;
+}
+
+.gotit-column-width-11-of-12 {
+	width: 91.66666%;
+}
+
+.gotit-column-width-12-of-12 {
+	width: 100%;
+}
+
+@media only screen and (max-width: 30em) {
+	.gotit-column-width-1-of-12,
+	.gotit-column-width-2-of-12,
+	.gotit-column-width-3-of-12,
+	.gotit-column-width-4-of-12,
+	.gotit-column-width-5-of-12,
+	.gotit-column-width-6-of-12,
+	.gotit-column-width-7-of-12,
+	.gotit-column-width-8-of-12,
+	.gotit-column-width-9-of-12,
+	.gotit-column-width-10-of-12,
+	.gotit-column-width-11-of-12 {
+		width: 100%;
+	}
+}
+
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                                BORDER LAYOUT                                 |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
+
+.gotit-border-layout {
+	display: table;
+	
+	width: 100%;
+	height: 100%;
+}
+
+.gotit-border-layout-north {
+	position: relative;
+	display: table-header-group;
+	
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+
+.gotit-border-layout-middle {
+	display: table-cell;
+}
+
+.gotit-border-layout-west {
+	position: relative;
+	float: left;
+	
+	height: 100%;
+	
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.gotit-border-layout-east {
+	position: relative;
+	float: right;
+	
+	height: 100%;
+	
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.gotit-border-layout-center {
+	position: relative;
+	overflow: auto;
+}
+
+.gotit-border-layout-south {
+	position: relative;
+	display: table-footer-group;
+	
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+
+/*============================================================================*\
+|                                                                              |
+|                             SPECIFIC CSS TARGETS                             |
+|                                                                              |
+\*============================================================================*/
+
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                                STANDARD PAGES                                |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
+
+/* TODO login page */
+
+/*----------------------------------------------------------------------------*\
+|                                                                              |
+|                                 DESKTOP PAGES                                |
+|                                                                              |
+\*----------------------------------------------------------------------------*/
+
+/* MAIN CONTAINERS
+   --------------- */
+
+.gotit-desktop-container,
+.gotit-workspace-container,
+.gotit-taskbar-container,
+.gotit-link-container,
+.gotit-gadget-container,
+.gotit-notification-container {
+	position: absolute;
+
+	margin: 0;
+	padding: 0;
+}
+
+.gotit-page-container {
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.gotit-desktop-container {
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	
+	background-color: #f0ffff;
+}
+
+.gotit-workspace-container {
+	top: 0;
+	bottom: 40px;
+	left: 0;
+	right: 0;
+}
+
+.gotit-taskbar-container {
+	bottom: 0;
+	left: 0;
+	right: 0;
+	
+	height: 40px;
+	
+	z-index: 10000000;
+	
+	background-color: #2c75ff;
+}
+
+.gotit-link-container {
+	padding: 50px;
+
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 500px;
+}
+
+.gotit-gadget-container {
+	top: 0;
+	right: 0;
+	
+	width: 500px;
+	height: 300px;
+}
+
+.gotit-notification-container {
+	padding: 10px 10px 10px 0;
+	
+	top: 300px;
+	bottom: 0;
+	right: 0;
+	
+	width: 490px;
+	
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.gotit-menu-container {
+	float: left;
+
+	margin: 0;
+	padding: 0;
+	
+	height: 100%;
+}
+
+/* FRAME COMPONENT
+   --------------- */
+
+.gotit-frame-component,
+.gotit-frame-top-left,
+.gotit-frame-top,
+.gotit-frame-top-right,
+.gotit-frame-middle-left,
+.gotit-frame-middle,
+.gotit-frame-middle-right,
+.gotit-frame-bottom-left,
+.gotit-frame-bottom,
+.gotit-frame-bottom-right {
+	position: absolute;
+	
+	margin: 0;
+	padding: 0;
+}
+
+.gotit-frame-top-left {
+	top: 0;
+	left: 0;
+	
+	width: 5px;
+	height: 5px;
+	
+	background-image: url(../../img/gotit/frames/frame_top_left.png);
+	background-repeat: no-repeat;
+	
+	cursor: nw-resize;
+}
+
+.gotit-frame-top {
+	top: 0;
+	left: 5px;
+	right: 5px;
+	
+	height: 5px;
+	
+	background-image: url(../../img/gotit/frames/frame_top.png);
+	background-repeat: repeat-x;
+	
+	cursor: n-resize;
+}
+
+.gotit-frame-top-right {
+	top: 0;
+	right: 0;
+	
+	width: 5px;
+	height: 5px;
+	
+	background-image: url(../../img/gotit/frames/frame_top_right.png);
+	background-repeat: no-repeat;
+	
+	cursor: ne-resize;
+}
+
+.gotit-frame-middle-left {
+	top: 5px;
+	bottom: 5px;
+	left: 0;
+	
+	width: 5px;
+	
+	background-image: url(../../img/gotit/frames/frame_middle_left.png);
+	background-repeat: repeat-y;
+	
+	cursor: w-resize;
+}
+
+.gotit-frame-middle {
+	top: 5px;
+	bottom: 5px;
+	left: 5px;
+	right: 5px;
+}
+
+.gotit-frame-middle-right {
+	top: 5px;
+	bottom: 5px;
+	right: 0;
+	
+	width: 5px;
+	
+	background-image: url(../../img/gotit/frames/frame_middle_right.png);
+	background-repeat: repeat-y;
+	
+	cursor: e-resize;
+}
+
+.gotit-frame-bottom-left {
+	bottom: 0;
+	left: 0;
+	
+	width: 5px;
+	height: 5px;
+	
+	background-image: url(../../img/gotit/frames/frame_bottom_left.png);
+	background-repeat: no-repeat;
+	
+	cursor: sw-resize;
+}
+
+.gotit-frame-bottom {
+	bottom: 0;
+	left: 5px;
+	right: 5px;
+	
+	height: 5px;
+	
+	background-image: url(../../img/gotit/frames/frame_bottom.png);
+	background-repeat: repeat-x;
+	
+	cursor: s-resize;
+}
+
+.gotit-frame-bottom-right {
+	bottom: 0;
+	right: 0;
+	
+	width: 5px;
+	height: 5px;
+	
+	background-image: url(../../img/gotit/frames/frame_bottom_right.png);
+	background-repeat: no-repeat;
+	
+	cursor: se-resize;
+}
+
+.gotit-frame-title-bar {
+	position: absolute;
+	
+	margin: 0;
+	padding: 0;
+	
+	top: 0;
+	left: 0;
+	right: 0;
+	
+	height: 30px;
+	line-height: 30px;
+	
+	background-color: #dff2ff;
+}
+
+.gotit-frame-title-text {
+	margin: 0;
+	padding: 0;
+	
+	cursor: default;
+}
+
+.gotit-frame-title-icon {
+	float: left;
+	
+	margin: 0 5px 0 0;
+	padding: 0;
+	
+	width: 26px;
+	height: 26px;
+	
+	background-color: blue;
+}
+
+.gotit-frame-title-button {
+	float: right;
+	
+	margin: 0 0 0 2px;
+	padding: 0;
+	
+	width: 26px;
+	height: 26px;
+	
+	background-color: red;
+}
+
+.gotit-frame-content {
+	position: absolute;
+	
+	top: 30px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	
+	margin: 0px;
+	padding: 5px;
+	
+	overflow: auto;
+	
+	border: 1px solid #0079cc;
+	
+	background-color: #44acff;
+}
+
+.gotit-frame-miniature {
+	display: inline-block;
+	
+	margin: 0 0 0 5px;
+	padding: 0 10px;
+
+	height: 100%;
+	line-height: 40px;
+	
+	cursor: default;
+	
+	background-color: #f99;
+}
+
+/* LINK COMPONENT
+   -------------- */
+
+.gotit-link-component {
+	float: left;
+	
+	margin: 10px;
+	padding: 0;
+	
+	width: 150px;
+	height: 180px;
+	
+	text-align: center;
+}
+
+.gotit-link-component img {
+	display: inline-block;
+	
+	height: 150px;
+}
+
+.gotit-link-component p {
+	margin: 0;
+
+	height: 30px;
+	line-height: 30px;
+	
+	cursor: default;
+}
+
+/* GADGET COMPONENT
+   ---------------- */
+
+.gotit-gadget-component {
+	margin: 0;
+	padding: 0;
+	
+	width: 100%;
+	height: 100%;
+	
+	background-color: #0f0;
+}
+
+/* NOTIFICATION COMPONENT
+   ---------------------- */
+
+.gotit-notification-component {
+	position: relative;
+	
+	margin: 0 0 20px 0;
+
+	width: 100%;
+	height: 170px;
+}
+
+.gotit-notification-icon,
+.gotit-notification-text,
+.gotit-notification-button {
+	position: absolute;
+	
+	margin: 0;
+	padding: 0;
+}
+
+.gotit-notification-icon {
+	top: 25px;
+	bottom: 15px;
+	left: 0;
+	
+	width: 120px;
+	
+	background-color: green;
+}
+
+.gotit-notification-text {
+	top: 10px;
+	bottom: 0;
+	left: 60px;
+	right: 10px;
+	
+	background-color: blue;
+}
+
+.gotit-notification-button {
+	top: 0;
+	right: 0;
+	
+	width: 50px;
+	height: 50px;
+	
+	background-color: red;
+}
