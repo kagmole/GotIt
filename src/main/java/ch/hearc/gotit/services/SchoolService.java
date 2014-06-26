@@ -13,7 +13,4 @@ public interface SchoolService extends BasicService<SchoolEntity, Integer>, Scho
 	public void addEmployeeWithType(SchoolEntity schoolEntity, UserEntity userEntity, EmployeeTypeEntity employeeTypeEntity);
 	public void addStudent(SchoolEntity schoolEntity, UserEntity userEntity);
 	public void addTraining(SchoolEntity schoolEntity, TrainingEntity trainingEntity);
-	
-	public boolean isUpdateAuthorized(SchoolEntity schoolEntity, UserEntity userEntity);
-	public boolean isDestroyAuthorized(SchoolEntity schoolEntity, UserEntity userEntity);
 }

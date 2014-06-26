@@ -1,28 +1,108 @@
 <%-- JSP DIRECTIVES --%>
 
 <%@ page contentType="text/html" pageEncoding="UTF-8" session="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="l" tagdir="/WEB-INF/tags/layouts" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 
 <%-- JSP CONTENT --%>
 
 <l:standard pageTitle="Sign up">
-	<sf:form method="POST" commandName="userEntity">
-		<sf:label path="username">Username</sf:label><sf:input path="username" /><sf:errors path="username" /><br />
-		<sf:label path="password">Password</sf:label><sf:password path="password" /><sf:errors path="password" /><br />
-		<sf:label path="confirmPassword">Confirm password</sf:label><sf:password path="confirmPassword" /><sf:errors path="confirmPassword" /><br />
-		<sf:label path="firstname">Firstname</sf:label><sf:input path="firstname" /><sf:errors path="firstname" /><br />
-		<sf:label path="lastname">Lastname</sf:label><sf:input path="lastname" /><sf:errors path="lastname" /><br />
-		<sf:label path="mainEmail">Main email</sf:label><sf:input path="mainEmail" /><sf:errors path="mainEmail" /><br />
-		<sf:label path="confirmMainEmail">Confirm main email</sf:label><sf:input path="confirmMainEmail" /><sf:errors path="confirmMainEmail" /><br />
-		<sf:label path="secondaryEmail">Secondary email</sf:label><sf:input path="secondaryEmail" /><sf:errors path="secondaryEmail" /><br />
-		<sf:label path="confirmSecondaryEmail">Confirm secondary email</sf:label><sf:input path="confirmSecondaryEmail" /><sf:errors path="confirmSecondaryEmail" /><br />
-		<sf:label path="location">Location</sf:label><sf:input path="location" /><sf:errors path="location" /><br />
-		<sf:label path="homePhone">Home phone</sf:label><sf:input path="homePhone" /><sf:errors path="homePhone" /><br />
-		<sf:label path="privatePhone">Private phone</sf:label><sf:input path="privatePhone" /><sf:errors path="privatePhone" /><br />
-		<sf:label path="biography">Biography</sf:label><sf:textarea path="biography" /><sf:errors path="biography" /><br />
-		
-		<input type="submit" value="Sign up" />
+	<sf:form method="POST" commandName="userEntity" class="form-horizontal">
+		<div class="form-group">
+			<sf:errors path="username" cssClass="col-sm-offset-2 col-sm-10" />
+			<sf:label path="username" cssClass="col-sm-2 control-label">Username</sf:label>
+			<div class="col-sm-10">
+				<sf:input path="username" cssClass="form-control" />
+			</div>
+		</div>
+		<div class="form-group">
+			<sf:errors path="password" cssClass="col-sm-offset-2 col-sm-10" />
+			<sf:label path="password" cssClass="col-sm-2 control-label">Password</sf:label>
+			<div class="col-sm-10">
+				<sf:password path="password" cssClass="form-control" />
+			</div>
+		</div>
+		<div class="form-group">
+			<sf:errors path="confirmPassword" cssClass="col-sm-offset-2 col-sm-10" />
+			<sf:label path="confirmPassword" cssClass="col-sm-2 control-label">Confirm password</sf:label>
+			<div class="col-sm-10">
+				<sf:password path="confirmPassword" cssClass="form-control" />
+			</div>
+		</div>
+		<div class="form-group">
+			<sf:errors path="firstname" cssClass="col-sm-offset-2 col-sm-10" />
+			<sf:label path="firstname" cssClass="col-sm-2 control-label">Firstname</sf:label>
+			<div class="col-sm-10">
+				<sf:input path="firstname" cssClass="form-control" />
+			</div>
+		</div>
+		<div class="form-group">
+			<sf:errors path="lastname" cssClass="col-sm-offset-2 col-sm-10" />
+			<sf:label path="lastname" cssClass="col-sm-2 control-label">Lastname</sf:label>
+			<div class="col-sm-10">
+				<sf:input path="lastname" cssClass="form-control" />
+			</div>
+		</div>
+		<div class="form-group">
+			<sf:errors path="mainEmail" cssClass="col-sm-offset-2 col-sm-10" />
+			<sf:label path="mainEmail" cssClass="col-sm-2 control-label">Main email</sf:label>
+			<div class="col-sm-10">
+				<sf:input type="email" path="mainEmail" cssClass="form-control" />
+			</div>
+		</div>
+		<div class="form-group">
+			<sf:errors path="confirmMainEmail" cssClass="col-sm-offset-2 col-sm-10" />
+			<sf:label path="confirmMainEmail" cssClass="col-sm-2 control-label">Confirm main email</sf:label>
+			<div class="col-sm-10">
+				<sf:input type="email" path="confirmMainEmail" cssClass="form-control" />
+			</div>
+		</div>
+		<div class="form-group">
+			<sf:errors path="secondaryEmail" cssClass="col-sm-offset-2 col-sm-10" />
+			<sf:label path="secondaryEmail" cssClass="col-sm-2 control-label">Secondary email</sf:label>
+			<div class="col-sm-10">
+				<sf:input type="email" path="secondaryEmail" cssClass="form-control" />
+			</div>
+		</div>
+		<div class="form-group">
+			<sf:errors path="confirmSecondaryEmail" cssClass="col-sm-offset-2 col-sm-10" />
+			<sf:label path="confirmSecondaryEmail" cssClass="col-sm-2 control-label">Confirm secondary email</sf:label>
+			<div class="col-sm-10">
+				<sf:input type="email" path="confirmSecondaryEmail" cssClass="form-control" />
+			</div>
+		</div>
+		<div class="form-group">
+			<sf:errors path="location" cssClass="col-sm-offset-2 col-sm-10" />
+			<sf:label path="location" cssClass="col-sm-2 control-label">Location</sf:label>
+			<div class="col-sm-10">
+				<sf:input path="location" cssClass="form-control" />
+			</div>
+		</div>
+		<div class="form-group">
+			<sf:errors path="homePhone" cssClass="col-sm-offset-2 col-sm-10" />
+			<sf:label path="homePhone" cssClass="col-sm-2 control-label">Home phone</sf:label>
+			<div class="col-sm-10">
+				<sf:input path="homePhone" cssClass="form-control" />
+			</div>
+		</div>
+		<div class="form-group">
+			<sf:errors path="privatePhone" cssClass="col-sm-offset-2 col-sm-10" />
+			<sf:label path="privatePhone" cssClass="col-sm-2 control-label">Private phone</sf:label>
+			<div class="col-sm-10">
+				<sf:input path="privatePhone" cssClass="form-control" />
+			</div>
+		</div>
+		<div class="form-group">
+			<sf:errors path="biography" cssClass="col-sm-offset-2 col-sm-10" />
+			<sf:label path="biography" cssClass="col-sm-2 control-label">Biography</sf:label>
+			<div class="col-sm-10">
+				<sf:textarea path="biography" cssClass="form-control" rows="5" />
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-default">Sign up</button>
+			</div>
+		</div>
 	</sf:form>
 </l:standard>

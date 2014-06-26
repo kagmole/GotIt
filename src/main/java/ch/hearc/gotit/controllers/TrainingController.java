@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping(value = "/schools/{id}/trainings")
-public class TrainingSchoolController {
+public class TrainingController {
 
 	private static final String START_URI = "standards/schools/trainings/";
 	

@@ -11,7 +11,7 @@ import javax.validation.Payload;
 
 import ch.hearc.gotit.constraints.validators.FieldEqualsConstraintValidator;
 
-@Target ({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
+@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = FieldEqualsConstraintValidator.class)
 @Documented

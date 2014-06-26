@@ -67,7 +67,7 @@ public class SchoolController {
 			return "forward:/errors/404";
 		}
 		
-		if (!schoolService.isDestroyAuthorized(schoolEntity, userService.findOneWithUsername(principal.getName()))) {
+		if (!schoolService.getFounderOf(schoolEntity).getUsername().equals(principal.getName())) {
 			return "forward:/errors/403";
 		}
 		
@@ -84,7 +84,7 @@ public class SchoolController {
 			return "forward:/errors/404";
 		}
 		
-		if (!schoolService.isDestroyAuthorized(schoolEntity, userService.findOneWithUsername(principal.getName()))) {
+		if (!schoolService.getFounderOf(schoolEntity).getUsername().equals(principal.getName())) {
 			return "forward:/errors/403";
 		}
 		
@@ -101,7 +101,7 @@ public class SchoolController {
 			return "forward:/errors/404";
 		}
 		
-		if (!schoolService.isUpdateAuthorized(schoolEntity, userService.findOneWithUsername(principal.getName()))) {
+		if (!schoolService.getFounderOf(schoolEntity).getUsername().equals(principal.getName())) {
 			return "forward:/errors/403";
 		}
 		
@@ -118,7 +118,7 @@ public class SchoolController {
 			return "forward:/errors/404";
 		}
 		
-		if (!schoolService.isUpdateAuthorized(schoolEntity, userService.findOneWithUsername(principal.getName()))) {
+		if (!schoolService.getFounderOf(schoolEntity).getUsername().equals(principal.getName())) {
 			return "forward:/errors/403";
 		}
 		

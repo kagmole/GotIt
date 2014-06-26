@@ -36,9 +36,9 @@ import org.hibernate.validator.constraints.NotBlank;
 			query = "SELECT u FROM UserEntity u WHERE u.username = :username")
 })
 @FieldEqualsConstraint.List({
-	@FieldEqualsConstraint(first = "password", second = "confirmPassword", message = "Passwords don't match"),
-	@FieldEqualsConstraint(first = "mainEmail", second = "confirmMainEmail", message = "Main emails don't match"),
-	@FieldEqualsConstraint(first = "secondaryEmail", second = "confirmSecondaryEmail", message = "Secondary emails don't match")
+	@FieldEqualsConstraint(first = "password", second = "confirmPassword", message = "Passwords do not match"),
+	@FieldEqualsConstraint(first = "mainEmail", second = "confirmMainEmail", message = "Main emails do not match"),
+	@FieldEqualsConstraint(first = "secondaryEmail", second = "confirmSecondaryEmail", message = "Secondary emails do not match")
 })
 @Table(name = "users")
 public class UserEntity implements Serializable {
@@ -58,10 +58,7 @@ public class UserEntity implements Serializable {
     @Column(name = "username")
     private String username;
     
-    @Size.List({
-    	@Size(min = 8, message = "Password is too short (minimum 8 characters)"),
-    	// TODO form for @Size(max = 50, message = "Password is too long (maximum 50 characters)")
-    })
+    @Size(min = 8, message = "Password is too short (minimum 8 characters)")
     @Column(name = "password")
     private String password;
     

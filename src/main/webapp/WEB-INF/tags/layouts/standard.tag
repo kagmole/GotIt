@@ -1,55 +1,93 @@
 <%-- JSP DIRECTIVES --%>
 
-<%@ tag description="Base of all pages before login" pageEncoding="UTF-8" %>
+<%@ tag description="Layout of all pages standard pages" pageEncoding="UTF-8" %>
 <%@ attribute name="pageTitle" required="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags" %>
 
 <%-- JSP CONTENT --%>
 
-<c:choose>
-	<c:when test="${!requestedWithAjax}">
-		<!DOCTYPE html>
-		<html lang="en">
-			<head>
-				<meta charset="utf-8" />
-				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-				<title>Got it! - ${pageTitle}</title>
-				<link rel="stylesheet" href="<c:url value="/css/gotit.css" />" />
-			</head>
-			<body>
-				<div class="gotit-border-layout">
-					<div class="gotit-border-layout-north">
-						<header id="gotit-standard-header">
-							<img src="img/gotit/standard/gotit_logo.png" alt="Got it!" />
-						</header>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Got it! - <c:out value="${pageTitle}" /></title>
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<br>
+		<div class="container">
+			<div class="navbar navbar-default">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="/">Got it!</a>
 					</div>
-					<div class="gotit-border-layout-middle gotit-vertical-align-middle">
-						<div class="gotit-border-layout-center">
-							<section id="gotit-standard-body">
-								<jsp:doBody />
-							</section>
-						</div>
-					</div>
-					<div class="gotit-border-layout-south">
-						<footer id="gotit-standard-footer">
-							Copyright &copy; Dany Jupille, HE-Arc Engineering
-						</footer>
+					<div class="collapse navbar-collapse">
+						<ul class="nav navbar-nav">
+							<li><a href="/">Home</a></li>
+							<li><a href="/schools">List of schools</a></li>
+							<li><a href="/about">About</a></li>
+							<li><a href="/contact">Contact</a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<sec:authorize access="isAnonymous()">
+								<li><a href="/sign-in">Sign in</a></li>
+								<li><a href="/sign-up">Sign up</a></li>
+							</sec:authorize>
+							<sec:authorize access="isAuthenticated()">
+								<li><p class="navbar-text">Signed in as <sec:authentication property="principal.username" /></p></li>
+								<li><a href="/sign-out">Sign out</a></li>
+							</sec:authorize>
+						</ul>
 					</div>
 				</div>
-				<script src="<c:url value="/js/gotit/gotit.js" />"></script>
-				<script src="<c:url value="/js/gotit/gotit.standard.js" />"></script>
-			</body>
-		</html>
-	</c:when>
-	<c:otherwise>
-		<?xml version="1.0" encoding="UTF-8"?>
-		<ajax-response>
-			<page-title>Got it! - ${pageTitle}</page-title>
-			<page-html>
-				<%= "<![CDATA[" %>
-					<jsp:doBody />
-				<%= "]]>" %>
-			</page-html>
-		</ajax-response>
-	</c:otherwise>
-</c:choose>
+			</div>
+			<div class="page-header">
+				<h1><c:out value="${pageTitle}" /></h1>
+			</div>
+			<c:if test="${not empty successMessage}">
+				<div class="alert alert-success alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					${successMessage}
+				</div>
+			</c:if>
+			<c:if test="${not empty infoMessage}">
+				<div class="alert alert-info alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					${infoMessage}
+				</div>
+			</c:if>
+			<c:if test="${not empty warningMessage}">
+				<div class="alert alert-warning alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					${warningMessage}
+				</div>
+			</c:if>
+			<c:if test="${not empty errorMessage}">
+				<div class="alert alert-danger alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					${errorMessage}
+				</div>
+			</c:if>
+			<jsp:doBody />
+			<div id="footer">
+				<hr>
+				<p>Copyright &copy; Dany Jupille, HE-Arc Engineering</p>
+			</div>
+		</div>
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	</body>
+</html>

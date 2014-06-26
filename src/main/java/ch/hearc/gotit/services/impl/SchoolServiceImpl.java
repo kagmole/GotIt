@@ -33,6 +33,12 @@ public class SchoolServiceImpl extends BasicServiceImpl<SchoolEntity, Integer> i
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
+	public UserEntity getFounderOf(SchoolEntity schoolEntity) {
+		return schoolDao.getFounderOf(schoolEntity);
+	}
+	
+	@Override
 	@Transactional(readOnly = false)
 	public void createWithUser(SchoolEntity schoolEntity, UserEntity userEntity) {
 		EmployeeSchoolTypeEntity employeeSchoolTypeEntity = new EmployeeSchoolTypeEntity();
@@ -72,33 +78,5 @@ public class SchoolServiceImpl extends BasicServiceImpl<SchoolEntity, Integer> i
 		schoolEntity.getTrainingsList().add(trainingEntity);
 		
 		schoolDao.update(schoolEntity);
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public boolean isUpdateAuthorized(SchoolEntity schoolEntity, UserEntity userEntity) {		
-		for (EmployeeSchoolTypeEntity employeeSchoolTypeEntity : userEntity.getEmployee().getEmployeesSchoolsTypesList()) {
-			if (employeeSchoolTypeEntity.getSchool().equals(schoolEntity)) {
-				if (employeeSchoolTypeEntity.getEmployeeType().getName().equals("founder")) {
-					return true;
-				}
-			}
-		}
-		
-		return false;
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public boolean isDestroyAuthorized(SchoolEntity schoolEntity, UserEntity userEntity) {
-		for (EmployeeSchoolTypeEntity employeeSchoolTypeEntity : userEntity.getEmployee().getEmployeesSchoolsTypesList()) {
-			if (employeeSchoolTypeEntity.getSchool().equals(schoolEntity)) {
-				if (employeeSchoolTypeEntity.getEmployeeType().getName().equals("founder")) {
-					return true;
-				}
-			}
-		}
-		
-		return false;
 	}
 }

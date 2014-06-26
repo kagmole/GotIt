@@ -6,7 +6,5 @@
 <%-- JSP CONTENT --%>
 
 <l:standard pageTitle="Contact">
-	<div class="gotit-row">
-		Here would stand a contact form. But he's still on holidays.
-	</div>
+	<p>Here would stand a contact form. But he's still on holidays.</p>
 </l:standard>

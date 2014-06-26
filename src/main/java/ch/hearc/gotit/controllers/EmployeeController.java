@@ -11,7 +11,7 @@ import ch.hearc.gotit.services.SchoolService;
 
 @Controller
 @RequestMapping(value = "/schools/{id}/employees")
-public class EmployeeSchoolController {
+public class EmployeeController {
 	
 	private static final String START_URI = "standards/schools/employees/";
 	

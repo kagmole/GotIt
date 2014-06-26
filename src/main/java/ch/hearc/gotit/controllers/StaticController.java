@@ -33,7 +33,7 @@ public class StaticController {
 	private UserService userService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String getHome() {		
+	public String getHome() {
 		return HOME_URI;
 	}
 	
@@ -42,7 +42,7 @@ public class StaticController {
 		return ABOUT_URI;
 	}
 	
-	@RequestMapping(value = "/contacts", method = RequestMethod.GET)
+	@RequestMapping(value = "/contact", method = RequestMethod.GET)
 	public String getContact() {
 		return CONTACT_URI;
 	}
@@ -64,8 +64,10 @@ public class StaticController {
 	}
 	
 	@RequestMapping(value = "/sign-up", method = RequestMethod.POST)
-	public String postSignUp(@Valid UserEntity userEntity, BindingResult result) {
+	public String postSignUp(@Valid UserEntity userEntity, BindingResult result, Model model) {
 		if (result.hasErrors()) {
+			model.addAttribute("errorMessage", "One or more fields are not filled correctly");
+			
 			return SIGN_UP_URI;
 		}
 		

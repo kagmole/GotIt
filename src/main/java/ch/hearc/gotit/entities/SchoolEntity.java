@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -27,6 +29,13 @@ import org.hibernate.validator.constraints.NotBlank;
  * @author Dany Jupille
  */
 @Entity
+@NamedQueries({
+	@NamedQuery(
+			name = "SchoolQuery.getFounderOf",
+			query = "SELECT e.user FROM EmployeeEntity e, SchoolEntity s, EmployeeTypeEntity et, EmployeeSchoolTypeEntity est"
+					+ " WHERE s.schoolPk = :schoolPk AND et.name = 'founder'"
+					+ " AND s = est.school AND e = est.employee AND et = est.employeeType")
+})
 @Table(name = "schools")
 public class SchoolEntity implements Serializable {
 	

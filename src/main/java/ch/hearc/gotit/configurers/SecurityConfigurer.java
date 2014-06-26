@@ -30,10 +30,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// XXX Keep or clean
 		http.authorizeRequests()
 				.antMatchers("/admin**").access("hasRole('admin')")
-				.antMatchers("/users/sign-in**").anonymous()
 			.and()
 				.formLogin()
 				.loginPage("/sign-in")
@@ -51,7 +49,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 			.and()
 				.logout()
 				.logoutUrl("/sign-out")
-				.logoutSuccessUrl("/?sign-out") // XXX would be better "sign-out?success", but URLs conflicts
+				.logoutSuccessUrl("/")
 				.permitAll()
 			.and()
 				.exceptionHandling()
