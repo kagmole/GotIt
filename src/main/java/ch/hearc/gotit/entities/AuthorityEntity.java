@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
 @Entity
 @NamedQueries({
 	@NamedQuery(
-			name = "AuthorityQuery.findByRole",
+			name = "AuthorityQuery.findOneWithRole",
 			query = "SELECT a FROM AuthorityEntity a WHERE a.role = :role")
 })
 @Table(name = "authorities")

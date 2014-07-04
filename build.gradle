@@ -16,9 +16,11 @@ repositories {
 }
 
 dependencies {
+	compile 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate4:2.4.1'
 	compile 'jstl:jstl:1.2'
 	compile 'log4j:log4j:1.2.17'
 	compile 'mysql:mysql-connector-java:5.1.30'
+	compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
 	compile 'org.jboss.as:jboss-as-jpa-hibernate4:7.2.0.Final'
 	compile 'org.jboss.spec.javax.servlet:jboss-servlet-api_3.0_spec:1.0.2.Final'
 	compile 'org.springframework:spring-context:4.0.4.RELEASE'

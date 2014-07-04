@@ -1,7 +1,10 @@
 package ch.hearc.gotit.services.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ch.hearc.gotit.daos.BasicDao;
 import ch.hearc.gotit.daos.CourseDao;
@@ -18,6 +21,12 @@ public class CourseServiceImpl extends BasicServiceImpl<CourseEntity, Integer> i
 	@Override
 	protected BasicDao<CourseEntity, Integer> getDao() {
 		return courseDao;
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<CourseEntity> findRangeWithModule(Integer modulePk, int offset, int limit) {
+		return courseDao.findRangeWithModule(modulePk, offset, limit);
 	}
 	
 	@Override

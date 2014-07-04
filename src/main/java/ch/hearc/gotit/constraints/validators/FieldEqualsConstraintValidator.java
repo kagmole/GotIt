@@ -24,7 +24,6 @@ public class FieldEqualsConstraintValidator implements ConstraintValidator<Field
 	
 	@Override
 	public boolean isValid(Object target, ConstraintValidatorContext context) {
-		
 		boolean valid;
 		
 		try {

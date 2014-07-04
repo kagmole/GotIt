@@ -16,6 +16,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -26,6 +28,13 @@ import javax.validation.constraints.Size;
  * @author Dany Jupille
  */
 @Entity
+@NamedQueries({
+	@NamedQuery(
+			name = "TrainingQuery.findRangeWithSchool",
+			query = "SELECT trainingEntity"
+					+ " FROM TrainingEntity trainingEntity"
+					+ " WHERE trainingEntity.school.schoolPk = :schoolPk")
+})
 @Table(name = "trainings")
 public class TrainingEntity implements Serializable {
 	
@@ -156,5 +165,4 @@ public class TrainingEntity implements Serializable {
     public String toString() {
         return "TrainingEntity[id=" + trainingPk + "]";
     }
-    
 }

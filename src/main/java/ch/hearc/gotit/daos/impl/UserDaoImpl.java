@@ -15,7 +15,7 @@ public class UserDaoImpl extends BasicDaoImpl<UserEntity, Integer> implements Us
 	@Override
 	public UserEntity findOneWithUsername(String username) {
 		return (UserEntity) getCurrentSession()
-				.getNamedQuery("UserQuery.findByUsername")
+				.getNamedQuery("UserQuery.findOneWithUsername")
 				.setString("username", username)
 				.uniqueResult();
 	}

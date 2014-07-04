@@ -16,9 +16,4 @@ public class DesktopController {
 	public String getDefault() {
 		return DEFAULT_URI;
 	}
-	
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String getTest() {
-		return "desktops/applications/test";
-	}
 }

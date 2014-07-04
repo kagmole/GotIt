@@ -1,5 +1,7 @@
 package ch.hearc.gotit.services.impl;
 
+import java.util.List;
+
 import ch.hearc.gotit.daos.BasicDao;
 import ch.hearc.gotit.daos.TrainingDao;
 import ch.hearc.gotit.entities.ModuleEntity;
@@ -8,7 +10,10 @@ import ch.hearc.gotit.entities.TrainingEntity;
 import ch.hearc.gotit.services.TrainingService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service("trainingService")
 public class TrainingServiceImpl extends BasicServiceImpl<TrainingEntity, Integer> implements TrainingService {
 
 	@Autowired
@@ -17,6 +22,12 @@ public class TrainingServiceImpl extends BasicServiceImpl<TrainingEntity, Intege
 	@Override
 	protected BasicDao<TrainingEntity, Integer> getDao() {
 		return trainingDao;
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<TrainingEntity> findRangeWithSchool(Integer schoolPk, int offset, int limit) {
+		return trainingDao.findRangeWithSchool(schoolPk, offset, limit);
 	}
 
 	@Override

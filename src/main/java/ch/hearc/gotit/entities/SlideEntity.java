@@ -11,10 +11,19 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(
+			name = "SlideQuery.findRangeWithClass",
+			query = "SELECT slideEntity"
+					+ " FROM SlideEntity slideEntity"
+					+ " WHERE slideEntity.classEntity.classPk = :classPk")
+})
 @Table(name = "slides")
 public class SlideEntity implements Serializable {
 

@@ -15,6 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -25,6 +28,13 @@ import javax.validation.constraints.Size;
  * @author Dany Jupille
  */
 @Entity
+@NamedQueries({
+	@NamedQuery(
+			name = "ModuleQuery.findRangeWithSchool",
+			query = "SELECT moduleEntity"
+					+ " FROM ModuleEntity moduleEntity"
+					+ " WHERE moduleEntity.school.schoolPk = :schoolPk")
+})
 @Table(name = "modules")
 public class ModuleEntity implements Serializable {
 	
@@ -44,6 +54,10 @@ public class ModuleEntity implements Serializable {
     @Size(max = 65535)
     @Column(name = "description")
     private String description;
+    
+    @JoinColumn(name = "fk_school", referencedColumnName = "pk_school")
+    @ManyToOne(optional = false)
+    private SchoolEntity school;
     
     @JoinTable(name = "modules_dependencies", joinColumns = {
         @JoinColumn(name = "pk_module", referencedColumnName = "pk_module")}, inverseJoinColumns = {
@@ -92,6 +106,14 @@ public class ModuleEntity implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public SchoolEntity getSchool() {
+    	return school;
+    }
+    
+    public void setSchool(SchoolEntity school) {
+    	this.school = school;
     }
 
     public List<ModuleEntity> getDependencyModulesList() {

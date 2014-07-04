@@ -3,7 +3,12 @@ package ch.hearc.gotit.controllers;
 import java.security.Principal;
 
 import ch.hearc.gotit.entities.SchoolEntity;
+import ch.hearc.gotit.services.EmployeeService;
+import ch.hearc.gotit.services.EventService;
+import ch.hearc.gotit.services.ModuleService;
 import ch.hearc.gotit.services.SchoolService;
+import ch.hearc.gotit.services.StudentService;
+import ch.hearc.gotit.services.TrainingService;
 import ch.hearc.gotit.services.UserService;
 
 import javax.validation.Valid;
@@ -23,10 +28,12 @@ public class SchoolController {
 	private static final String START_URI = "standards/schools/";
 	
 	private static final String LIST_URI = START_URI + "list";
+	private static final String VIEW_URI = START_URI + "view";
 	private static final String ADD_URI = START_URI + "add";
 	private static final String DELETE_URI = START_URI + "delete";
 	private static final String EDIT_URI = START_URI + "edit";
-	private static final String VIEW_URI = START_URI + "view";
+	
+	private static final int SCHOOLS_PER_PAGE = 10;
 	
 	@Autowired
 	private SchoolService schoolService;
@@ -39,6 +46,19 @@ public class SchoolController {
 		model.addAttribute("schoolsEntitiesList", schoolService.findAll());
 		
 		return LIST_URI;
+	}
+	
+	@RequestMapping(value = "/{schoolPk}", method = RequestMethod.GET)
+	public String getViewById(@PathVariable int schoolPk, Model model) {
+		SchoolEntity schoolEntity = schoolService.findOne(schoolPk);
+		
+		if (schoolEntity == null) {
+			return "forward:/errors/404";
+		}
+		
+		model.addAttribute("schoolEntity", schoolEntity);
+		
+		return VIEW_URI;
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
@@ -59,9 +79,9 @@ public class SchoolController {
 		return "redirect:/schools/" + schoolEntity.getSchoolPk();
 	}
 	
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public String getDeleteById(@PathVariable int id, Model model, Principal principal) {
-		SchoolEntity schoolEntity = schoolService.findOne(id);
+	@RequestMapping(value = "/delete/{schoolPk}", method = RequestMethod.GET)
+	public String getDeleteById(@PathVariable int schoolPk, Model model, Principal principal) {
+		SchoolEntity schoolEntity = schoolService.findOne(schoolPk);
 		
 		if (schoolEntity == null) {
 			return "forward:/errors/404";
@@ -76,9 +96,9 @@ public class SchoolController {
 		return DELETE_URI;
 	}
 	
-	@RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-	public String postDeleteById(@PathVariable int id, Principal principal) {
-		SchoolEntity schoolEntity = schoolService.findOne(id);
+	@RequestMapping(value = "/delete/{schoolPk}", method = RequestMethod.POST)
+	public String postDeleteById(@PathVariable int schoolPk, Principal principal) {
+		SchoolEntity schoolEntity = schoolService.findOne(schoolPk);
 		
 		if (schoolEntity == null) {
 			return "forward:/errors/404";
@@ -93,9 +113,9 @@ public class SchoolController {
 		return "redirect:/schools";
 	}
 	
-	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-	public String getEditById(@PathVariable int id, Model model, Principal principal) {
-		SchoolEntity schoolEntity = schoolService.findOne(id);
+	@RequestMapping(value = "/edit/{schoolPk}", method = RequestMethod.GET)
+	public String getEditById(@PathVariable int schoolPk, Model model, Principal principal) {
+		SchoolEntity schoolEntity = schoolService.findOne(schoolPk);
 		
 		if (schoolEntity == null) {
 			return "forward:/errors/404";
@@ -110,9 +130,9 @@ public class SchoolController {
 		return EDIT_URI;
 	}
 	
-	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-	public String postEditById(@PathVariable int id, @Valid SchoolEntity schoolEntity2, BindingResult result, Principal principal) {
-		SchoolEntity schoolEntity = schoolService.findOne(id);
+	@RequestMapping(value = "/edit/{schoolPk}", method = RequestMethod.POST)
+	public String postEditById(@PathVariable int schoolPk, @Valid SchoolEntity schoolEntity2, BindingResult result, Principal principal) {
+		SchoolEntity schoolEntity = schoolService.findOne(schoolPk);
 		
 		if (schoolEntity == null) {
 			return "forward:/errors/404";
@@ -126,22 +146,9 @@ public class SchoolController {
 			return EDIT_URI;
 		}
 		
-		schoolEntity2.setSchoolPk(id);
+		schoolEntity2.setSchoolPk(schoolPk);
 		schoolService.update(schoolEntity2);
 		
-		return "redirect:/schools/" + id;
-	}
-	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String getViewById(@PathVariable int id, Model model) {
-		SchoolEntity schoolEntity = schoolService.findOne(id);
-		
-		if (schoolEntity == null) {
-			return "forward:/errors/404";
-		}
-		
-		model.addAttribute("schoolEntity", schoolEntity);
-		
-		return VIEW_URI;
+		return "redirect:/schools/" + schoolPk;
 	}
 }

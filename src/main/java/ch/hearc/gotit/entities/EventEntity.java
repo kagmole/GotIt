@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,6 +26,23 @@ import javax.validation.constraints.Size;
  * @author Dany Jupille
  */
 @Entity
+@NamedQueries({
+	@NamedQuery(
+			name = "EventQuery.findRangeWithSchool",
+			query = "SELECT schoolEntity.eventsList"
+					+ " FROM SchoolEntity schoolEntity"
+					+ " WHERE schoolEntity.schoolPk = :schoolPk"),
+	@NamedQuery(
+			name = "EventQuery.findRangeWithTraining",
+			query = "SELECT trainingEntity.eventsList"
+					+ " FROM TrainingEntity trainingEntity"
+					+ " WHERE trainingEntity.trainingPk = :trainingPk"),
+	@NamedQuery(
+			name = "EventQuery.findRangeWithCourse",
+			query = "SELECT courseEntity.eventsList"
+					+ " FROM CourseEntity courseEntity"
+					+ " WHERE courseEntity.coursePk = :coursePk")
+})
 @Table(name = "events")
 public class EventEntity implements Serializable {
 	

@@ -26,7 +26,7 @@ import javax.validation.constraints.Size;
 @Entity
 @NamedQueries({
 	@NamedQuery(
-			name = "EmployeeTypeQuery.findByName",
+			name = "EmployeeTypeQuery.findOneWithName",
 			query = "SELECT et FROM EmployeeTypeEntity et WHERE et.name = :name")
 })
 @Table(name = "employees_types")

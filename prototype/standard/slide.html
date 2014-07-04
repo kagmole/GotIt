@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Got it! - School</title>
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="container">
+			<div class="row" style="height: 500px;">
+				<div class="col-sm-3" style="max-height: 100%; overflow-y: auto; overflow-x: hidden;">
+					<button id="gotit-slide-button-add" type="button" class="btn btn-success btn-lg btn-block">Add slide</button>
+					<ul id="gotit-slide-navigation-container" class="nav nav-pills nav-stacked">
+						<!-- <li[ class="active"]><a href="#SLIDE_ID" data-toggle="pill">#SLIDE_NAME</a></li> -->
+					</ul>
+				</div>
+				<div class="col-sm-9">
+					<div id="gotit-slide-content-container" class="tab-content" style="height: 100%;">
+						<!-- <div class="tab-pane [active]" id="#SLIDE_ID">#SLIDE_CONTENT</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script src="http://cdn.ckeditor.com/4.4.2/standard/ckeditor.js"></script>
+		<script>
+			$(function() {
+				var slideId = 0;
+				
+				$('#gotit-slide-navigation-container').sortable();
+				$('#gotit-slide-navigation-container').disableSelection();
+				
+				$('#gotit-slide-button-add').click( function() {
+					$('#gotit-slide-navigation-container').append(
+						'<li><a href="#gotit-slide-' + slideId + '"><span class="glyphicon glyphicon-resize-vertical"></span> ' + 'SLIDE_' + slideId + '</a></li>'
+					);
+					
+					$('#gotit-slide-content-container').append(
+						'<div class="tab-pane" id="gotit-slide-' + slideId + '"><textarea id="gotit-slide-' + slideId + '-content">' + 'SLIDE_' + slideId + '_CONTENT' + '</textarea></div>'
+					);
+					
+					$('#gotit-slide-navigation-container a[href="#gotit-slide-' + slideId + '"]').click(function(e) {
+						e.preventDefault();
+						
+						$(this).tab('show');
+					});
+					
+					CKEDITOR.replace('gotit-slide-' + slideId + '-content');
+					
+					++slideId;
+				});
+			});
+		</script>
+	</body>
+</html>

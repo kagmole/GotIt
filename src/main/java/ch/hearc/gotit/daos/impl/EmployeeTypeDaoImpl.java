@@ -15,7 +15,7 @@ public class EmployeeTypeDaoImpl extends BasicDaoImpl<EmployeeTypeEntity, Intege
 	@Override
 	public EmployeeTypeEntity findOneWithName(String name) {
 		return (EmployeeTypeEntity) getCurrentSession()
-				.getNamedQuery("EmployeeTypeQuery.findByName")
+				.getNamedQuery("EmployeeTypeQuery.findOneWithName")
 				.setString("name", name)
 				.uniqueResult();
 	}

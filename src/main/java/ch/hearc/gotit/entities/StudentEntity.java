@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -24,6 +26,13 @@ import javax.persistence.Table;
  * @author Dany Jupille
  */
 @Entity
+@NamedQueries({
+	@NamedQuery(
+			name = "StudentQuery.findRangeWithSchool",
+			query = "SELECT schoolEntity.studentsList"
+					+ " FROM SchoolEntity schoolEntity"
+					+ " WHERE schoolEntity.schoolPk = :schoolPk")
+})
 @Table(name = "students")
 public class StudentEntity implements Serializable {
 	

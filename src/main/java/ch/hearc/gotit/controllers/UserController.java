@@ -20,8 +20,8 @@ public class UserController {
 	private static final String START_URI = "standards/users/";
 	
 	private static final String LIST_URI = START_URI + "list";
-	private static final String EDIT_URI = START_URI + "edit";
 	private static final String VIEW_URI = START_URI + "view";
+	private static final String EDIT_URI = START_URI + "edit";
 	
 	@Autowired
 	private UserService userService;
@@ -33,9 +33,14 @@ public class UserController {
 		return LIST_URI;
 	}
 	
-	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-	public String getEditById(@PathVariable int id, Model model) {
-		UserEntity userEntity = userService.findOne(id);
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public String getViewById(@PathVariable int id) {
+		return VIEW_URI;
+	}
+	
+	@RequestMapping(value = "/edit/{userPk}", method = RequestMethod.GET)
+	public String getEditById(@PathVariable int userPk, Model model) {
+		UserEntity userEntity = userService.findOne(userPk);
 		
 		if (userEntity == null) {
 			return "redirect:/users";
@@ -46,20 +51,15 @@ public class UserController {
 		return EDIT_URI;
 	}
 	
-	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-	public String postEditById(@PathVariable int id, @Valid UserEntity userEntity, BindingResult result) {
+	@RequestMapping(value = "/edit/{userPk}", method = RequestMethod.POST)
+	public String postEditById(@PathVariable int userPk, @Valid UserEntity userEntity, BindingResult result) {
 		if (result.hasErrors()) {
 			return EDIT_URI;
 		}
 		
-		userEntity.setUserPk(id);
+		userEntity.setUserPk(userPk);
 		userService.update(userEntity);
 		
 		return "redirect:/users/" + userEntity.getUserPk();
-	}
-	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public String getViewById(@PathVariable int id) {
-		return VIEW_URI;
 	}
 }

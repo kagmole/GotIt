@@ -16,6 +16,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -26,6 +28,13 @@ import javax.validation.constraints.Size;
  * @author Dany Jupille
  */
 @Entity
+@NamedQueries({
+	@NamedQuery(
+			name = "CourseQuery.findRangeWithModule",
+			query = "SELECT courseEntity"
+					+ " FROM CourseEntity courseEntity"
+					+ " WHERE courseEntity.module.modulePk = :modulePk")
+})
 @Table(name = "courses")
 public class CourseEntity implements Serializable {
 	

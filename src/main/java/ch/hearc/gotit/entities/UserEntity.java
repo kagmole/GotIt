@@ -32,7 +32,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 @NamedQueries({
 	@NamedQuery(
-			name = "UserQuery.findByUsername",
+			name = "UserQuery.findOneWithUsername",
 			query = "SELECT u FROM UserEntity u WHERE u.username = :username")
 })
 @FieldEqualsConstraint.List({
